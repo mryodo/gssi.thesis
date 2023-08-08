@@ -134,8 +134,8 @@
       %\definecolor{cadet}{rgb}{0.33, 0.41, 0.47}
       %\everymath{\color{cadet}}
 
-      %\let\mathcal\undefined
-      %\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+      \let\mathcal\undefined
+      \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 % =========== Fonts =============== %
 % ================================= %
 
@@ -362,14 +362,24 @@
 
 % ================================= %
 % ============ Margins ============ %
+
+
+\newtcolorbox{story}[1][]{
+  width=0.35\textwidth,
+  breakable,
+  colframe=persimmon,
+  colback=persimmon!10
+  #1
+}
+
       \renewcommand*{\raggedleftmarginnote}{{\color{black4} \noindent}}
       \renewcommand*{\raggedrightmarginnote}{{\color{black4} \noindent}}
-      \newcommand{\mn}[1]{\textsuperscript{\thesidenote}{}\marginnote{ \color{black4} \textsuperscript{\thesidenote}{}\itshape{\setstretch{0.5}\footnotesize #1}\refstepcounter{sidenote}}}
+      \newcommand{\mn}[1]{\textsuperscript{\thesidenote}{}\marginnote{\begin{story} \color{black4} \textsuperscript{\thesidenote}{}\itshape{\setstretch{0.5}\footnotesize #1 }\end{story}\refstepcounter{sidenote}}}
       \newcommand{\en}[1]{\marginnote{\footnotesize{#1}}}
       \newcommand{\lec}[2]{{\setlength{\marginparwidth}{.07\paperwidth}\reversemarginpar\marginnote{\centering\footnotesize{\textsf{\bfseries #1}}\\#2}}}
       \newcommand{\sn}[1]{\sidenote{\itshape\footnotesize #1}}
-      \newcommand{\mnl}[1]{\textsuperscript{\thesidenote}{}\marginnote{\color{black4} \textsuperscript{\thesidenote}{} #1}\refstepcounter{sidenote}}
-      \newcommand{\mnln}[1]{\marginnote{\color{black4}  #1}\refstepcounter{sidenote}}
+      \newcommand{\mnl}[1]{\textsuperscript{\thesidenote}{}\marginnote{\color{black4} \begin{story}\textsuperscript{\thesidenote}{} #1\end{story}}\refstepcounter{sidenote}}
+      \newcommand{\mnln}[1]{\marginnote{\color{black4}  \begin{story}#1\end{story}}\refstepcounter{sidenote}}
 % ============ Margins ============ %
 % ================================= %
 

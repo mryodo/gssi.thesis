@@ -1362,6 +1362,10 @@ INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/mdsymbol/MdSymbolF-Lig
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/nunito/Nunito-LightItalic-tosf-ot1.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/nunito/Nunito-Light-tosf-ot1.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm
+INPUT ./inputs/abstract.tex
+INPUT inputs/abstract.tex
+INPUT ./inputs/abstract.tex
+INPUT inputs/abstract.tex
 INPUT ./inputs/introduction.tex
 INPUT inputs/introduction.tex
 INPUT ./inputs/introduction.tex
@@ -1370,6 +1374,9 @@ INPUT ./inputs/simplicial_complex.tex
 INPUT inputs/simplicial_complex.tex
 INPUT ./inputs/simplicial_complex.tex
 INPUT inputs/simplicial_complex.tex
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/nunito/Nunito-LightItalic-tosf-ot1.tfm
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT ./inputs/MNP.tex
 INPUT inputs/MNP.tex
 INPUT ./inputs/MNP.tex
@@ -1387,7 +1394,15 @@ INPUT mynotes.aux
 INPUT ./mynotes.out
 INPUT ./mynotes.out
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/nunito/a_wslvgt.enc
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/mdsymbol/MdSymbolA-Light.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/mdsymbol/MdSymbolB-Light.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/mdsymbol/MdSymbolF-Light.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/nunito/Nunito-Bold.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/nunito/Nunito-Light.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/nunito/Nunito-LightItalic.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb

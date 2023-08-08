@@ -4,6 +4,9 @@
 
 \input{shortcuts}
 
+\hfuzz=106.002pt %suppress annoying overflows
+
+
 \title{ Topological Stability and Preconditioning of Higher-Order Laplacian Operators on Simplicial Complexes }
 
 \author[1]{Anton Savostianov}
@@ -20,8 +23,11 @@
 \begin{document}
 
       \maketitle
-     % \tableofcontents
-
+      %\tableofcontents
+      
+      %\input{inputs/terms.tex}
+      
+      \input{inputs/abstract.tex}
       \input{inputs/introduction.tex}
       \input{inputs/simplicial_complex.tex}
       \input{inputs/MNP.tex}
@@ -30,5 +36,9 @@
       \nocite{*}
       \bibliographystyle{alpha}
       \bibliography{notes}
+
+      \clearpage
+
+      
 
 \end{document}
