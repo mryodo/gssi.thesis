@@ -1,3 +1,19 @@
+\usepackage{tikz-network}
+
+
+
+%%%% COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\insidefigure}[3][0.5\columnwidth]{
+      \begin{center}
+            \begin{minipage}{#1}
+                  \centering
+                  #2
+                  \captionof{figure}{#3}
+            \end{minipage}
+      \end{center}
+}
+
 \newcommand*{\mc}[1]{\mathcal{#1}}
 \renewcommand*{\b}[1]{\mathbf{#1}}
 \newcommand*\eps{\varepsilon}
