@@ -1,5 +1,32 @@
-\section*{List of terms}
+\usepackage{glossaries}
 
-\begin{itemize}
-      \item 
-\end{itemize}
+\makeglossaries
+
+\newglossaryentry{SC}
+{
+    name=simplicial complex,
+    description={higher-order network model; hypergraph closed for edge inclusion}
+}
+
+\newglossaryentry{simplex}{
+    name = simplex,
+    description = {elements of the simplicial complex; subset of vertex set}
+}
+
+\newglossaryentry{face}{
+    name = face,
+    description = {
+        subsimplex of a given simplex
+    },
+    plural = {faces}
+}
+
+\newglossaryentry{facet}{       
+     name = facet,
+     description = {
+         a simplex of higher-order containing given simplex
+    },
+     plural = {facets}
+}
+
+

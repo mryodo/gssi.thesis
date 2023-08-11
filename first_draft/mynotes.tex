@@ -22,23 +22,28 @@
 
 \linespread{1.15}
 
+\input{inputs/terms.tex}
+
 \begin{document}
 
       \maketitle
       %\tableofcontents
       
-      %\input{inputs/terms.tex}
+      
       
       \input{inputs/abstract.tex}
       \input{inputs/introduction.tex}
       \input{inputs/simplicial_complex.tex}
       \input{inputs/MNP.tex}
       \input{inputs/stability.tex}
+      \input{inputs/preconditioning.tex}
 
       \nocite{*}
       \bibliographystyle{alpha}
       \bibliography{notes}
 
-      
+      \clearpage
+
+      \printglossaries
 
 \end{document}

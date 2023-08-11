@@ -121,21 +121,22 @@
 % =========== Fonts =============== %
       %\usepackage[T1]{fontenc}     
       %\usepackage{lmodern,mathrsfs}
-
+      \usepackage{cmbright}
       \usepackage{nunito}
+      %\usepackage{lato}
       \renewcommand{\mddefault}{l}
       \renewcommand{\bfdefault}{b}
-      \usepackage[normalweight=Light]{mdsymbol}
+      %\usepackage[normalweight=Light]{mdsymbol}
 
       \makeatletter
       \DeclareMathSizes{\f@size}{11}{8}{8}
       \makeatother
       
-      %\definecolor{cadet}{rgb}{0.33, 0.41, 0.47}
-      %\everymath{\color{cadet}}
+      \definecolor{cadet}{rgb}{0.33, 0.41, 0.47}
+      \everymath{\color{jet}}
 
-      \let\mathcal\undefined
-      \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+      %\let\mathcal\undefined
+      %\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 % =========== Fonts =============== %
 % ================================= %
 
@@ -529,3 +530,29 @@
 \def\maketag@@@#1{\formatout{#1}}
 \renewcommand\tagform@[1]{\maketag@@@{\ignorespaces#1\unskip\@@italiccorr}}
 \makeatother
+
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage{algpseudocode}
+
+\usepackage{pgfplots}
+
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{backgrounds}
+\usepgfplotslibrary{patchplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{%
+     layers/standard/.define layer set={%
+         background,axis background,axis grid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis foreground%
+     }{
+         grid style={/pgfplots/on layer=axis grid},%
+         tick style={/pgfplots/on layer=axis ticks},%
+         axis line style={/pgfplots/on layer=axis lines},%
+         label style={/pgfplots/on layer=axis descriptions},%
+         legend style={/pgfplots/on layer=axis descriptions},%
+         title style={/pgfplots/on layer=axis descriptions},%
+         colorbar style={/pgfplots/on layer=axis descriptions},%
+         ticklabel style={/pgfplots/on layer=axis tick labels},%
+         axis background@ style={/pgfplots/on layer=axis background},%
+         3d box foreground style={/pgfplots/on layer=axis foreground},%
+     },
+ }
