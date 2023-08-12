@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+      \Vertex[x=0, y=0, size=0.25, fontscale=0.75, label=1]{v1}
+      \Vertex[x=2, y=0, size=0.25, fontscale=0.75,label=2]{v2}
+      \Vertex[x=1, y=1.5, size=0.25,fontscale=0.75, label=3]{v3}
+      \Vertex[x=1, y=0.5, size=0.25,fontscale=0.75, label=4]{v4} 
+      \Edge(v1)(v2)
+      \Edge(v1)(v3)
+      \Edge(v1)(v4)
+      \Edge(v2)(v3)
+      \Edge(v2)(v4)
+      \Edge(v3)(v4)
+
+      
+      \Vertex[x=6, y=0, size=0.25, fontscale=0.75, label=1]{v1}
+      \Vertex[x=5.5, y=1, size=0.25, fontscale=0.75, label=2]{v2}
+      \Vertex[x=6.5, y=1, size=0.25, fontscale=0.75, label=3]{v3}
+      \Vertex[x=4.25, y=-0.25, size=0.25, fontscale=0.75, label=4]{v4}
+      \Vertex[x=7.75, y=-0.25, size=0.25, fontscale=0.75, label=5]{v5}
+      \Vertex[x=6, y=2.25, size=0.25, fontscale=0.75, label=6]{v6}
+      \Edge(v1)(v2)
+      \Edge(v2)(v3)
+      \Edge(v1)(v3)
+      \Edge(v4)(v5)
+      \Edge(v4)(v6)
+      \Edge(v5)(v6)
+      \Edge(v1)(v4)
+      \Edge(v1)(v5)
+      \Edge(v2)(v6)
+      \Edge(v3)(v6)
+      \Edge(v2)(v4)
+      \Edge(v3)(v5)
+\end{tikzpicture}

@@ -8,7 +8,7 @@
 Let \( V = \{ v_1, v_2, \ldots, v_n \} \) be a set of nodes; as discussed above, such set may refer to various interacting entities and agents in the system, e.g.\ neurons, genes, traffic stops, online actors, publication authors, etc. Then: 
 
 \begin{definition}[Simplicial Complex]\label{def:simplicial_complex}
-      The collection of subsets \( \mathcal K \) of the nodal set \( V \) is  a (abstract) \gls{SC}\mnl{addition of the word ``abstract'' to the term is more common in the topological setting} if for each subset \( \sigma \in \mc K \), referred as a \gls{simplex}, all its subsets \( \sigma'\), \( \sigma' \subseteq \sigma \), referred as \gls{face}, enter \( \mc K \) as well, \( \sigma' \in \mc K\).
+      The collection of subsets \( \mathcal K \) of the nodal set \( V \) is  a (abstract) \gls{SC}\mnl{addition of the word ``abstract'' to the term is more common in the topological setting} if for each subset \( \sigma \in \mc K \), referred as a \gls{simplex}, all its subsets \( \sigma'\), \( \sigma' \subseteq \sigma \), referred as \glspl{face}, enter \( \mc K \) as well, \( \sigma' \in \mc K\).
 \end{definition}
 
 A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the order \( k \), \( \ord \sigma = k \). Let \( \V k \) be a set of all \(k\)-order simplices in \( \mc K \) and \( m_k \) is the cardinality of \( \V k\), \( m_k = | \V k | \); then \( \V 0 \) is the set of nodes in the simplicial complex \( \mc K \), \( \V 1 \) --- the set of edges, \( \V 2 \) --- the set of triangles, or \(3\)-cliques, and so on, with \( \mc K = \{ \V 0, \V 1, \V 2 \ldots \} \). Note that due to the inclusion rule in \Cref{def:simplicial_complex}, the number of non-empty \( \V k \) is finite and, moreover, uninterupted in a sense of the order: if \( \V k = \vn \), then \( \V {k+1} \) is also necessarily empty.
@@ -21,3 +21,8 @@ A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the or
       123
       
 \end{example}
+
+
+
+\subsection{ Hodge's Algebra }
+

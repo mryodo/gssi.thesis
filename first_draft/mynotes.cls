@@ -556,3 +556,20 @@
          3d box foreground style={/pgfplots/on layer=axis foreground},%
      },
  }
+
+
+ \newtcolorbox{tmp}[1][]{
+      enhanced,breakable,colframe=jet!50!white,
+      colbacktitle=jet!15!white,
+      coltitle=jet,
+      colback = white,
+      borderline={0.5mm}{0mm}{jet!15!white},
+      borderline={0.5mm}{0mm}{jet!50!white,dashed},
+      attach boxed title to top center={yshift=-2mm},
+      boxed title style={boxrule=0.4pt},
+      title=TMP,
+      code={\singlespacing}
+    }
+
+
+\counterwithin{figure}{section}

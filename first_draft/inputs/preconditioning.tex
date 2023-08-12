@@ -1,78 +1,59 @@
 \section{Preconditioning}
 
+\begin{tmp}
+      Here we need to say general words about how we need an efficient preconditioning scheme.
+\end{tmp}
+
 \subsection{Preconditioning 101}
 
 \subsection{Cholesky preconditioning for classical graphs}
 
-\subsection{Collapsible simplicial complexes}
+\subsection{Classical collapsibility}
 
 % TODO: introduction
 
-In this section we borrow the terminology from \cite{whiteheadSimplicialSpacesNuclei1939}. 
- The simplex \(\sigma \in \mc K \) is \emph{free} if it is a face of exactly one simplex \(\tau = \tau(\sigma) \in \mc K \) of the higher order (facet).  The \emph{collapse} \( \mc K \backslash \{ \sigma \} \) of \( \mc K \) at a free simplex \( \sigma \) is the transition \( \mc K \to \mc K' = \mc K - \sigma - \tau \); namely, one can eliminate a simplex \( \tau \) if it has an accessible (not included in another simplex) face \(\sigma\).
 
- The consequent collapses at \( \Sigma = \{ \sigma_1, \sigma_2, \ldots \} \) are called the \emph{collapsing sequence}; formally:
+In this section we borrow the terminology from \cite{whiteheadSimplicialSpacesNuclei1939}; additionally, let us  assume that considered simplicial complex \( \mc K \) is restricted to its \(2\)-skeleton, so \( \mc K \) consists only of nodes, edges, and triangles, \( \mc K = \V 0 \cup \V 1 \cup \V 2\).
+
+Simplex \( \tau \in \mc K \) is called an (inlusion-wise) \gls{maximal face} of simplex \( \sigma \in \mc K \) if \( \tau \) is maximal by inlusion simplex such that \( \sigma \subseteq \tau \) and \( \ord \sigma < \ord \tau \). \en{
+      \insidefigure[0.3\columnwidth]{\input{imgs/tikz/adjacent_triangles.tex}}{Example of a simplicial complex: free simplices and maximal faces. \label{fig:adjacent_triangles}}
+} For instance, in \Cref{fig:adjacent_triangles} the edge \( \{1, 2\} \) and nodes \( \{ 1 \} \) and \( \{ 2 \} \) have two maximal faces, \( \{ 1, 2, 3 \} \) and \( \{ 1, 2, 4 \} \), while all the other edges and nodes have unique maximal faces --- their corresponding triangles. Note that in the case of the node \( \{ 1 \} \), there are bigger simplices containing it besides the triangles (e.g. the edge \( \{ 1, 2 \} \)), but they are not maximal by inclusion.
+
+\begin{definition}[Free simplex]\label{def:free}
+      The simplex \(\sigma \in \mc K \) is \gls{free} if it has exactly one maximal face \( \tau \), \( \tau = \tau(\sigma) \). F.i. edges \( \{ 1, 3 \} \), \( \{ 1, 4 \} \), \( \{ 2, 3 \} \) and \( \{ 2, 4 \} \) are all free in \Cref{fig:adjacent_triangles}.
+\end{definition} 
+
+ The \gls{collapse} \( \mc K \backslash \{ \sigma \} \) of \( \mc K \) at a free simplex \( \sigma \) is the transition from the original simplicial complex \( \mc K \) to a smaller simplicial complex \( \mc L \) without the free simplex \( \sigma \) and the corresponding maximal face \( \tau \), \( \mc K \to \mc K' = \mc K - \sigma - \tau \); namely, one can eliminate a simplex \( \tau \) if it has an accessible (not included in another simplex) face \(\sigma\).
+
+Naturally, one can perform several consequent collapses at  \( \Sigma = \{ \sigma_1, \sigma_2, \ldots \} \) assuming \( \sigma_i \) is free in collapse simplicial complex from the previous stage; \( \Sigma \) is called the \gls{collapsing sequence}. Formally:
  \begin{definition}[Collapsing sequence]
-       Let \( \mc K \) be a simplicial complex. \( \Sigma = \{ \sigma_1, \sigma_2, \ldots \} \) is a \emph{collapsing sequence} if \( \sigma_1 \) is free in \( \mc K \) and each \( \sigma_i \), \( i > 1 \), is free at 
+       Let \( \mc K \) be a simplicial complex. \( \Sigma = \{ \sigma_1, \sigma_2, \ldots \} \) is a \gls{collapsing sequence} if \( \sigma_1 \) is free in \( \mc K \) and each \( \sigma_i \), \( i > 1 \), is free at 
        \( \mc K^{(i)} = \mc K^{(i-1)} \backslash \{ \sigma_i \} \), \( \mc K^{(1)} = \mc K \). The collapse of \( \mc K \) to a new complex \( \mc L \) at \( \Sigma \) is denoted by \( \mc L = \mc K \backslash \Sigma \).
  \end{definition}
- By the definition, every collapsing sequence \( \Sigma \) has a corresponding sequence \( \ds T = \{ \tau(\sigma_1), \tau(\sigma_2), \ldots \} \) of facets being collapsed at every step.
+ By the definition, every collapsing sequence \( \Sigma \) has a corresponding sequence \( \ds T = \{ \tau(\sigma_1), \tau(\sigma_2), \ldots \} \) of maximal faces being collapsed at every step.
 
  \begin{definition}[Collapsible simplicial complex, \cite{whiteheadSimplicialSpacesNuclei1939}]
-      The simplicial complex \( \mc K \) is collapsible if there exists a collapsing sequence \( \Sigma \) such that \( \mc K \) collapses to a single vertex at \( \Sigma \), \( \mc K \backslash \Sigma = \{ v \} \).
+      The simplicial complex \( \mc K \) is \gls{collapsible} if there exists a collapsing sequence \( \Sigma \) such that \( \mc K \) collapses to a single vertex at \( \Sigma \), \( \mc K \backslash \Sigma = \{ v \} \).
 \end{definition}
 
-Determining whether the complex is collapsible is in general \emph{NP-complete}, \cite{tancer2016recognitiontancerRecognitionCollapsibleComplexes2016}, but can be almost linear for a set of specific families of \( \mc K \), \cite{cohenSolving1laplaciansNearly2014}. Naturally restricting the collapses to the case of \(d\)-collapses (such that \( \dim \sigma_i \le d-1 \)), one arrive at the notion of \(d\)-collapsibility, \cite{tancerDcollapsibilityNPcomplete2009}.
+Determining whether the complex is collapsible is in general \emph{NP-complete},~\cite{tancerRecognitionCollapsibleComplexes2016}, but can be almost linear for a set of specific families of \( \mc K \), e.g.\ if the simplex can be embeded into the triangulation of the \(d\)-dimensional unit sphere,~\cite{cohenSolving1laplaciansNearly2014}. Naturally restricting the collapses to the case of \(d\)-collapses (such that \( \ord \sigma_i \le d-1 \)), one arrive at the notion of \(d\)-collapsibility,~\cite{tancerDcollapsibilityNPcomplete2009}.
 
 \begin{definition}[\(d\)-Core]
-      A \(d\)-Core is a subcomplex of \( \mc K \) such that every simplex of dimension \( d - 1\) belongs to at least \( 2 \) \(d\)-simplices. E.g. \(2\)-Core is such a subcomplex of the original 2-skeleton \( \mc K \) that every edge from \( \V 1 \) belong to at least \(2\) triangles from \( \V 2 \).
+      A \(d\)-Core is a subcomplex of \( \mc K \) such that every simplex of order \( d - 1\) belongs to at least \( 2 \) simplices of order \( d \). E.g. \(2\)-Core is such a subcomplex of the original 2-skeleton \( \mc K \) that every edge from \( \V 1 \) belong to at least \(2\) triangles from \( \V 2 \).
 \end{definition}
+
 \begin{lemma}[\cite{lofanoWorstWayCollapse2021}]
       \( \mc K \) is \(d\)-collapsible if and only if it does not contain a \( d\)-core.
 \end{lemma}
 \begin{proof}
-      The proof of the lemma above naturally follows from the definition of the core: if the \(d\)-collapsing sequence is stuck then the simplex collapsed up to \(d\)-Core; conversely if a \(d\)-Core exists in the complex, the collapsing sequence necessarily includes its \((d-1)\)-faces which are not collapsible.
+      The proof of the lemma above naturally follows from the definition of the core. Assume \( \Sigma \) is a \(d\)-collapsing sequence, and \( \mc K \backslash \Sigma \) consists of more than a single vertex and has no free simplices of order \( \le d-1\) (``collapsing sequence gets stuck''). Then, each simplex of order \( d-1 \) is no free but belongs to at least \(2\) simplices of order \(d\), so \( \mc K \backslash \Sigma \) is a \( d \)-Core. Conversely if a \(d\)-Core exists in the complex, the collapsing sequence should necessarily include its \((d-1)\)-simplices which are not collapsible. %TODO : fix this
 \end{proof}
-The \(d\)-Core is the generalization of the cycle for the case of \(1\)-collapsibility of the classical graph; additionally, the \(d\)-Core is very dense due to its definition. In the case of \(2\)-Core, we provide simple exemplary structures on \Cref{fig:2-core} which imply various possible configurations for a  \(d\)-Core, \( d \ge 2 \), hence a search for \(d\)-Core inside \( \mc K \) is neither trivial, no computationally cheap.
 
-%In the case of \(2\)-Core, see examples on \Cref{fig:2-core}, the most sparse cases (assuming all the formed triangles are included in \( \mc K \)) are mosaic triangulations with \( \mathrm{deg} \ge 4\); the \(4\)-regular graph can be extended further, alternatively, each face of the \(2\)-core can be fractally substituted by shown structures.
-%{\blav One can probably show that \( \mathrm{deg} v \ge 4\) is necessary, but who cares.} 
-%Exemplary structures on \Cref{fig:2-core} imply various possible configurations for a  \(d\)-Core, \( d \ge 2 \), hence a search for \(d\)-Core inside \( \mc K \) is neither trivial, no computationally cheap.
+In the case of the classical graph model, the \( 1 \)-Core is a subgraph where each vertex has a degree at least \( 2 \); in other words, \( 1 \)-Core cannot be a tree and necessarily contains a simple cycle. Hence, the collapsibility of a classical graph coincides with the acyclicity. The \(d\)-Core is the generalization of the cycle for the case of \(1\)-collapsibility of the classical graph; additionally, the \(d\)-Core is very dense due to its definition. In the case of \(2\)-Core, we provide simple exemplary structures on \Cref{fig:2-core} which imply various possible configurations for a  \(d\)-Core, \( d \ge 2 \), hence a search for \(d\)-Core inside \( \mc K \) is neither trivial, no computationally cheap.
 
 \begin{figure}[htbp]
       \centering
-      \begin{tikzpicture}
-            \Vertex[x=0, y=0, size=0.25, fontscale=0.75, label=1]{v1}
-            \Vertex[x=2, y=0, size=0.25, fontscale=0.75,label=2]{v2}
-            \Vertex[x=1, y=1.5, size=0.25,fontscale=0.75, label=3]{v3}
-            \Vertex[x=1, y=0.5, size=0.25,fontscale=0.75, label=4]{v4} 
-            \Edge(v1)(v2)
-            \Edge(v1)(v3)
-            \Edge(v1)(v4)
-            \Edge(v2)(v3)
-            \Edge(v2)(v4)
-            \Edge(v3)(v4)
-
-            
-            \Vertex[x=6, y=0, size=0.25, fontscale=0.75, label=1]{v1}
-            \Vertex[x=5.5, y=1, size=0.25, fontscale=0.75, label=2]{v2}
-            \Vertex[x=6.5, y=1, size=0.25, fontscale=0.75, label=3]{v3}
-            \Vertex[x=4.25, y=-0.25, size=0.25, fontscale=0.75, label=4]{v4}
-            \Vertex[x=7.75, y=-0.25, size=0.25, fontscale=0.75, label=5]{v5}
-            \Vertex[x=6, y=2.25, size=0.25, fontscale=0.75, label=6]{v6}
-            \Edge(v1)(v2)
-            \Edge(v2)(v3)
-            \Edge(v1)(v3)
-            \Edge(v4)(v5)
-            \Edge(v4)(v6)
-            \Edge(v5)(v6)
-            \Edge(v1)(v4)
-            \Edge(v1)(v5)
-            \Edge(v2)(v6)
-            \Edge(v3)(v6)
-            \Edge(v2)(v4)
-            \Edge(v3)(v5)
-      \end{tikzpicture}
+      \input{imgs/tikz/example_core.tex}
       \caption{ \(2\)-Core, examples. \label{fig:2-core} }
 \end{figure}
 
