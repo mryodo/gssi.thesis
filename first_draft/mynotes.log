@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.17)  12 AUG 2023 18:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.17)  13 AUG 2023 21:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -962,6 +962,10 @@ File: tikzlibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: pgflibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ))
 \c@LayerCounter=\count397
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/faktor/faktor.sty
+Package: faktor 2006/04/05 v0.1b Faktor-Ringe, -Gruppen, -Raeume (PE)
+\faktor@zaehlerhoehe=\skip78
+\faktor@nennerhoehe=\skip79
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/doublestroke/dsfont.sty
 Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
 )) (./inputs/terms.tex (/usr/local/texlive/2022/texmf-dist/tex/latex/glossaries/base/glossaries.sty
@@ -977,7 +981,7 @@ Package: glossaries-compatible-307 2021/11/01 v4.49 (NLCT)
 )
 \gls@level=\count398
 \@gls@tmpb=\toks81
-\gls@tmplen=\skip78
+\gls@tmplen=\skip80
 \glskeylisttok=\toks82
 \glslabeltok=\toks83
 \glsshorttok=\toks84
@@ -986,15 +990,15 @@ Package: glossaries-compatible-307 2021/11/01 v4.49 (NLCT)
 Package: glossary-hypernav 2021/11/01 v4.49 (NLCT)
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty
 Package: glossary-list 2021/11/01 v4.49 (NLCT)
-\glslistdottedwidth=\skip79
+\glslistdottedwidth=\skip81
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty
 Package: glossary-long 2021/11/01 v4.49 (NLCT)
  (/usr/local/texlive/2022/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
-\LTleft=\skip80
-\LTright=\skip81
-\LTpre=\skip82
-\LTpost=\skip83
+\LTleft=\skip82
+\LTright=\skip83
+\LTpre=\skip84
+\LTpost=\skip85
 \LTchunksize=\count399
 \LTcapwidth=\dimen306
 \LT@head=\box85
@@ -1008,17 +1012,17 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \c@LT@chunks=\count403
 \LT@p@ftn=\toks86
 )
-\glsdescwidth=\skip84
-\glspagelistwidth=\skip85
+\glsdescwidth=\skip86
+\glspagelistwidth=\skip87
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/glossaries/styles/glossary-super.sty
 Package: glossary-super 2021/11/01 v4.49 (NLCT)
  (/usr/local/texlive/2022/texmf-dist/tex/latex/supertabular/supertabular.sty
 Package: supertabular 2020/02/02 v4.1g the supertabular environment
 \c@tracingst=\count404
 \ST@wd=\dimen307
-\ST@rightskip=\skip86
-\ST@leftskip=\skip87
-\ST@parfillskip=\skip88
+\ST@rightskip=\skip88
+\ST@leftskip=\skip89
+\ST@parfillskip=\skip90
 \ST@pageleft=\dimen308
 \ST@headht=\dimen309
 \ST@tailht=\dimen310
@@ -1031,7 +1035,7 @@ Package: supertabular 2020/02/02 v4.1g the supertabular environment
 \ST@pbox=\box90
 )) (/usr/local/texlive/2022/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 Package: glossary-tree 2021/11/01 v4.49 (NLCT)
-\glstreeindent=\skip89
+\glstreeindent=\skip91
 ))
 \glswrite=\write5
 \glo@main@file=\write6
@@ -1071,7 +1075,7 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\@sidenotes@extrawidth=\skip90
+\@sidenotes@extrawidth=\skip92
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1204,12 +1208,51 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 See the caption package documentation for explanation.
 
 Package hyperref Info: bookmark level for unknown example defaults to 0 on input line 19.
-) (./inputs/MNP.tex) (./inputs/stability.tex) (./inputs/preconditioning.tex [1
+
+LaTeX Font Warning: Font shape `OT1/cmbr/bx/n' in size <8> not available
+(Font)              Font shape `OT1/cmbr/m/n' tried instead on input line 40.
+
+Package marginnote Info: Margin note 1.3 is on absolute page 2 on input line 47.
+Package marginnote Info: right page because not two side mode on input line 47.
+Package marginnote Info: xpos seems to be 347.92992pt on input line 47.
+(./imgs/tikz/quotient.tex
+
+LaTeX Font Warning: Font shape `OT1/cmbr/bx/n' in size <6> not available
+(Font)              Font shape `OT1/cmbr/m/n' tried instead on input line 16.
+
+)
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 47.
+See the caption package documentation for explanation.
+
+
+Overfull \hbox (14.93585pt too wide) in paragraph at lines 24--47
+ [][] 
+ []
+
+
+Underfull \hbox (badness 1072) in paragraph at lines 47--47
+[][]\OT1/cmbr/bx/n/9 Figure II.2[][]: []|[]\OT1/cmbr/l/it/9 Illustration of
+ []
+
+
+LaTeX Font Warning: Font shape `OT1/cmbr/bx/n' in size <5> not available
+(Font)              Font shape `OT1/cmbr/m/n' tried instead on input line 47.
+
+Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 48.
+[1
 
 \openout5 = `mynotes.ist'.
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package marginnote Info: Margin note 2.1 is on absolute page 2 on input line 20.
+Package hyperref Info: bookmark level for unknown proof defaults to 0 on input line 57.
+Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 60.
+LaTeX Font Info:    Trying to load font information for U+dsrom on input line 93.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/doublestroke/Udsrom.fd
+File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
+)) (./inputs/MNP.tex [2]) (./inputs/stability.tex) (./inputs/preconditioning.tex
+Package marginnote Info: Margin note 3.1 is on absolute page 3 on input line 20.
 Package marginnote Info: right page because not two side mode on input line 20.
 Package marginnote Info: xpos seems to be 319.84885pt on input line 20.
  (./imgs/tikz/adjacent_triangles.tex)
@@ -1218,56 +1261,49 @@ Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 20.
 See the caption package documentation for explanation.
 
-LaTeX Font Info:    Trying to load font information for U+dsrom on input line 33.
-(/usr/local/texlive/2022/texmf-dist/tex/latex/doublestroke/Udsrom.fd
-File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-)
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 45.
-Package hyperref Info: bookmark level for unknown proof defaults to 0 on input line 49.
- [2] (./imgs/tikz/example_core.tex) (./imgs/julia/triang_prob.tex
+[3] (./imgs/tikz/example_core.tex) (./imgs/julia/triang_prob.tex
 LaTeX Font Info:    Calculating math sizes for size <18> on input line 272.
 LaTeX Font Info:    Calculating math sizes for size <22> on input line 272.
 ) (./imgs/julia/percol_prob.tex)
-Overfull \hbox (23.4134pt too wide) in paragraph at lines 67--71
+Overfull \hbox (23.4134pt too wide) in paragraph at lines 69--73
  [][][] 
  []
 
-[3] (./imgs/tikz/core.tex)
+[4] (./imgs/tikz/core.tex)
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 87.
+(caption)                particular \caption on input line 89.
 See the caption package documentation for explanation.
 
-Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 90.
-[4]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 123.
+[5]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 125.
 
 
 LaTeX Font Warning: Font shape `OT1/cmtl/l/n' undefined
-(Font)              using `OT1/cmtl/m/n' instead on input line 123.
+(Font)              using `OT1/cmtl/m/n' instead on input line 125.
 
-) (./mynotes.bbl) [5] (./mynotes.gls) [6
+) (./mynotes.bbl [6]) [7] (./mynotes.gls) [8
 
 ] (./mynotes.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `mynotes.out' has not changed.
-(rerunfilecheck)             Checksum: 9AD7C49E34E1D0B91E55E14A8C34DB50;2302.
+(rerunfilecheck)             Checksum: 282AF7185FE85AD6FC8F6A78744C8C3C;2297.
  ) 
 Here is how much of TeX's memory you used:
- 50648 strings out of 478268
- 1170846 string characters out of 5846347
- 1870889 words of memory out of 5000000
- 67891 multiletter control sequences out of 15000+600000
- 486187 words of font info for 100 fonts, out of 8000000 for 9000
+ 50804 strings out of 478268
+ 1174052 string characters out of 5846347
+ 1883821 words of memory out of 5000000
+ 68015 multiletter control sequences out of 15000+600000
+ 489484 words of font info for 112 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  114i,21n,118p,3633b,2556s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/doublestroke/dsrom8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbras10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrbs10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrmi9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrsy9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hftl10.pfb>
-Output written on mynotes.pdf (6 pages, 251645 bytes).
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/doublestroke/dsrom8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbr9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbras10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrbs10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrmi9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hfbrsy9.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/hfbright/hftl10.pfb>
+Output written on mynotes.pdf (8 pages, 275356 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
- 223 compressed objects within 3 object streams
- 65 named destinations out of 1000 (max. 500000)
+ 315 PDF objects out of 1000 (max. 8388607)
+ 266 compressed objects within 3 object streams
+ 90 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 

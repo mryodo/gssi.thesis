@@ -523,7 +523,7 @@
 
 \makeatletter
 \def\formatout#1{\hbox{\hskip1sp\m@th\llap{%
-    \normalcolor\small \color{greensheen}(Eqn.~#1) \hspace{-1.5cm}}}}
+    \normalcolor\small \color{greensheen}(Eqn.~#1) \hspace{0cm}}}}
 \let\oldmaketag@@@\maketag@@@
 \def\oldtagform@#1{\oldmaketag@@@{\ignorespaces#1\unskip\@@italiccorr}}
 \renewcommand{\eqref}[1]{\textup{\oldtagform@{\ref{#1}}}}

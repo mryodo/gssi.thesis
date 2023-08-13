@@ -19,6 +19,13 @@ Davide Lofano and Andrew Newman.
 \newblock The worst way to collapse a simplex.
 \newblock {\em Israel Journal of Mathematics}, 244(2):625--647, 2021.
 
+\bibitem[SBH{\etalchar{+}}20]{schaubRandomWalksSimplicial2020}
+Michael~T. Schaub, Austin~R. Benson, Paul Horn, Gabor Lippner, and Ali
+  Jadbabaie.
+\newblock Random {{Walks}} on {{Simplicial Complexes}} and the {{Normalized
+  Hodge}} 1-{{Laplacian}}.
+\newblock {\em SIAM Review}, 62(2):353--391, January 2020.
+
 \bibitem[Tan09]{tancerDcollapsibilityNPcomplete2009}
 Martin Tancer.
 \newblock D-collapsibility is {{NP-complete}} for d{$\geqslant$} 4.

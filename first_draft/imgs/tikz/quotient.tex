@@ -1,0 +1,24 @@
+\newcommand*{\xMin}{-1}%
+\newcommand*{\xMax}{2}%
+\newcommand*{\yMin}{-2}%
+\newcommand*{\yMax}{2}%
+
+\begin{tikzpicture}
+      \foreach \i in {\xMin,...,\xMax} {
+        \draw [very thin,lightgray] (\i,\yMin-0.2) -- (\i,\yMax+0.2)  node [below] at (\i,\yMin) {};
+    }
+    \foreach \i in {\yMin,...,\yMax} {
+        \draw [very thin,lightgray] (\xMin-0.2,\i) -- (\xMax+0.2,\i) node [left] at (\xMin,\i) {};
+    }
+
+    \draw [gray] (\xMin-0.2, 0) -- (\xMax+0.2,0) node [left] at (\xMin,0) {};
+    \draw [gray] (0,\yMin-0.2) -- (0,\yMax+0.2)  node [below] at (0,\yMin) {};
+    \node at (-1.75, 1.75) { \large \(\ker A \)};
+
+    \draw [black, line width = 3, dashed] (-1, -2) -- (1, 2) node [below] at (0.0, 1.75){ \large \( \im B \) };
+
+    \draw [black, line width = 3] (0.25, -2) -- (2.25, 2) node [below] at (0.0, 1.75){ \large \( \im B \) };
+
+    \draw [liberty, -{latex}, line width = 2] (0, 0) -- (1.15, 0) node [above] at (0.6, 0) {\large \( \b x \)};
+    \draw [persimmon, -{latex}, line width = 2] (0, 0) -- (0.9, -.6) node [below] at (0.3, -0.3) {\large \( \b x_H \)};
+\end{tikzpicture}

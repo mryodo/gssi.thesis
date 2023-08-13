@@ -24,5 +24,85 @@ A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the or
 
 
 
-\subsection{ Hodge's Algebra }
+\subsection{ Hodge's Theory }
 
+Two linear operators \( A \) and \( B \) are said to satisfy Hodge's theory if and only if their composition is a null operator, 
+\begin{equation}
+      A B = 0
+\end{equation}
+which is equivalent to \( \im B \subseteq \ker A \).
+
+\begin{definition}\label{def:quotient}
+      For a pair of operators \( A \) and \( B \) satisfying Hodge's theory, the \emph{quotient space} \( \mc H \) is defined as follows:
+      \begin{equation}
+            \mc H = \faktor{ \ker A }{\im B}
+      \end{equation}
+      where each element of \( \mc H \) is a manifold \( \b x + \im B = \left\{ \b x + \b y \mid \forall \b y \in \im B \right\}\) for \( \b x \in \ker A \). It follows directly from the definition that \( \mc H\) is an abelian group under addition.
+\end{definition}
+
+By \Cref{def:quotient}, the quotient space \( \mc H \) is a collection of \emph{equivalence classes} \( \b x + \im B \). Then, each class \( \b x + \im B = \b x_H + \im B \) for some \( \b x_H \perp \im B \) (both \( \b x, \b x_H \in \ker A \)); indeed, since the orthogonal component \( \b x_H \) (referred as \emph{harmonic representative}) of \( \b x \) with respect to \( \im B\) is unique, the map \( \b x_H \leftrightarrow \b x + \im B \) is bijectional.\en{
+      \insidefigure[0.3\columnwidth]{
+            \input{imgs/tikz/quotient.tex}}{Illustration of a harmonic representative for an equivalence class}
+}
+
+\begin{theorem}[{\cite[Thm 5.3]{limHodgeLaplaciansGraphs2020}}]\label{thm:two_kernels}
+      Let \( A \) and \( B \) be linear operators, \( A B = 0 \). Then the homology group \( \mc H \) satisfies:
+      \begin{equation}
+            \mc H = \faktor{\ker A }{\im B } \cong \ker A \cap \ker B^\top,
+      \end{equation}
+      where \( \cong \) denotes the isomorphism.
+\end{theorem}
+
+\begin{proof}
+      One builds the isomorphism through the harmonic representative, as discussed above. It sufficient to note that \( \b x_H \perp \im B \Leftrightarrow \b x_H \in \ker B^\top \) in order to complete the proof.
+\end{proof}
+
+\begin{lemma}[{\cite[Thm 5.2]{limHodgeLaplaciansGraphs2020}}]\label{lemma:hodge_kernels}
+      Let \( A \) and \( B \) be linear operators, \( A B = 0 \). Then:
+      \begin{equation}
+            \ker A \cap \ker B^\top = \ker \left( A^\top A + B B^\top \right)
+      \end{equation}
+      \vspace{-\baselineskip}
+\end{lemma}
+
+\begin{proof}
+      Note that if \( \b x \in \ker A \cap \ker B^\top \), then \( \b x \in \ker A \) and \( \b x \ker B^\top \), so \( \b x \in \ker \left( A^\top A + B B^\top  \right)\). As a result, \( \ker A \cap \ker B^\top \subset \ker \left( A^\top A + B B^\top  \right)\).
+
+      On the other hand, let \( \b x \in \ker \left( A^\top A + B B^\top \right)\), then
+      \begin{equation}
+            A^\top A \b x  + B B^\top \b x = 0
+      \end{equation}
+      Exploiting \( A B = 0 \) and multiplying the equation above by \( B^\top \) and \( A \) one gets the following:
+      \begin{equation}
+            \begin{aligned}
+                  & B^\top B B^\top \b x = 0 \\
+                  & A A^\top A \b x = 0 
+            \end{aligned}
+      \end{equation}
+      Note that \( A A^\top A \b x = 0 \Leftrightarrow A^\top A \b x \in \ker A \), but \( A^\top A \b x \in \im A^\top \), so by Fredholm alternative, \( A^\top A \b x = 0\). Finally, for \( A^\top A \b x = 0\):
+      \begin{equation}
+             A^\top A \b x = 0  \Longrightarrow  \b x^\top A^\top A \b x = 0 \iff \| A \b x \|^2 = 0 \Longrightarrow \b x \in \ker A  
+      \end{equation}
+      Similarly, for the second equation, \( \b x \in \ker B^\top \) which completes the proof.
+\end{proof}
+
+\begin{tmp}
+      Here we need some words about the transitions.
+\end{tmp}
+
+Since \( A B = 0\), \( B^\top A^\top = 0 \) or \( \im A^\top \subset \ker B^\top \). Then, exploiting \( \ds R^n = \ker A \oplus \im A^\top \): 
+\begin{equation}
+      \begin{aligned}
+            \ker B^\top & = \ker B^\top \cap \ds R^n = \ker B^\top \cap \left( \ker A \oplus \im A^\top \right) = \\
+            & = \left( \ker A \cap \ker B^\top \right) \oplus \left( \im A^\top \cap \ker B^\top \right)
+      \end{aligned}
+\end{equation}
+Given \Cref{lemma:hodge_kernels}, \( \ker A \cap \ker B^\top = \ker \left(  A^\top A + B B^\top \right) \) and, since \( \im A^\top \subset \ker B^\top \), \( \im A^\top \cap \ker B^\top = \im A^\top \), yeilding:
+\begin{theorem}[Hodge Decomposition]\label{thm:hodge_decomposition}
+      Let \( A \) and \( B \) be linear operators, \( A B = 0 \). Then:
+      \begin{equation}
+            \ds R^n = \lefteqn{\overbrace{\phantom{\im A^\top \oplus  \ker \left( A^\top A + B B^\top \right)}}^{\ker B^\top}} \im A^\top \oplus
+            \underbrace{\ker \left( A^\top A + B B^\top \right) \oplus  \im B}_{\ker A}
+      \end{equation}
+      \vspace{-\baselineskip}
+\end{theorem}
