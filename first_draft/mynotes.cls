@@ -573,3 +573,11 @@
 
 
 \counterwithin{figure}{section}
+
+
+\usepackage[
+      color=persimmon!10!white,
+      bordercolor=persimmon,
+      linecolor = persimmon,
+      textwidth = 0.3\columnwidth,
+]{todonotes}

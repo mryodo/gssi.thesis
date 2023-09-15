@@ -4,6 +4,11 @@
       Here we need to say general words about how we need an efficient preconditioning scheme.
 \end{tmp}
 
+\subsection{ Iterative methods for Positive Definite Systems }
+
+
+
+
 \subsection{Preconditioning 101}
 
 \subsection{Cholesky preconditioning for classical graphs}
@@ -48,7 +53,7 @@ Determining whether the complex is collapsible is in general \emph{NP-complete},
 \begin{proof}
       The proof of the lemma above naturally follows from the definition of the core. Assume \( \Sigma \) is a \(d\)-collapsing sequence, and \( \mc K \backslash \Sigma \) consists of more than a single vertex and has no free simplices of order \( \le d-1\) (``collapsing sequence gets stuck''). Then, each simplex of order \( d-1 \) is no free but belongs to at least \(2\) simplices of order \(d\), so \( \mc K \backslash \Sigma \) is a \( d \)-Core. 
       
-      Conversely if a \(d\)-Core exists in the complex, the collapsing sequence should necessarily include its simplices of order \( d - 1 \) which can not become free during as a result of a sequence of collapses. Indeed, for \(\sigma\) from \(d\)-Core,  \(\ord \sigma = d-1\), to become free, one needs to collapse at least one of \(\sigma\)'s maximal faces for \( d\)-Core , all of whose faces are, in turn, contained in the \( d\)-Core (since \(d\)-Core is a simplicial complex). As a result one necessarily needs a prior collapse inside the \(d\)-Core to perform the first collapse in the \(d\)-Core, which is impossible. 
+      Conversely if a \(d\)-Core exists in the complex, the collapsing sequence should necessarily include its simplices of order \( d - 1 \) which can not become free during as a result of a sequence of collapses. Indeed, for \(\sigma\) from \(d\)-Core,  \(\ord \sigma = d-1\), to become free, one needs to collapse at least one of \(\sigma\)'s maximal faces for \( d\)-Core , all of whose faces are, in turn, contained in the \( d\)-Core (since \(d\)-Core is a simplicial complex). As a result one necessarily needs a prior collapse inside the \(d\)-Core to perform the first collapse in the \(d\)-Core, which is impossible.
 \end{proof}
 
 In the case of the classical graph model, the \( 1 \)-Core is a subgraph where each vertex has a degree at least \( 2 \); in other words, \( 1 \)-Core cannot be a tree and necessarily contains a simple cycle. Hence, the collapsibility of a classical graph coincides with the acyclicity. The \(d\)-Core is the generalization of the cycle for the case of \(1\)-collapsibility of the classical graph; additionally, the \(d\)-Core is very dense due to its definition. In the case of \(2\)-Core, we provide simple exemplary structures on \Cref{fig:2-core} which imply various possible configurations for a  \(d\)-Core, \( d \ge 2 \), hence a search for \(d\)-Core inside \( \mc K \) is neither trivial, no computationally cheap.
