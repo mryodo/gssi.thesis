@@ -465,7 +465,7 @@
 
       \renewcommand{\thesection}{\Roman{section}} 
       \renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
-      \renewcommand{\thesubsubsection}{\thesection.\thesubsection.\Roman{subsection}}
+      \renewcommand{\thesubsubsection}{\thesubsection.\Roman{subsubsection}}
 
 
       \RequirePackage[font={small}, figurename=Figure, labelfont={bf,color=persimmon}]{caption}

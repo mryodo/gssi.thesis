@@ -14,7 +14,7 @@ Let \( V = \{ v_1, v_2, \ldots, v_n \} \) be a set of nodes; as discussed above,
 A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the order \( k \), \( \ord \sigma = k \). Let \( \V k \) be a set of all \(k\)-order simplices in \( \mc K \) and \( m_k \) is the cardinality of \( \V k\), \( m_k = | \V k | \); then \( \V 0 \) is the set of nodes in the simplicial complex \( \mc K \), \( \V 1 \) --- the set of edges, \( \V 2 \) --- the set of triangles, or \(3\)-cliques, and so on, with \( \mc K = \{ \V 0, \V 1, \V 2 \ldots \} \). Note that due to the inclusion rule in \Cref{def:simplicial_complex}, the number of non-empty \( \V k \) is finite and, moreover, uninterupted in a sense of the order: if \( \V k = \vn \), then \( \V {k+1} \) is also necessarily empty.
 \en{
       \insidefigure[0.3\columnwidth]{ \input{imgs/tikz/simplicial_complex_example.tex}}{
-            Example of a simplicial complex}
+            Example of a simplicial complex\label{fig:example_SC}}
 }
 
 \begin{example}[Simplicial Complex]
@@ -107,3 +107,23 @@ Given \Cref{lemma:hodge_kernels}, \( \ker A \cap \ker B^\top = \ker \left(  A^\t
       \end{equation}
       \vspace{-\baselineskip}
 \end{theorem}
+
+
+
+%=================================================%
+%                                                 %
+%=================================================%
+
+
+\subsection{ Boundary and Laplacian Operators }
+
+\subsubsection{Boundary operators}
+
+Each simplicial complex \( \mc K \) has a nested structure of simplicies: indeed, if \( \sigma \) is a simplex of order \( k \), \( \sigma \in \V k \), then all of \( (k-1)\)-th order faces forming the boundary of \( \sigma \) also belong to \( \mc K \): for instance, for the triangle \( \{ 1, 2, 3  \} \) all the border edges \( \{ 1, 2\} \), \( \{ 1, 3\}\) and \( \{ 2, 3 \}\) are also in the simplicial complex, \Cref{fig:example_SC}. 
+
+This nested property implies that one can build a formal map from a simplex to its boundary enclosed inside the simplicial complex. 
+
+\begin{definition}[Chain spaces]
+      Let \( \mc K \) be a simplicial complex; then the space \( C_k \) of formal sums of simplices from \( \V k \) over real numbers is called \emph{a \( k\)-th chain space}.
+\end{definition}
+
