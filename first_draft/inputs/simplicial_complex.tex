@@ -127,3 +127,6 @@ This nested property implies that one can build a formal map from a simplex to i
       Let \( \mc K \) be a simplicial complex; then the space \( C_k \) of formal sums of simplices from \( \V k \) over real numbers is called \emph{a \( k\)-th chain space}.
 \end{definition}
 
+Chain spaces on its own are naturally present in the majority of the network models: \( C_0 \) is a space of states of vertices (e.g. in the dynamical system \( \dot{ \b x } = A \b x \) the evoloving vector \( \b x \in C_0 \)), \( C_1 \) --- is a space of (unrestricted) flows on graphs edges, and so on\todo{refs?}.
+
+Since \( C_k \) is a linear space, versor vectors corresponding to the elements of \( \V k\) is a natural basis of \( C_k \); in order to proceed with the boundary maps, one needs to fix an order of the simplices inside \( \V k \) (alas one fixes the order of vertices in the graph to form an adjacency matrix) as a matter of bookkeeping. Addiitionally, since \( C_k \) is a space over \( \ds R \), chains \( \sigma \) and \( - \sigma \) naturally introduce the notion of \emph{orientation} of the simplex.
