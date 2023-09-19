@@ -4,7 +4,16 @@
 
 \subsection{ 101 on MNP }
 
-Generally speaking, for a given matrix \( A \) a \emph{matrix nearness problem} consists of finding the closest possible matrix \( X \) among the admissible set with a number of desired properties.
+Generally speaking, for a given matrix \( A \) a \emph{matrix nearness problem} consists of finding the closest possible matrix \( X \) among the admissible set with a number of desired properties. For instance, one may search for the closest (in some metric) symmetric positive/negative definite matrix, unitary matrix or the closest graph Laplacian. 
+
+Motivated by the topological meaning of the \emph{kernel} of Hodge Laplacians \( L_k \), we assume the specific case of \emph{spectral} MNPs: here one aims for the target matrix \( X \) to have a specific spectrum \( \sigma(X) \). For instance in the stability study of the dynamical system \( \dot{\b x} = A \b x \) one can search for the closest Hurwitz matrix such that \( \mathrm{Re} \left[ \lambda_i \right] < 0 \) for all \( \lambda_i \in \sigma(X) \); similarly, assuming given matrix \( A \) is a graph Laplacian, one can search for the closest disconnected graph (so the algebraic connectivity \( \lambda_2 = 0 \)).
+
+Here we recite the optimization framework developed by REFREFREF\todo{fix it} for the class of the spectral matrix nearness problems; one should note, however, that this is by far not the only approach to the task, REFREFREF\todo{also fix it with Nicholas and others, I guess?}.
+
+\paragraph{Functional and Gradient Flow}
+
+Let as assume that \( X = A + \Delta \) and intead of searching for \( X \), we search for the perturbation matrix \( \Delta \); additionally, we assume that \( \Omega \) is the admissible set containing all possible perturbations \( \Delta \).
+
 
 
 
