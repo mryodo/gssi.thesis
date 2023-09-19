@@ -29,6 +29,61 @@ Let as assume that \( X = A + \Delta \) and intead of searching for \( X \), we 
 
 
 
+\subsection{Direct approach: failure and discontinuity problems }
+
+
+\subsubsection{Principal spectral inheritance}
+
+
+Before moving on to the next section, we recall here a relatively direct  but important spectral property that connects the spectra of the $k$-th and $(k+1)$-th order Laplacians. 
+
+\begin{theorem}[HOL's spectral inheritance]\label{thm:inherit}
+  Let $L_k$ and $L_{k+1}$ be  higher-order Laplacians for the same simplicial complex $\mc K$. Let $\bar L_k=\bar L_k^{down}+\bar L_k^{up}$, where $\bar L_k^{down}=\bar B_k^\top \bar B_k$ and $\bar L_k^{up}=\bar B_{k+1} \bar B_{k+1}^\top$. Then:
+  \begin{enumerate}
+    \item $\sigma_+(\bar L_k^{up})=\sigma_+(\bar L_{k+1}^{down})$, where $\sigma_+(\cdot)$ denotes the positive part of the spectrum;
+    \item if $ 0 \ne \mu \in \sigma_+(\bar L_k^{up}) = \sigma_+(\bar L_{k+1}^{down})$, then the eigenvectors are related as follows:
+    \begin{enumerate}
+      \item if $\vec x$ is and eigenvector for $\bar L_k^{up}$ with the eigenvalue $\mu$, then $\vec y = \frac{1}{\sqrt{\mu}} \bar B_{k+1}^\top \vec x$ is an eigenvector for $\bar L_{k+1}^{down}$ with the same eigenvalue;
+      \item if $\vec u$ is and eigenvector for $\bar L_{k+1}^{down}$ with the eigenvalue $\mu$ and $\vec u \notin \ker \bar B_{k+1}$, then $\vec v = \frac{1}{\sqrt{\mu}} \bar B_{k+1} \vec u$ is an eigenvector for $\bar L_{k}^{up}$ with the same eigenvalue;
+    \end{enumerate}
+    \item for each Laplacian $\bar L_k$: if $\vec v \notin \ker \bar L_k^{down}$ is the eigenvector for $\bar L_k^{down}$, then $\vec v \in \ker \bar L_{k}^{up}$; vice versa, if $\vec u \notin \ker \bar L_k^{up}$ is the eigenvector for $\bar L_k^{up}$, then $\vec v \in \ker \bar L_k^{down}$;
+    \item consequently, there exist $\mu \in \sigma_+(\bar L_k)$ with an eigenvector $\vec u \in \ker \bar L_k^{up}$, and $\nu \in \sigma_+(\bar L_{k+1})$ with an eigenvector $\vec u \in \ker \bar L_{k+1}^{down}$, such that:
+    $$
+    \bar B_k^\top \bar B_k \vec v  = \mu \vec v, \qquad \bar B_{k+2} \bar B_{k+2}^\top \vec u = \nu \vec u\, . 
+    $$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+For $(2a)$ it is sufficient to note that $ \bar L_{k+1}^{down} \vec y = \bar B_{k+1}^\top \bar B_{k+1} \frac{1}{\sqrt{\mu}} \bar B_{k+1}^\top \vec x = \frac{1}{\sqrt{\mu}}\bar B_{k+1}^\top \bar L_k^{up} \vec x = \sqrt \mu \bar B_{k+1}^\top \vec x  = \mu \vec y$. Similarly, for $(2b)$: $\bar L_k^{up} \vec v= \bar B_{k+1} \bar B_{k+1}^\top \frac{1}{\sqrt{\mu}} \bar B_{k+1} \vec u = \frac{1}{\sqrt{\mu}} \bar B_{k+1} \bar L_{k+1}^{down} \vec u = \mu \vec v $; joint $2(a)$ and $2(b)$ yield $(1)$. \emph{Hodge decomposition} immediately yields the strict separation of eigenvectors between $\bar L_k^{up}$ and $\bar L_k^{down}$, $(3)$; given $(3)$, all the inherited  eigenvectors from $(2a)$ fall into the $\ker \bar L_{k+1}^{down}$, thus resulting into $(4)$.
+\end{proof}
+In other words, the variation of the spectrum of the $k$-th Laplacian when moving from one order to the next one works as follows: 
+the down-term $\bar L_{k+1}^{down}$ inherits the positive part of the spectrum from the up-term of  $\bar L_k^{up}$; the  eigenvectors corresponding to the inherited positive part of the spectrum lie in the kernel of $\bar L_{k+1}^{up}$; at the same time, the ``new'' up-term $\bar L_{k+1}^{up}$ has a new, non-inherited, part of the positive spectrum (which, in turn, lies in the kernel of the $(k+2)$-th down-term).
+
+In particular, we notice that for $k = 0$, since $B_0=0$ and $\bar L_0=\bar L_0^{up}$, the  theorem yields $\sigma_+ (\bar L_0 ) = \sigma_+ (\bar{L_1}^{down}) \subseteq \sigma_+(\bar L_1)$. In other terms, the positive spectrum of the $\bar L_0$ is inherited by the spectrum of $\bar L_1$ and the remaining (non-inherited) part of $\sigma_+(\bar L_1)$ coincides with $\sigma_+(\bar L_1^{up})$. 
+\Cref{fig:thm_spct_ill} provides an  illustration of the statement of  \Cref{thm:inherit} for $k = 0$.
+  \begin{figure}[t]
+    \centering
+    \input{imgs/tikz/spectral_inheritance}
+    \caption{Illustration for the principal spectrum inheritance (\Cref{thm:inherit}) in case $k=0$: spectra of $\bar L_1$, $\bar L_1^{down}$ and $\bar L_1^{up}$ are shown. Colors signify the splitting of the spectrum, $\lambda_i>0 \in \sigma(\bar L_1)$ ; all yellow eigenvalues are inherited from $\sigma_+(\bar L_0)$; red eigenvalues belong to the non-inherited part. Dashed barrier $\mu$ signifies the penalization threshold (see the target functional in \Cref{subsec:functional}) preventing homological pollution (see \Cref{subsec:connetedness}). }
+    \label{fig:thm_spct_ill}
+    \vspace{-10pt}
+  \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

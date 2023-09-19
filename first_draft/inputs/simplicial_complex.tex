@@ -23,6 +23,14 @@ A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the or
       
 \end{example}
 
+\begin{example}[Real Life Simplicial Complex]
+
+      123
+      
+\end{example}
+
+
+Comparing to the general case of the hypergraph described above, it is easy to see that simplicial complex is a special case of a hypergraph where every edge is enclosed with respect to the inclusion. In other words, simplicial complex contains additional structural rigidness which allows to formally describe the topology of \( \mc K \); as a result, one is specifically interested in the formal desctiption of the nested inclusion principle achieved through \emph{boundary operators} defined in the subsections below.
 
 
 \subsection{ Hodge's Theory }
@@ -130,3 +138,45 @@ This nested property implies that one can build a formal map from a simplex to i
 Chain spaces on its own are naturally present in the majority of the network models: \( C_0 \) is a space of states of vertices (e.g. in the dynamical system \( \dot{ \b x } = A \b x \) the evoloving vector \( \b x \in C_0 \)), \( C_1 \) --- is a space of (unrestricted) flows on graphs edges, and so on\todo{refs?}.
 
 Since \( C_k \) is a linear space, versor vectors corresponding to the elements of \( \V k\) is a natural basis of \( C_k \); in order to proceed with the boundary maps, one needs to fix an order of the simplices inside \( \V k \) (alas one fixes the order of vertices in the graph to form an adjacency matrix) as a matter of bookkeeping. Addiitionally, since \( C_k \) is a space over \( \ds R \), chains \( \sigma \) and \( - \sigma \) naturally introduce the notion of \emph{orientation} of the simplex.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{ Weigthed and Normalised Boundary Operators}
+
+
+Note that, from the definition \( \bar B_k= W_{k-1}^{-1} B_k W_k \) and \eqref{eq:Bk_Bk+1_0}, we immediately have that  \( \bar B_k\bar B_{k+1}=0 \). Thus, the group \( \bar {\mc H}_k = \ker \bar B_k / \im \bar B_{k+1} \) is well defined for any choice of positive weights  \( w_k \) and is isomorphic to \( \ker \bar L_k \). While the homology group may depend on the weights,  we observe below that its dimension does not. Precisely, we have 
+\begin{proposition}
+ \label{thm:wHomGroup}
+     The dimension of the homology groups of \( \mc K \) is not affected by the weights of its \( k \)-simplicies. Precisely, if \( W_k \) are positive diagonal matrices, we have
+     \begin{equation}
+         \dim \ker \bar B_k = \dim \ker B_k, \quad \dim \ker \bar B_k^\top = \dim \ker B_k^\top, \quad \dim \bar{\mc H}_k = \dim \mc H_k\, .
+     \end{equation}
+     Moreover, \( \ker B_k = W_k \ker \bar B_k \) and \( \ker B_k^\top = W_{k-1}^{-1} \ker \bar B_k^\top \).
+\end{proposition}
+
+\begin{proof}
+Since \( W_k \) is an invertible diagonal matrix, 
+\begin{equation*}
+    \bar B_k \b x = 0 \iff W_{k-1}^{-1}B_k W_k \vec x =0 \iff B_k W_k \vec x =0. 
+\end{equation*}
+Hence, if \( \vec x \in \ker \bar B_k \), then \( W_k \vec x \in \ker B_k \), and, since \( W_k \) is bijective, \( \dim \ker \bar B_k = \dim \ker B_k \). Similarly, one observes that \( \dim \ker \bar B_k^\top = \dim \ker B_k^\top \).
+
+Moreover, since \( \bar B_k \bar B_{k+1} =0 \), then \( \im \bar B_{k+1} \subseteq \ker \bar B_k \) and \( \im \bar B_k^\top \subseteq \ker \bar B_{k+1}^\top \). This yields \( \ker \bar B_k \cup \ker \bar B_{k+1}^\top = \mathbb{R}^{\mc V_k} = \ker B_k \cup \ker  B_{k+1}^\top\). Thus, for the homology group it holds:
+\begin{equation*}
+      \begin{aligned}
+    \dim \bar {\mc H}_k & = \dim \left( \ker \bar B_k \cap \ker \bar B_{k+1}^\top \right)= \\
+    & = \dim \ker \bar B_k + \dim \ker \bar B_{k+1}^\top - \dim \left( \ker \bar B_k \cup \ker \bar B_{k+1}^\top \right) = \\
+    & = \dim \ker B_k + \dim \ker  B_{k+1}^\top - \dim \left( \ker  B_k \cup \ker  B_{k+1}^\top \right) = \dim \mc H_k
+      \end{aligned}
+\end{equation*}
+\end{proof}

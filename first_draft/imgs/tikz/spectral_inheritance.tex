@@ -1,0 +1,62 @@
+\begin{tikzpicture}
+      \node[draw] at (0,0) {0};
+      \node[draw] at (0.5,0) {0};
+      \node at (1, 0) {$\cdots$};
+      \node[draw] at (1.5,0) {0};
+      \node[draw, fill=bananamania] at (2.15,0) {\tiny{$\lambda_1$}};
+      \node[draw, fill=bananamania] at (2.65,0) {\tiny{$\lambda_2$}};
+      \node[draw, fill=burntsienna] at (3.15,0) {\tiny{$\lambda_3$}};
+      \node[draw, fill=bananamania] at (3.65,0) {\tiny{$\lambda_4$}};
+      \node[draw, fill=burntsienna] at (4.15,0) {\tiny{$\lambda_5$}};
+      \node[draw, fill=burntsienna] at (4.65,0) {\tiny{$\lambda_6$}};
+      \node[draw, fill=bananamania] at (5.15,0) {\tiny{$\lambda_7$}};
+      \node[draw, fill=bananamania] at (5.65,0) {\tiny{$\lambda_8$}};
+      \node[draw, fill=burntsienna] at (6.15,0) {\tiny{$\lambda_9$}};
+      \node[draw, fill=bananamania] at (6.65,0) {\tiny{$\lambda_{10}$}};
+      \node at (8.5, 0) {$\leftarrow \quad \sigma (\bar L_1)$\phantom{$\bar B_1$}};
+    
+      \node[draw] at (0,-0.7) {0};
+      \node[draw] at (0.5,-0.7) {0};
+      \node at (1, -0.7) {$\cdots$};
+      \node[draw] at (1.5,-0.7) {0};
+      \node[draw, fill=bananamania] at (2.15,-0.7) {\tiny{$\lambda_1$}};
+      \node[draw, fill=bananamania] at (2.65,-0.7) {\tiny{$\lambda_2$}};
+      \node[draw] at (3.15,-0.7) {0};
+      \node[draw, fill=bananamania] at (3.65,-0.7) {\tiny{$\lambda_4$}};
+      \node[draw] at (4.15,-0.7) {0};
+      \node[draw] at (4.65,-0.7) {0};
+      \node[draw, fill=bananamania] at (5.15,-0.7) {\tiny{$\lambda_7$}};
+      \node[draw, fill=bananamania] at (5.65,-0.7) {\tiny{$\lambda_8$}};
+      \node[draw] at (6.15,-0.7) {0};
+      \node[draw, fill=bananamania] at (6.65,-0.7) {\tiny{$\lambda_{10}$}};
+      \node at (8.5, -0.7) {$\leftarrow \quad \sigma (\bar B_1^T \bar B_1)$};
+    
+      \node[draw] at (0,-1.4) {0};
+      \node[draw] at (0.5,-1.4) {0};
+      \node at (1, -1.4) {$\cdots$};
+      \node[draw] at (1.5,-1.4) {0};
+      \node[draw] at (2.15,-1.4) {0};
+      \node[draw] at (2.65,-1.4) {0};
+      \node[draw, fill=burntsienna] at (3.15,-1.4) {\tiny{$\lambda_3$}};
+      \node[draw] at (3.65,-1.4) {0};
+      \node[draw, fill=burntsienna] at (4.15,-1.4) {\tiny{$\lambda_5$}};
+      \node[draw, fill=burntsienna] at (4.65,-1.4) {\tiny{$\lambda_6$}};
+      \node[draw] at (5.15,-1.4) {0};
+      \node[draw] at (5.65,-1.4) {0};
+      \node[draw, fill=burntsienna] at (6.15,-1.4) {\tiny{$\lambda_9$}};
+      \node[draw] at (6.65,-1.4) {0};
+      \node at (8.5, -1.4) {$\leftarrow \quad \sigma (\bar B_2 \bar B_2^T)$};
+    
+      \draw [
+        thick,
+        decoration={
+            brace,
+            mirror,
+            raise=0.25cm
+        },
+        decorate
+      ] (-0.25, -1.4) -- (1.75, -1.4) 
+    node [pos=0.5,anchor=north,yshift=-0.25cm] {holes}; 
+      \draw[pattern=north west lines] (1.75,0.4) rectangle (1.85, -1.8);
+      \node[draw, align=center, fill=bananamania] at (1.8,-2.1) {$\mu$};
+    \end{tikzpicture}
