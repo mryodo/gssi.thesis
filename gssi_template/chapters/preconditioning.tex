@@ -1,0 +1,162 @@
+\chapter{Preconditioning}
+
+\todo{
+      Here we need to say general words about how we need an efficient preconditioning scheme.
+}
+
+\section{ Iterative methods for Positive Definite Systems }
+
+
+
+
+\section{Preconditioning 101}
+
+\section{Cholesky preconditioning for classical graphs}
+
+\section{Classical collapsibility}
+
+% TODO: introduction
+
+
+In this section we borrow the terminology from \cite{whiteheadSimplicialSpacesNuclei1939}; additionally, let us  assume that considered simplicial complex \( \mc K \) is restricted to its \(2\)-skeleton, so \( \mc K \) consists only of nodes, edges, and triangles, \( \mc K = \V 0 \cup \V 1 \cup \V 2\).
+
+Simplex \( \tau \in \mc K \) is called an (inlusion-wise) {maximal face} of simplex \( \sigma \in \mc K \) if \( \tau \) is maximal by inlusion simplex such that \( \sigma \subseteq \tau \) and \( \ord \sigma < \ord \tau \). 
+\begin{figure}[hbtp]
+      \centering
+      \input{figures/tikz/adjacent_triangles.tex}
+      \caption{Example of a simplicial complex: free simplices and maximal faces. \label{fig:adjacent_triangles}}
+\end{figure}
+ For instance, in \Cref{fig:adjacent_triangles} the edge \( \{1, 2\} \) and nodes \( \{ 1 \} \) and \( \{ 2 \} \) have two maximal faces, \( \{ 1, 2, 3 \} \) and \( \{ 1, 2, 4 \} \), while all the other edges and nodes have unique maximal faces --- their corresponding triangles. Note that in the case of the node \( \{ 1 \} \), there are bigger simplices containing it besides the triangles (e.g. the edge \( \{ 1, 2 \} \)), but they are not maximal by inclusion.
+
+\begin{definition}[Free simplex]\label{def:free}
+      The simplex \(\sigma \in \mc K \) is {free} if it has exactly one maximal face \( \tau \), \( \tau = \tau(\sigma) \). F.i. edges \( \{ 1, 3 \} \), \( \{ 1, 4 \} \), \( \{ 2, 3 \} \) and \( \{ 2, 4 \} \) are all free in \Cref{fig:adjacent_triangles}.
+\end{definition} 
+
+ The {collapse} \( \mc K \backslash \{ \sigma \} \) of \( \mc K \) at a free simplex \( \sigma \) is the transition from the original simplicial complex \( \mc K \) to a smaller simplicial complex \( \mc L \) without the free simplex \( \sigma \) and the corresponding maximal face \( \tau \), \( \mc K \to \mc K' = \mc K - \sigma - \tau \); namely, one can eliminate a simplex \( \tau \) if it has an accessible (not included in another simplex) face \(\sigma\).
+
+Naturally, one can perform several consequent collapses at  \( \Sigma = \{ \sigma_1, \sigma_2, \ldots \} \) assuming \( \sigma_i \) is free in collapse simplicial complex from the previous stage; \( \Sigma \) is called the {collapsing sequence}. Formally:
+ \begin{definition}[Collapsing sequence]
+       Let \( \mc K \) be a simplicial complex. \( \Sigma = \{ \sigma_1, \sigma_2, \ldots \} \) is a {collapsing sequence} if \( \sigma_1 \) is free in \( \mc K \) and each \( \sigma_i \), \( i > 1 \), is free at 
+       \( \mc K^{(i)} = \mc K^{(i-1)} \backslash \{ \sigma_i \} \), \( \mc K^{(1)} = \mc K \). The collapse of \( \mc K \) to a new complex \( \mc L \) at \( \Sigma \) is denoted by \( \mc L = \mc K \backslash \Sigma \).
+ \end{definition}
+ By the definition, every collapsing sequence \( \Sigma \) has a corresponding sequence \( \ds T = \{ \tau(\sigma_1), \tau(\sigma_2), \ldots \} \) of maximal faces being collapsed at every step.
+
+ \begin{definition}[Collapsible simplicial complex, \cite{whiteheadSimplicialSpacesNuclei1939}]
+      The simplicial complex \( \mc K \) is {collapsible} if there exists a collapsing sequence \( \Sigma \) such that \( \mc K \) collapses to a single vertex at \( \Sigma \), \( \mc K \backslash \Sigma = \{ v \} \).
+\end{definition}
+
+Determining whether the complex is collapsible is in general \emph{NP-complete},~\cite{tancerRecognitionCollapsibleComplexes2016}, but can be almost linear for a set of specific families of \( \mc K \), e.g.\ if the simplex can be embeded into the triangulation of the \(d\)-dimensional unit sphere,~\cite{cohenSolving1laplaciansNearly2014}. Naturally restricting the collapses to the case of \(d\)-collapses (such that \( \ord \sigma_i \le d-1 \)), one arrive at the notion of \(d\)-collapsibility,~\cite{tancerDcollapsibilityNPcomplete2009}.
+
+\begin{definition}[\(d\)-Core]
+      A \(d\)-Core is a subcomplex of \( \mc K \) such that every simplex of order \( d - 1\) belongs to at least \( 2 \) simplices of order \( d \). E.g. \(2\)-Core is such a subcomplex of the original 2-skeleton \( \mc K \) that every edge from \( \V 1 \) belong to at least \(2\) triangles from \( \V 2 \).
+\end{definition}
+
+\begin{lemma}[\cite{lofanoWorstWayCollapse2021}]
+      \( \mc K \) is \(d\)-collapsible if and only if it does not contain a \( d\)-core.
+\end{lemma}
+\begin{proof}
+      The proof of the lemma above naturally follows from the definition of the core. Assume \( \Sigma \) is a \(d\)-collapsing sequence, and \( \mc K \backslash \Sigma \) consists of more than a single vertex and has no free simplices of order \( \le d-1\) (``collapsing sequence gets stuck''). Then, each simplex of order \( d-1 \) is no free but belongs to at least \(2\) simplices of order \(d\), so \( \mc K \backslash \Sigma \) is a \( d \)-Core. 
+      
+      Conversely if a \(d\)-Core exists in the complex, the collapsing sequence should necessarily include its simplices of order \( d - 1 \) which can not become free during as a result of a sequence of collapses. Indeed, for \(\sigma\) from \(d\)-Core,  \(\ord \sigma = d-1\), to become free, one needs to collapse at least one of \(\sigma\)'s maximal faces for \( d\)-Core , all of whose faces are, in turn, contained in the \( d\)-Core (since \(d\)-Core is a simplicial complex). As a result one necessarily needs a prior collapse inside the \(d\)-Core to perform the first collapse in the \(d\)-Core, which is impossible.
+\end{proof}
+
+In the case of the classical graph model, the \( 1 \)-Core is a subgraph where each vertex has a degree at least \( 2 \); in other words, \( 1 \)-Core cannot be a tree and necessarily contains a simple cycle. Hence, the collapsibility of a classical graph coincides with the acyclicity. The \(d\)-Core is the generalization of the cycle for the case of \(1\)-collapsibility of the classical graph; additionally, the \(d\)-Core is very dense due to its definition. In the case of \(2\)-Core, we provide simple exemplary structures on \Cref{fig:2-core} which imply various possible configurations for a  \(d\)-Core, \( d \ge 2 \), hence a search for \(d\)-Core inside \( \mc K \) is neither trivial, no computationally cheap.
+
+\begin{figure}[htbp]
+      \centering
+      \input{figures/tikz/example_core.tex}
+      \caption{ \(2\)-Core, examples. \label{fig:2-core} }
+\end{figure}
+
+%Besides the quantitative restriction discussed later, \( 2 \)-Cores tend to appear relatively early when upon ``densifying'' the complex.
+Additionally, we demonstrate that an arbitrary simplicial complex \(\mc K\) tends to contain \(2\)-Cores as long as \( \mc K \) is denser than a trivially collapsible case. Assume the complex formed by triangulation of \( m_0 \) random points on the unit square with a sparsity pattern \( \nu \); the triangulation itself with the corresponding \( \nu_\Delta \) is collapsible, but a reasonably small addition of edges already creates a \(2\)-Core (since it is local), \Cref{fig:core_prob}, left. Similarly, sampled sensor networks, where \( \exists \sigma \in \V 1: \; \sigma = [v_1, v_2] \iff \| v_1 - v_2 \|_2 < \eps \) for a chosen percolation parameter \( \eps > 0 \), quickly form a 2-Core upon the densifying of the network.
+
+\begin{figure}[htbp]
+      \centering
+      \scalebox{0.4}{
+            \input{figures/julia/triang_prob.tex}
+      }%
+      \scalebox{0.4}{
+            \input{figures/julia/percol_prob.tex}
+      }
+      \caption{ The probability of the \( 2 \)-Core in richer-than-triangulation simplicial complexes: triangulation of random points modified to have \( \left[ \nu \frac{ | \V 0 | \cdot ( | \V 0 | - 1 ) }{2} \right] \) edges on the left; random sensor networks with \( \eps \)-percolation on the right. \( \nu_\Delta \) defines the initial sparsity of the triangulated network; \(\eps_{\min} = \ds E \min_{x, y \in [0, 1]^2} \| x - y\|_2 \) is the minimal possible percolation parameter. \label{fig:core_prob} }
+\end{figure}
+
+However, in the following, we observe that a weaker condition is enough to efficiently design a preconditioner for any ``sparse enough'' simplicial complex.
+
+\subsection{Weak collapsibility}
+
+
+Let the complex \( \mc K \) be restricted up to its \(2\)-skeleton, \( \mc K = \V 0 \cup \V 1 \cup \V 2 \), and \( \mc K \) is collapsible. Then the collapsing sequence \( \Sigma \) necessarily involves collapses at simplices \( \sigma_i \) of different orders: at edges (eliminating \emph{edges} and \emph{triangles}) and at vertices (eliminating \emph{vertices} and \emph{edges}). One can show that for a given collapsing sequence \( \Sigma \) there is a reordering \( \tilde \Sigma \) such that \( \dim \tilde{\sigma_i} \) are non-increasing, {\cite[Lemma 2.5]{cohenSolving1laplaciansNearly2014}}. Namely, if such a complex is collapsible, then there is a collapsible sequence \( \Sigma = \{ \Sigma_1, \Sigma_0 \} \) where \( \Sigma_1 \) contains all the collapses at edges first and \( \Sigma_0 \) is composed of collapses at vertices. Note that the partial collapse \( \mc K \backslash \Sigma_1 = \mc L \) eliminates all the triangles in the complex, \( \mc V_2 (\mc L) = \varnothing \); otherwise, the whole sequence \( \Sigma \) is not collapsing \( \mc K \) to a single vertex. Since \( \mc V_2 (\mc L ) = \varnothing \), the associated up-Laplacian \( \Lu 1 ( \mc L ) = 0 \).
+
+\begin{definition}[Weakly collapsible complex]
+      Simplicial complex \( \mc K \) restricted to its \(2\)-skeleton is called \emph{weakly collapsible}, if there exists a collapsing sequence \( \Sigma_1 \) such that the simplicial complex \( \mc L = \mc K \backslash \Sigma_1 \) has no simplices of order \(2\), \( \mc V_2(\mc L) = \varnothing \) and \( \Lu 1 (\mc L ) = 0 \).
+\end{definition}
+
+\begin{example}
+      Note that a collapsible complex is necessarily weakly collapsible; the opposite does not hold. Consider the following example in \Cref{fig:weak_example}: the initial complex is weakly collapsible either by a collapse at \( [3, 4] \) or at \( [2, 4] \). After this, the only available collapse is at the vertex \([4]\) leaving the uncollapsible \(3\)-vertex structure.
+
+      \begin{figure}[hbtp]
+            \centering
+            \input{figures/tikz/core.tex}
+            \caption{Example of weakly collapsible but not collapsible simplicial complex \label{fig:weak_example}}
+      \end{figure}
+\end{example}
+
+\begin{theorem}\label{thm:poly}
+      Weak collapsibility of \( 2\)-skeleton \( \mc K \) is polynomially solvable.
+\end{theorem}
+\begin{proof}
+      The \emph{greedy algorithm} for the collapsing sequence intuitively operates as follows: at each iteration perform any of possible collapses; in the absence of free edges, the complex should be considered not collapsible, \Cref{algo:greedy}. Clearly, such an algorithm runs polynomially with respect to the number of simplexes in \(\mc K\).
+      % TODO:
+
+      The failure of the greedy algorithm indicates the existence of a weakly collapsible complex \( \mc K \) such that the greedy algorithm gets stuck at a \( 2 \)-Core, which is avoidable for another possible order of collapses. Among all the counter exemplary complexes, let \( \mc K \) be a minimal one with respect to the number of triangles \( m_2 \). Then there exist a free edge \( \sigma \in \V 1 \) such that \( \mc K \backslash \{ \sigma \} \) is \emph{collapsible} and another \( \sigma' \in \V 2 \) such that \( \mc K \backslash \{ \sigma' \} \) is \emph{not collapsible}.
+
+      Note that if \( \mc K \) is minimal then for any pair of free edges \( \sigma_1 \) and \( \sigma_2 \) belong to the same triangle: \( \tau(\sigma_1) = \tau(\sigma_2) \). Indeed, for any \( \tau(\sigma_1) \ne \tau(\sigma_2) \),  \( \mc K \backslash \{ \sigma_1, \sigma_2 \} = \mc K \backslash \{ \sigma_2, \sigma_1 \} \). Let \( \tau(\sigma_1) \ne \tau(\sigma_2) \) for at least one pair of \( \sigma_1 \) and \( \sigma_2 \); in our assumption, either both \( \mc K \backslash \{ \sigma_1 \} \) and \( \mc K \backslash \{ \sigma_2 \} \), only \( \mc K \backslash \{ \sigma_1 \}  \) or none are collapsible. In the former case either \( \mc K \backslash \{ \sigma_1 \} \) or \( \mc K \backslash \{ \sigma_2 \} \) is a smaller example of the complex satisfying the assumption, hence, violating the minimality. If only \( \mc K \backslash \{ \sigma_1 \} \) is collapsible, then \( \mc K \backslash \{ \sigma_2, \sigma_1 \}  \) is not collapsible; hence, \( \mc K \backslash \{ \sigma_1, \sigma_2 \} \) is not collapsible, so \( \mc K \backslash \{ \sigma_1 \} \) is a smaller example of a complex satisfying the assumption. Finally, if both \( \mc K \backslash \{ \sigma_1 \} \) and \( \mc K \backslash \{ \sigma_2 \} \) are collapsible, then for  known \( \sigma' \) such that \( \mc K \backslash \{ \sigma' \} \) is not collapsible, \( \tau(\sigma') \ne \tau(\sigma_1)\) or \( \tau(\sigma') \ne \tau(\sigma_2) \), which revisits the previous point.
+
+      As a result, for \( \sigma \) ( \( \mc K \backslash \{ \sigma \} \) is collapsible) and for \( \sigma' \) ( \( \mc K \backslash \{ \sigma' \} \) is not collapsible ) it holds that \( \tau (\sigma) = \tau (\sigma') \Rightarrow  \sigma \cap \sigma' = \{ v \}  \), so after collapses \( \mc K  \{ \sigma \} \) and \( \mc K \backslash \{ \sigma' \} \) we arrive at two identical simplicial complexes modulo the hanging vertex irrelevant for the weak collapsibility. A simplicial complex can not be simultaneously collapsible and not collapsible, so the question of weak collapsibility can always be resolved by the greedy algorithm which has polynomial complexity.
+\end{proof}
+
+\begin{comment}
+\blav
+\begin{remark}
+      The proof above is reminiscent of the one for polynomiality of \(d\)-collapsibility, \( d = 1\) or \( d = 2\), \cite{tancer2008dcollapse}, but bares significant differences: firstly, \( 2 \)-collapsibility allows collapses at \(\sigma: \; \dim \sigma \le 1\); secondly, in the scope of \cite{tancer2008dcollapse}, \( \tau(\sigma) = \sigma \) is allowed which affects (complicates) the proof.
+\end{remark}
+\elav
+
+
+\begin{remark}
+      If \( \mc K \) is weakly collapsible, then the number of triangles can not be higher than the number of edges, \( m_2 \le m_1 \), hence \( \mc K \) is \emph{necessarily sparse} and does not breach the gap up to \( m_2 = \mc O\left( m_1 \ln \left( 4 m_1 \right) \right) \).
+\end{remark}
+\end{comment}
+
+\subsection{Computational cost of the greedy algorithm}
+
+Let \( \mc K \) be a \(2\)-skeleton; let \( \Delta_\sigma \) be a set of triangles of \( \mc K \) containing the edge \( \sigma \), \( \Delta_\sigma = \{ t \mid  t \in \V 2  \text{ and } \sigma \in t \} \). Then the edge \( \sigma \) is free iff \( | \Delta_\sigma | = 1 \) and \( F = \{ \sigma \mid | \Delta_e | = 1  \} \) is a set of all free edges. Note that \( | \Delta_e | \le m_0 -2 = \mc O ( m_0  ) \).
+
+\begin{algorithm}[h]
+      \caption{ \texttt{GREEDY\_COLLAPSE}(\(\mc K\)):  greedy algorithm for the weak collapsibility
+      \label{algo:greedy}}
+      \begin{algorithmic}[1]
+            \Require initial set of free edges \( F \), adjacency sets \(  \{ \Delta_{ \sigma_i } \}_{i=1}^{ m_1 } \)
+             \State \( \Sigma = [ \; ] , \; \ds T = [ \; ] \) \Comment{ initialize the collapsing sequence}
+             \While{ \( F \ne \vn \) \textbf{ and } \( \V 2 \ne \vn \) }
+                  \State \( \sigma \gets \texttt{pop}( F ) \), \( \; \tau \gets \tau(\sigma)  \) \Comment{ pick a free edge \( \sigma \) }
+                  \State \( \mc K \gets \mc K \backslash \{ \sigma \} \), \( \; \Sigma \gets [ \, \Sigma \;\; \sigma \, ] , \; \ds T \gets [ \ds T \; \tau ] \) \Comment{ \small \( \tau \) is a triangle being collapsed; \( \tau = [ \sigma, \sigma_1, \sigma_2 ] \) }
+                  \State \( \Delta_{\sigma_1} \gets \Delta_{\sigma_1} \backslash \tau  \), \( \; \Delta_{\sigma_2} \gets \Delta_{\sigma_2} \backslash \tau  \) \Comment{ remove \( \tau \) from adjacency lists }
+                  \State \( F \gets F \cup \{ \sigma_i \, |  \, i = 1, 2 \text{ and } | \Delta_{\sigma_i} | = 1 \}  \) \Comment{ update \( F \) if any of \( \sigma_1 \) or \( \sigma_2 \) has become free }
+                  %\State \( \mc K \gets \mc K  \backslash \{ \sigma \} \) \Comment{ perform a collapse  }
+             \EndWhile
+             \State \Return \( \mc K, \, \Sigma, \, \ds T \)
+      \end{algorithmic}
+\end{algorithm}
+
+The complexity of \Cref{algo:greedy} rests upon the precomputed \( \sigma \mapsto \Delta_\sigma \) structure that de-facto coincides with the boundary operator \( B_2 \) (assuming \( B_2 \) is stored as a sparse matrix, the adjacency structure describes its non-zero entries). Similarly, the initial \( F \) set can be computed alongside the construction of \( B_2 \) matrix. Another concession is needed for the complexity of the removal of elements from \( \Delta_{\sigma_i} \) and \( F \), which may vary from \( \mc O (1) \) on average up to guaranteed \( \log ( | \Delta_{\sigma_i} | ) \). As a result, given a pre-existing \( B_2 \) operator, \Cref{algo:greedy} runs linearly, \( \mc O ( m_1  )\), or almost linearly depending on the realisation, \( \mc O ( m_1 \log m_1 )\).
+
+
+
+
+
+
+
+

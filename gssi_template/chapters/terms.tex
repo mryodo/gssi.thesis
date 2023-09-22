@@ -1,0 +1,69 @@
+\usepackage{glossaries}
+
+\makeglossaries
+
+\newglossaryentry{SC}
+{
+    name=simplicial complex,
+    description={higher-order network model; hypergraph closed for edge inclusion}
+}
+
+\newglossaryentry{simplex}{
+    name = simplex,
+    description = {elements of the simplicial complex; subset of vertex set}
+}
+
+\newglossaryentry{face}{
+    name = face,
+    description = {
+        subsimplex of a given simplex
+    },
+    plural = {faces}
+}
+
+\newglossaryentry{maximal face}{       
+     name = maximal face,
+     description = {
+         a maximal simplex of higher-order containing given simplex
+    },
+     plural = {maximal faces}
+}
+
+\newglossaryentry{free}{
+     name = free,
+     description = {
+         wrt a simplex: having exactly one facet
+    }
+}
+
+\newglossaryentry{collapse}{
+     name = collapse,
+     description = {
+         transition to a smaller simplicial complex without a free simplex and its maximal face
+    },
+     plural = {collapses}
+}
+
+\newglossaryentry{collapsing sequence}{
+     name = collapsing sequence,
+     description = {
+         several consequent collapses 
+    },
+     plural = {collapsing sequences}
+}
+
+\newglossaryentry{collapsible}{
+     name = collapsible,
+     description = {
+         simplex that can be collapsed to a single vertex
+    },
+     plural = {}
+}
+
+\newglossaryentry{homology group}{
+     name = homology group,
+     description = {
+         quontinent space describing the \(k\)-dimensional holes in simplicial complexes
+    },
+     plural = {}
+}

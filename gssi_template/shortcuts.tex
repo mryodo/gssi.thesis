@@ -1,0 +1,146 @@
+\usepackage{tikz-network}
+\usepackage{faktor}
+\usepackage{comment}
+
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage{algpseudocode}
+
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{backgrounds}
+\usepgfplotslibrary{patchplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{%
+     layers/standard/.define layer set={%
+         background,axis background,axis grid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis foreground%
+     }{
+         grid style={/pgfplots/on layer=axis grid},%
+         tick style={/pgfplots/on layer=axis ticks},%
+         axis line style={/pgfplots/on layer=axis lines},%
+         label style={/pgfplots/on layer=axis descriptions},%
+         legend style={/pgfplots/on layer=axis descriptions},%
+         title style={/pgfplots/on layer=axis descriptions},%
+         colorbar style={/pgfplots/on layer=axis descriptions},%
+         ticklabel style={/pgfplots/on layer=axis tick labels},%
+         axis background@ style={/pgfplots/on layer=axis background},%
+         3d box foreground style={/pgfplots/on layer=axis foreground},%
+     },
+ }
+
+
+%%%% COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\insidefigure}[3][0.5\columnwidth]{
+      \begin{center}
+            \begin{minipage}{#1}
+                  \centering
+                  #2
+                  \captionof{figure}{#3}
+            \end{minipage}
+      \end{center}
+}
+
+\newcommand*{\mc}[1]{\mathcal{#1}}
+\renewcommand*{\b}[1]{\mathbf{#1}}
+\newcommand*\eps{\varepsilon}
+\newcommand*{\V}[1]{ \mc V_{#1}(\mc K)}
+\newcommand*{\vn}{\varnothing}
+\newcommand*{\ord}[1]{\mathrm{ord}\,(#1)}
+
+\usepackage{dsfont}
+\newcommand*{\ds}[1]{\mathds{#1}}
+
+\newcommand*{\Lu}[1]{L_{#1}^{\uparrow}}
+\newcommand*{\Ld}[1]{L_{#1}^{\downarrow}}
+
+\newcommand*{\wh}[1]{\widehat{#1}}
+
+
+\renewcommand*{\bar}[1]{ \overline{#1} }
+
+
+\newcommand{\algname}{\texttt{HeCS}}
+
+
+\DeclareMathOperator{\im}{im}
+\let\span\relax
+\DeclareMathOperator{\span}{span}
+\DeclareMathOperator{\Sym}{Sym}
+
+
+
+
+
+
+
+
+
+\usetikzlibrary{patterns}
+\definecolor{bananamania}{rgb}{0.98, 0.91, 0.71}
+\definecolor{lavender}{rgb}{0.4470588235294118, 0.5294117647058824, 0.992156862745098}
+\definecolor{burntsienna}{rgb}{0.91, 0.45, 0.32}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+\definecolor{liberty}{HTML}{5158BB}
+\definecolor{junglegreen}{rgb}{0.16, 0.67, 0.53}
+
+
+\newcommand{\AxisRotator}[1][rotate=0]{%
+    \tikz [x=0.15cm,y=0.15cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+}
+\newcommand{\AxisRotatorMirror}[1][rotate=0]{%
+    \tikz [x=0.15cm,y=0.15cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (150:-150:1 and 1);%
+}
+\newcommand{\EVert}[2]{%
+\left[\begin{smallmatrix} #1 \\ #2 \end{smallmatrix}\right]
+}
+\newcommand{\TVert}[3]{%
+\left[\begin{smallmatrix} #1 \\ #2 \\ #3 \end{smallmatrix}\right]
+}
+
+\usepackage[capitalize, nameinlink]{cleveref}
+\crefdefaultlabelformat{\color{liberty}#1#2#3}
+
+
+\crefname{section}{section}{sections}
+\crefname{subsection}{subsection}{subsections}
+\Crefname{section}{Section}{Sections}
+\Crefname{subsection}{Subsection}{Subsections}
+\Crefname{figure}{Figure}{Figures}
+\crefformat{equation}{\textup{#2(#1)#3}}
+\crefrangeformat{equation}{\textup{#3(#1)#4--#5(#2)#6}}
+\crefmultiformat{equation}{\textup{#2(#1)#3}}{ and \textup{#2(#1)#3}}
+{, \textup{#2(#1)#3}}{, and \textup{#2(#1)#3}}
+\crefrangemultiformat{equation}{\textup{#3(#1)#4--#5(#2)#6}}%
+{ and \textup{#3(#1)#4--#5(#2)#6}}{, \textup{#3(#1)#4--#5(#2)#6}}{, and \textup{#3(#1)#4--#5(#2)#6}}
+
+\Crefformat{equation}{#2Equation~\textup{(#1)}#3}
+\Crefrangeformat{equation}{Equations~\textup{#3(#1)#4--#5(#2)#6}}
+\Crefmultiformat{equation}{Equations~\textup{#2(#1)#3}}{ and \textup{#2(#1)#3}}
+{, \textup{#2(#1)#3}}{, and \textup{#2(#1)#3}}
+\Crefrangemultiformat{equation}{Equations~\textup{#3(#1)#4--#5(#2)#6}}%
+{ and \textup{#3(#1)#4--#5(#2)#6}}{, \textup{#3(#1)#4--#5(#2)#6}}{, and \textup{#3(#1)#4--#5(#2)#6}}
+
+\crefdefaultlabelformat{#2\textup{#1}#3}
+
+
+% ================================= %
+% =========== Colors ============== %
+\definecolor{black4}{rgb}{0.11764705882352941, 0.11764705882352941, 0.1803921568627451}
+\definecolor{newwhite}{rgb}{0.8509803921568627, 0.8784313725490196, 0.9333333333333333}
+\definecolor{newred}{rgb}{0.9098039215686274, 0.6352941176470588, 0.6862745098039216}
+\definecolor{newcerulean}{rgb}{0.5882352941176471, 0.803921568627451, 0.984313725490196}
+\definecolor{newgreen}{rgb}{0.6705882352941176, 0.9137254901960784, 0.7019607843137254}
+\definecolor{newteal}{rgb}{ 0.6039215686274509, 0.8, 0.7686274509803922,}
+\definecolor{newpeach}{rgb}{0.9725490196078431, 0.7411764705882353, 0.5882352941176471}
+\definecolor{newflam}{rgb}{0.9490196078431372, 0.803921568627451, 0.803921568627451}
+\definecolor{persimmon}{HTML}{DE5A02}
+\definecolor{jet}{HTML}{333232}
+\definecolor{peach}{HTML}{FCDE9C}
+\definecolor{cerulean}{HTML}{A7C6DA}
+\definecolor{liberty}{HTML}{5158BB}
+\definecolor{greensheen}{HTML}{68B0AB}
+% =========== Colors ============== %
+% ================================= %

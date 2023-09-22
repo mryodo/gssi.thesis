@@ -584,3 +584,5 @@
 
 \let\emph\relax % there's no \RedeclareTextFontCommand
 \DeclareTextFontCommand{\emph}{\bfseries\color{greensheen}}
+
+\usetikzlibrary{calc}

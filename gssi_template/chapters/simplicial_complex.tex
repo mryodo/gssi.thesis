@@ -1,21 +1,40 @@
-\section{ From Graphs to Simplicial Complex }
+\chapter{ Simplicial complex as Higher-order Topology Description } \label{chap:SC}
 
-%\subsection{ Higher-order Models in Networks }
+\lhead{\emph{Simplicial complexes}}
 
-\subsection{ Simplicial Complexes }
+
+
+\section{ From graph to higher-order models } \label{sec:higher-order-models}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{ Simplicial Complexes } \label{sec:SCs}
 
 
 Let \( V = \{ v_1, v_2, \ldots, v_n \} \) be a set of nodes; as discussed above, such set may refer to various interacting entities and agents in the system, e.g.\ neurons, genes, traffic stops, online actors, publication authors, etc. Then: 
 
 \begin{definition}[Simplicial Complex]\label{def:simplicial_complex}
-      The collection of subsets \( \mathcal K \) of the nodal set \( V \) is  a (abstract) \gls{SC}\en{addition of the word ``abstract'' to the term is more common in the topological setting} if for each subset \( \sigma \in \mc K \), referred as a \gls{simplex}, all its subsets \( \sigma'\), \( \sigma' \subseteq \sigma \), referred as \glspl{face}, enter \( \mc K \) as well, \( \sigma' \in \mc K\).
+      The collection of subsets \( \mathcal K \) of the nodal set \( V \) is  a (abstract) {SC}\footnote{addition of the word ``abstract'' to the term is more common in the topological setting} if for each subset \( \sigma \in \mc K \), referred as a {simplex}, all its subsets \( \sigma'\), \( \sigma' \subseteq \sigma \), referred as {faces}, enter \( \mc K \) as well, \( \sigma' \in \mc K\).
 \end{definition}
 
 A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the order \( k \), \( \ord \sigma = k \). Let \( \V k \) be a set of all \(k\)-order simplices in \( \mc K \) and \( m_k \) is the cardinality of \( \V k\), \( m_k = | \V k | \); then \( \V 0 \) is the set of nodes in the simplicial complex \( \mc K \), \( \V 1 \) --- the set of edges, \( \V 2 \) --- the set of triangles, or \(3\)-cliques, and so on, with \( \mc K = \{ \V 0, \V 1, \V 2 \ldots \} \). Note that due to the inclusion rule in \Cref{def:simplicial_complex}, the number of non-empty \( \V k \) is finite and, moreover, uninterupted in a sense of the order: if \( \V k = \vn \), then \( \V {k+1} \) is also necessarily empty.
-\en{
-      \insidefigure[0.3\columnwidth]{ \input{imgs/tikz/simplicial_complex_example.tex}}{
+\begin{figure}[hbtp]
+      \centering
+      \scalebox{1.5}{\input{figures/tikz/simplicial_complex_example.tex}}
+      \caption{
             Example of a simplicial complex\label{fig:example_SC}}
-}
+\end{figure}
+
 
 \begin{example}[Simplicial Complex]
 
@@ -33,7 +52,7 @@ A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the or
 Comparing to the general case of the hypergraph described above, it is easy to see that simplicial complex is a special case of a hypergraph where every edge is enclosed with respect to the inclusion. In other words, simplicial complex contains additional structural rigidness which allows to formally describe the topology of \( \mc K \); as a result, one is specifically interested in the formal desctiption of the nested inclusion principle achieved through \emph{boundary operators} defined in the subsections below.
 
 
-\subsection{ Hodge's Theory }
+\section{ Hodge's Theory }
 
 Two linear operators \( A \) and \( B \) are said to satisfy Hodge's theory if and only if their composition is a null operator, 
 \begin{equation}
@@ -49,10 +68,13 @@ which is equivalent to \( \im B \subseteq \ker A \).
       where each element of \( \mc H \) is a manifold \( \b x + \im B = \left\{ \b x + \b y \mid \forall \b y \in \im B \right\}\) for \( \b x \in \ker A \). It follows directly from the definition that \( \mc H\) is an abelian group under addition.
 \end{definition}
 
-By \Cref{def:quotient}, the quotient space \( \mc H \) is a collection\todo{in a general sense} of \emph{equivalence classes} \( \b x + \im B \). Then, each class \( \b x + \im B = \b x_H + \im B \) for some \( \b x_H \perp \im B \) (both \( \b x, \b x_H \in \ker A \)); indeed, since the orthogonal component \( \b x_H \) (referred as \emph{harmonic representative}) of \( \b x \) with respect to \( \im B\) is unique, the map \( \b x_H \leftrightarrow \b x + \im B \) is bijectional.\en{
-      \insidefigure[0.3\columnwidth]{
-            \input{imgs/tikz/quotient.tex}}{Illustration of a harmonic representative for an equivalence class}
-}
+By \Cref{def:quotient}, the quotient space \( \mc H \) is a collection\todo{in a general sense} of \emph{equivalence classes} \( \b x + \im B \). Then, each class \( \b x + \im B = \b x_H + \im B \) for some \( \b x_H \perp \im B \) (both \( \b x, \b x_H \in \ker A \)); indeed, since the orthogonal component \( \b x_H \) (referred as \emph{harmonic representative}) of \( \b x \) with respect to \( \im B\) is unique, the map \( \b x_H \leftrightarrow \b x + \im B \) is bijectional.
+
+\begin{figure}[hbtp]
+      \centering
+            \input{figures/tikz/quotient.tex}
+            \caption{Illustration of a harmonic representative for an equivalence class}
+\end{figure}
 
 \begin{theorem}[{\cite[Thm 5.3]{limHodgeLaplaciansGraphs2020}}]\label{thm:two_kernels}
       Let \( A \) and \( B \) be linear operators, \( A B = 0 \). Then the homology group \( \mc H \) satisfies:
@@ -95,9 +117,10 @@ By \Cref{def:quotient}, the quotient space \( \mc H \) is a collection\todo{in a
       Similarly, for the second equation, \( \b x \in \ker B^\top \) which completes the proof.
 \end{proof}
 
-\begin{tmp}
+\todo{
       Here we need some words about the transitions.
-\end{tmp}
+}
+
 
 Since \( A B = 0\), \( B^\top A^\top = 0 \) or \( \im A^\top \subset \ker B^\top \). Then, exploiting \( \ds R^n = \ker A \oplus \im A^\top \): 
 \begin{equation}
@@ -123,9 +146,9 @@ Given \Cref{lemma:hodge_kernels}, \( \ker A \cap \ker B^\top = \ker \left(  A^\t
 %=================================================%
 
 
-\subsection{ Boundary and Laplacian Operators }
+\section{ Boundary and Laplacian Operators }
 
-\subsubsection{Boundary operators}
+\subsection{Boundary operators}
 
 Each simplicial complex \( \mc K \) has a nested structure of simplicies: indeed, if \( \sigma \) is a simplex of order \( k \), \( \sigma \in \V k \), then all of \( (k-1)\)-th order faces forming the boundary of \( \sigma \) also belong to \( \mc K \): for instance, for the triangle \( \{ 1, 2, 3  \} \) all the border edges \( \{ 1, 2\} \), \( \{ 1, 3\}\) and \( \{ 2, 3 \}\) are also in the simplicial complex, \Cref{fig:example_SC}. 
 
@@ -135,10 +158,12 @@ This nested property implies that one can build a formal map from a simplex to i
       Let \( \mc K \) be a simplicial complex; then the space \( C_k \) of formal sums of simplices from \( \V k \) over real numbers is called \emph{a \( k\)-th chain space}.
 \end{definition}
 
-\begin{example}
-      
-      \insidefigure[\columnwidth]{\input{imgs/tikz/chains.tex}}{Example of chains on the simplicial complex \label{fig:weak_example}}
-
+\begin{example}    
+      \begin{figure}[hbtp]
+            \centering
+            \input{figures/tikz/chains.tex}
+            \caption{Example of chains on the simplicial complex \label{fig:weak_example}}
+      \end{figure}
 \end{example}
 
 Chain spaces on its own are naturally present in the majority of the network models: \( C_0 \) is a space of states of vertices (e.g. in the dynamical system \( \dot{ \b x } = A \b x \) the evoloving vector \( \b x \in C_0 \)), \( C_1 \) --- is a space of (unrestricted) flows on graphs edges, and so on\todo{refs?}.
@@ -157,7 +182,7 @@ Since \( C_k \) is a linear space, versor vectors corresponding to the elements 
 
 
 
-\subsection{ Weigthed and Normalised Boundary Operators}
+\section{ Weigthed and Normalised Boundary Operators}
 
 
 Note that, from the definition \( \bar B_k= W_{k-1}^{-1} B_k W_k \) and \eqref{eq:Bk_Bk+1_0}, we immediately have that  \( \bar B_k\bar B_{k+1}=0 \). Thus, the group \( \bar {\mc H}_k = \ker \bar B_k / \im \bar B_{k+1} \) is well defined for any choice of positive weights  \( w_k \) and is isomorphic to \( \ker \bar L_k \). While the homology group may depend on the weights,  we observe below that its dimension does not. Precisely, we have 

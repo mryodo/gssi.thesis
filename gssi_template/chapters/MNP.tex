@@ -1,0 +1,100 @@
+\chapter{Matrix nearness problems}
+
+
+
+\section{ 101 on MNP }
+
+Generally speaking, for a given matrix \( A \) a \emph{matrix nearness problem} consists of finding the closest possible matrix \( X \) among the admissible set with a number of desired properties. For instance, one may search for the closest (in some metric) symmetric positive/negative definite matrix, unitary matrix or the closest graph Laplacian. 
+
+Motivated by the topological meaning of the \emph{kernel} of Hodge Laplacians \( L_k \), we assume the specific case of \emph{spectral} MNPs: here one aims for the target matrix \( X \) to have a specific spectrum \( \sigma(X) \). For instance in the stability study of the dynamical system \( \dot{\b x} = A \b x \) one can search for the closest Hurwitz matrix such that \( \mathrm{Re} \left[ \lambda_i \right] < 0 \) for all \( \lambda_i \in \sigma(X) \); similarly, assuming given matrix \( A \) is a graph Laplacian, one can search for the closest disconnected graph (so the algebraic connectivity \( \lambda_2 = 0 \)).
+
+Here we recite the optimization framework developed by REFREFREF\todo{fix it} for the class of the spectral matrix nearness problems; one should note, however, that this is by far not the only approach to the task, REFREFREF\todo{also fix it with Nicholas and others, I guess?}.
+
+\paragraph{Functional and Gradient Flow}
+
+Let as assume that \( X = A + \Delta \) and intead of searching for \( X \), we search for the perturbation matrix \( \Delta \); additionally, we assume that \( \Omega \) is the admissible set containing all possible perturbations \( \Delta \).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Direct approach: failure and discontinuity problems }
+
+
+\subsection{Principal spectral inheritance}
+
+
+Before moving on to the next section, we recall here a relatively direct  but important spectral property that connects the spectra of the $k$-th and $(k+1)$-th order Laplacians. 
+
+\begin{theorem}[HOL's spectral inheritance]\label{thm:inherit}
+  Let $L_k$ and $L_{k+1}$ be  higher-order Laplacians for the same simplicial complex $\mc K$. Let $\bar L_k=\bar L_k^{down}+\bar L_k^{up}$, where $\bar L_k^{down}=\bar B_k^\top \bar B_k$ and $\bar L_k^{up}=\bar B_{k+1} \bar B_{k+1}^\top$. Then:
+  \begin{enumerate}
+    \item $\sigma_+(\bar L_k^{up})=\sigma_+(\bar L_{k+1}^{down})$, where $\sigma_+(\cdot)$ denotes the positive part of the spectrum;
+    \item if $ 0 \ne \mu \in \sigma_+(\bar L_k^{up}) = \sigma_+(\bar L_{k+1}^{down})$, then the eigenvectors are related as follows:
+    \begin{enumerate}
+      \item if $\b x$ is and eigenvector for $\bar L_k^{up}$ with the eigenvalue $\mu$, then $\b y = \frac{1}{\sqrt{\mu}} \bar B_{k+1}^\top \b x$ is an eigenvector for $\bar L_{k+1}^{down}$ with the same eigenvalue;
+      \item if $\b u$ is and eigenvector for $\bar L_{k+1}^{down}$ with the eigenvalue $\mu$ and $\b u \notin \ker \bar B_{k+1}$, then $\b v = \frac{1}{\sqrt{\mu}} \bar B_{k+1} \b u$ is an eigenvector for $\bar L_{k}^{up}$ with the same eigenvalue;
+    \end{enumerate}
+    \item for each Laplacian $\bar L_k$: if $\b v \notin \ker \bar L_k^{down}$ is the eigenvector for $\bar L_k^{down}$, then $\b v \in \ker \bar L_{k}^{up}$; vice versa, if $\b u \notin \ker \bar L_k^{up}$ is the eigenvector for $\bar L_k^{up}$, then $\b v \in \ker \bar L_k^{down}$;
+    \item consequently, there exist $\mu \in \sigma_+(\bar L_k)$ with an eigenvector $\b u \in \ker \bar L_k^{up}$, and $\nu \in \sigma_+(\bar L_{k+1})$ with an eigenvector $\b u \in \ker \bar L_{k+1}^{down}$, such that:
+    $$
+    \bar B_k^\top \bar B_k \b v  = \mu \b v, \qquad \bar B_{k+2} \bar B_{k+2}^\top \b u = \nu \b u\, . 
+    $$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+For $(2a)$ it is sufficient to note that $ \bar L_{k+1}^{down} \b y = \bar B_{k+1}^\top \bar B_{k+1} \frac{1}{\sqrt{\mu}} \bar B_{k+1}^\top \b x = \frac{1}{\sqrt{\mu}}\bar B_{k+1}^\top \bar L_k^{up} \b x = \sqrt \mu \bar B_{k+1}^\top \b x  = \mu \b y$. Similarly, for $(2b)$: $\bar L_k^{up} \b v= \bar B_{k+1} \bar B_{k+1}^\top \frac{1}{\sqrt{\mu}} \bar B_{k+1} \b u = \frac{1}{\sqrt{\mu}} \bar B_{k+1} \bar L_{k+1}^{down} \b u = \mu \b v $; joint $2(a)$ and $2(b)$ yield $(1)$. \emph{Hodge decomposition} immediately yields the strict separation of eigenvectors between $\bar L_k^{up}$ and $\bar L_k^{down}$, $(3)$; given $(3)$, all the inherited  eigenvectors from $(2a)$ fall into the $\ker \bar L_{k+1}^{down}$, thus resulting into $(4)$.
+\end{proof}
+In other words, the variation of the spectrum of the $k$-th Laplacian when moving from one order to the next one works as follows: 
+the down-term $\bar L_{k+1}^{down}$ inherits the positive part of the spectrum from the up-term of  $\bar L_k^{up}$; the  eigenvectors corresponding to the inherited positive part of the spectrum lie in the kernel of $\bar L_{k+1}^{up}$; at the same time, the ``new'' up-term $\bar L_{k+1}^{up}$ has a new, non-inherited, part of the positive spectrum (which, in turn, lies in the kernel of the $(k+2)$-th down-term).
+
+In particular, we notice that for $k = 0$, since $B_0=0$ and $\bar L_0=\bar L_0^{up}$, the  theorem yields $\sigma_+ (\bar L_0 ) = \sigma_+ (\bar{L_1}^{down}) \subseteq \sigma_+(\bar L_1)$. In other terms, the positive spectrum of the $\bar L_0$ is inherited by the spectrum of $\bar L_1$ and the remaining (non-inherited) part of $\sigma_+(\bar L_1)$ coincides with $\sigma_+(\bar L_1^{up})$. 
+\Cref{fig:thm_spct_ill} provides an  illustration of the statement of  \Cref{thm:inherit} for $k = 0$.
+  \begin{figure}[t]
+    \centering
+    \input{figures/tikz/spectral_inheritance}
+    \caption{Illustration for the principal spectrum inheritance (\Cref{thm:inherit}) in case $k=0$: spectra of $\bar L_1$, $\bar {\Ld 1}$ and $\bar {\Ld 1}$ are shown. Colors signify the splitting of the spectrum, $\lambda_i>0 \in \sigma(\bar L_1)$ ; all yellow eigenvalues are inherited from $\sigma_+(\bar L_0)$; red eigenvalues belong to the non-inherited part. Dashed barrier $\mu$ signifies the penalization threshold (see the target functional in \Cref{subsec:functional}) preventing homological pollution (see \Cref{subsec:connetedness}). }
+    \label{fig:thm_spct_ill}
+    \vspace{-10pt}
+  \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Let \( A \) be a square matrix, \( A \ in \ds C^{n \times n }\); \todo{do we need that?} let \( \lambda ( A )\) be a chosen eigenvalue of the matrix \( A \). For instance, \( \lambda \) can be the eigenvalue with highest/lowest magnitude or real part on the complex plane.
+
+%Generally speaking, \emph{a spectral matrix nearness problem} focuses on finding a matrix \( X \) closest to \( A \) such that the spectrum \( \sigma ( X ) \) satisfies some property. For instance, one can search for the closest matrix such that the rightmost eigenvalue has a zero real part on the complex plane (in the stability study of the continuous dynamical systems) or all the eigenvalues fit on the unit disk (in the stability study of the discrete dynamical systems), etc.
+
+%Let \( \Delta = X - A \); then one aims to find a perturbation \( \Delta \) with a minimal norm, \( \min \| \Delta \| \). Additionally, 

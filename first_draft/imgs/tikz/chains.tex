@@ -1,0 +1,45 @@
+\begin{tikzpicture}
+
+      \fill [opacity=0.3,liberty]    (0, 0) -- (3, 0) --  (1.5, 2.6) -- cycle;
+      \node at (1.5, 0.9) {\AxisRotator[rotate=-90]};
+      \node at (1.5, 1.2) {\small \color{liberty!50!jet} +1};
+      \fill [opacity=0.2,liberty]    (5.0, 1.0) -- (6.5, 2.6) --  (6.4, 1.4) -- cycle;
+      \node at (17.9/3, 5/3) {\AxisRotatorMirror[rotate=0]};
+      \fill [opacity=0.6,liberty]    (5.0, 1.0) -- (9.0, -0.4) --  (6.4, 1.4) -- cycle;
+      \node at (6.8, 2/3) {\AxisRotator[rotate=-90]};
+      \fill [opacity=0.4,liberty]    (6.5, 2.6) -- (9.0, -0.4) --  (6.4, 1.4) -- cycle;
+      \node at (7.3, 1.2) {\AxisRotatorMirror[rotate=-90]};
+      
+      
+
+
+      \Vertex[x=0, y=0,style={color=persimmon}, fontcolor=white, size=0.2, label = 1]{v1}
+      \node[below left=-1pt of v1] {\small \color{persimmon}+1};
+      \Vertex[x=3, y=0,style={color=persimmon}, fontcolor=white, size=0.2, label = 2]{v2}
+      \node[below=-1pt of v2] {\small \color{persimmon}-2};
+      \Vertex[x=1.5, y=2.6, style={color=persimmon}, fontcolor=white, size=0.2, label = 3]{v3}
+      \node[above=-1pt of v3] {\small \color{persimmon}+0};
+      \Vertex[x=5, y=1.0, style={color=persimmon}, fontcolor=white, size=0.2, label = 4]{v4}
+      \node[above=-1pt of v4] {\small \color{persimmon}-3};
+      \Vertex[x=6.5, y=2.6, style={color=persimmon}, fontcolor=white, size=0.2, label = 5]{v5}
+      \node[above right=-1pt of v5] {\small \color{persimmon}-1};
+      \Vertex[x=9, y=-.4, style={color=persimmon}, fontcolor=white, size=0.2, label = 6]{v6}
+      \node[below=-1pt of v6] {\small \color{persimmon}+0};
+      \Vertex[x=6.4, y=1.4, style={color=persimmon}, fontcolor=white, size=0.2, label = 7]{v7}
+      \node[right=-1pt of v7] {\small \color{persimmon}+2};
+      \Vertex[x=11.0, y=2.0, style={color=persimmon}, fontcolor=white, size=0.2, label = 8]{v8}
+      \node[above=-1pt of v8] {\small \color{persimmon}+3};
+
+      \Edge[Direct, label=1, Math](v1)(v2)
+      \Edge[Direct, label=-1, Math](v1)(v3)
+      \Edge[Direct, label=0, Math](v2)(v3)
+      \Edge[Direct, label=2, Math](v2)(v4)
+      \Edge[Direct, label=2, Math](v3)(v4)
+      \Edge[Direct, label=1, Math](v4)(v5)
+      \Edge[Direct, label=-3, Math](v4)(v6)
+      \Edge[Direct, label=0, Math](v4)(v7)
+      \Edge[Direct, label=0, Math](v5)(v6)
+      \Edge[Direct, label=-1, Math](v5)(v7)
+      \Edge[Direct, label=2, Math](v6)(v7)
+      \Edge[Direct, label=0, Math](v6)(v8)
+\end{tikzpicture}
