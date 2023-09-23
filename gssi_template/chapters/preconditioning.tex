@@ -4,18 +4,53 @@
       Here we need to say general words about how we need an efficient preconditioning scheme.
 }
 
-\section{ Iterative methods for Positive Definite Systems }
-
-
-
-
 \section{Preconditioning 101}
 
-\section{Cholesky preconditioning for classical graphs}
+\subsection{ why do we care about the condition number?}
 
-\section{Classical collapsibility}
+
+\subsection{ Iterative methods }
+
+
+\subsection{ CG and convergence  }
+      \todo{ CGLS }
+
+
+\subsection{ Zoo of preconditioners }
+
+      \todo{ Reinforced diagonal} 
+
+      \todo{ Cholesky }
+      \todo{ Incomplete Cholesky }
+
+
+\section{ LSq problem for the whole Laplacian -> up-Laplacian }
+      
+\section{ Preconditioning on the up-Laplacian }
+      
+\subsection{ Sparsification (Spielman/Osting) }
+      
+\subsection{ Cholesky preconditioning for classical graphs  }
+
+
+\subsubsection{ Stochastic Cholesky preconditioning  }
+      
+\subsubsection{ Schur complements }
+
+
+\subsection{ Problem with Schur complements in the case of \( L_1 \)  }
+
+      \todo{  Transition to collapsibility }
+      
+
+
+
+
+\section{Collapsible simplicial complexes}
 
 % TODO: introduction
+
+\subsection{ Classical collapsiblity }
 
 
 In this section we borrow the terminology from \cite{whiteheadSimplicialSpacesNuclei1939}; additionally, let us  assume that considered simplicial complex \( \mc K \) is restricted to its \(2\)-skeleton, so \( \mc K \) consists only of nodes, edges, and triangles, \( \mc K = \V 0 \cup \V 1 \cup \V 2\).
@@ -152,6 +187,45 @@ Let \( \mc K \) be a \(2\)-skeleton; let \( \Delta_\sigma \) be a set of triangl
 \end{algorithm}
 
 The complexity of \Cref{algo:greedy} rests upon the precomputed \( \sigma \mapsto \Delta_\sigma \) structure that de-facto coincides with the boundary operator \( B_2 \) (assuming \( B_2 \) is stored as a sparse matrix, the adjacency structure describes its non-zero entries). Similarly, the initial \( F \) set can be computed alongside the construction of \( B_2 \) matrix. Another concession is needed for the complexity of the removal of elements from \( \Delta_{\sigma_i} \) and \( F \), which may vary from \( \mc O (1) \) on average up to guaranteed \( \log ( | \Delta_{\sigma_i} | ) \). As a result, given a pre-existing \( B_2 \) operator, \Cref{algo:greedy} runs linearly, \( \mc O ( m_1  )\), or almost linearly depending on the realisation, \( \mc O ( m_1 \log m_1 )\).
+
+
+\todo{ Picture }
+
+
+\section{ HeCS preconditioning }
+
+\subsection{ Cholesky decomposition for weakly collapsible subcomplex }
+
+\subsection{ Problem: precondition by subcomplex }
+
+
+\subsection{ Optimal weights for subsampling }
+
+
+\subsection{ Theorem on conditionality of a subcomplex }
+
+
+\subsection{ The notion of the heavy collapsible subcomplex }
+
+
+\subsection{ Algorithm and complexity }
+
+
+
+
+
+
+
+
+
+\section{Benchmarking: triangulation}
+
+\subsection{ Timings of algorithm and preconditioned application }
+
+\subsection{ Conditionality and iterations }
+
+
+\subsection{ Compare with shifted ichol }
 
 
 

@@ -1,8 +1,19 @@
-\chapter{Matrix nearness problems}
+\chapter{Topological Stability as MNP}
+
+\section{ General idea of the topological stability }
+
+\subsection{Alternative with a persistent homology}
+
+
+\subsection{ Transition to the spectral properties }
 
 
 
-\section{ 101 on MNP }
+
+
+\section{ 101 on Spectral Matrix Nearness Problems }
+
+\todo{definition}
 
 Generally speaking, for a given matrix \( A \) a \emph{matrix nearness problem} consists of finding the closest possible matrix \( X \) among the admissible set with a number of desired properties. For instance, one may search for the closest (in some metric) symmetric positive/negative definite matrix, unitary matrix or the closest graph Laplacian. 
 
@@ -10,10 +21,20 @@ Motivated by the topological meaning of the \emph{kernel} of Hodge Laplacians \(
 
 Here we recite the optimization framework developed by REFREFREF\todo{fix it} for the class of the spectral matrix nearness problems; one should note, however, that this is by far not the only approach to the task, REFREFREF\todo{also fix it with Nicholas and others, I guess?}.
 
-\paragraph{Functional and Gradient Flow}
+\subsection{Functional and Gradient Flow}
 
 Let as assume that \( X = A + \Delta \) and intead of searching for \( X \), we search for the perturbation matrix \( \Delta \); additionally, we assume that \( \Omega \) is the admissible set containing all possible perturbations \( \Delta \).
 
+
+\subsection{ Transition to the gradient flow }
+  
+  \todo{ Derivative }
+
+\subsection{ Constraint gradient flow }
+
+\subsection{ Sparsity pattern and rank-1 optimizers }
+
+\subsection{ Idea of two level optimization }
 
 
 
@@ -70,6 +91,56 @@ In particular, we notice that for $k = 0$, since $B_0=0$ and $\bar L_0=\bar L_0^
   \end{figure}
 
 
+\subsection{ Example with inheritted disconnectedness }
+
+
+
+\subsection{ Example with faux edges (different weighting scheme) }
+
+
+
+
+
+\section{ Functional, derivative and alternating scheme }
+
+\subsection{ Target Functional }
+
+
+\subsection{ Free gradient calculation }
+
+
+\subsection{ Constrained gradient }
+
+
+\subsection{ Alternating scheme }
+
+
+\subsection{ Implementation }
+
+\subsubsection{ Algorithms }
+
+\subsubsection{ Computation of the first non-zero eigenvalue }
+
+\subsubsection{ Preconditioning in the eigen-phase }
+
+
+
+
+
+
+
+\section{ Benchmarking }
+
+\subsection{ Toy example }
+
+
+\subsection{ Triangulation }
+
+\todo{Preconditioning of the LS as a way forward}
+
+
+
+\subsection{ Cities }
 
 
 
@@ -93,8 +164,16 @@ In particular, we notice that for $k = 0$, since $B_0=0$ and $\bar L_0=\bar L_0^
 
 
 
-%Let \( A \) be a square matrix, \( A \ in \ds C^{n \times n }\); \todo{do we need that?} let \( \lambda ( A )\) be a chosen eigenvalue of the matrix \( A \). For instance, \( \lambda \) can be the eigenvalue with highest/lowest magnitude or real part on the complex plane.
 
-%Generally speaking, \emph{a spectral matrix nearness problem} focuses on finding a matrix \( X \) closest to \( A \) such that the spectrum \( \sigma ( X ) \) satisfies some property. For instance, one can search for the closest matrix such that the rightmost eigenvalue has a zero real part on the complex plane (in the stability study of the continuous dynamical systems) or all the eigenvalues fit on the unit disk (in the stability study of the discrete dynamical systems), etc.
 
-%Let \( \Delta = X - A \); then one aims to find a perturbation \( \Delta \) with a minimal norm, \( \min \| \Delta \| \). Additionally, 
+
+
+
+
+
+
+
+
+
+
+

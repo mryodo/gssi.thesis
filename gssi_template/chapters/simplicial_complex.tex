@@ -6,6 +6,18 @@
 
 \section{ From graph to higher-order models } \label{sec:higher-order-models}
 
+\todo{graph definition}
+
+\todo{graph examples in real life (2 or 3)}
+
+\todo{motivation for the transition to the higher order models}
+
+\todo{Hypergraphs: definitions and examples}
+
+\todo{Motifs: definitions and examples}
+
+\todo{somehow relate to the tensor models and tractability
+simplicial complexes}
 
 
 
@@ -38,13 +50,20 @@ A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the or
 
 \begin{example}[Simplicial Complex]
 
-      123
-      
+      Here we provide the following example of the simplicial complex \( \mc K \), \Cref{fig:example_SC}: we denote \(0\)-order simplices (vertices) by orange color, \( 1\)-order simplicies (edges) by black and \( 2\)-order simplices (triangles) by blue, where: 
+      \begin{equation}
+            \begin{aligned}
+                  \V 0 & = \{ 1, 2, 3, 4, 5, 6, 7 \} \\
+                  \V 1 & = \{ [1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [2, 5], [3, 4], [3, 5], [4, 6], [4, 7], [5, 6], [6, 7] \} \\
+                  \V 2 & = \{ [ 1, 2, 3 ], [1, 2, 4], [1, 3, 4], [2, 3, 5], [4, 6, 7], [5, 6, 7] \}
+            \end{aligned}
+      \end{equation}
+      Note that \( \V 3 = \vn \), so the highest order of simplices in \( \mc K \) is \( 2 \). Additionally, edge \( [2, 3] \), \( [2, 4]\) and \( [3, 4]\) are included in \( \mc K \), but the triangle \( [2, 3, 4]\) is not; this does not violate the inclusion rule. Instead, every edge and every vertices of every triangle in \( \V 2 \) as well as every vertex of every edge in \( \V 1 \) are contained in \( \mc K \) fullfilling the inclusion principle.
 \end{example}
 
 \begin{example}[Real Life Simplicial Complex]
 
-      123
+      \todo{find a natural example of the simplicial complex with an illustration}
       
 \end{example}
 
@@ -148,7 +167,7 @@ Given \Cref{lemma:hodge_kernels}, \( \ker A \cap \ker B^\top = \ker \left(  A^\t
 
 \section{ Boundary and Laplacian Operators }
 
-\subsection{Boundary operators}
+\subsection{Boundary operators \( B_k \)}
 
 Each simplicial complex \( \mc K \) has a nested structure of simplicies: indeed, if \( \sigma \) is a simplex of order \( k \), \( \sigma \in \V k \), then all of \( (k-1)\)-th order faces forming the boundary of \( \sigma \) also belong to \( \mc K \): for instance, for the triangle \( \{ 1, 2, 3  \} \) all the border edges \( \{ 1, 2\} \), \( \{ 1, 3\}\) and \( \{ 2, 3 \}\) are also in the simplicial complex, \Cref{fig:example_SC}. 
 
@@ -156,6 +175,8 @@ This nested property implies that one can build a formal map from a simplex to i
 
 \begin{definition}[Chain spaces]
       Let \( \mc K \) be a simplicial complex; then the space \( C_k \) of formal sums of simplices from \( \V k \) over real numbers is called \emph{a \( k\)-th chain space}.
+
+      \todo{switch to \( \mc C_k\)}
 \end{definition}
 
 \begin{example}    
@@ -164,11 +185,43 @@ This nested property implies that one can build a formal map from a simplex to i
             \input{figures/tikz/chains.tex}
             \caption{Example of chains on the simplicial complex \label{fig:weak_example}}
       \end{figure}
+
+      \todo{add description of the example }
 \end{example}
 
 Chain spaces on its own are naturally present in the majority of the network models: \( C_0 \) is a space of states of vertices (e.g. in the dynamical system \( \dot{ \b x } = A \b x \) the evoloving vector \( \b x \in C_0 \)), \( C_1 \) --- is a space of (unrestricted) flows on graphs edges, and so on\todo{refs?}.
 
 Since \( C_k \) is a linear space, versor vectors corresponding to the elements of \( \V k\) is a natural basis of \( C_k \); in order to proceed with the boundary maps, one needs to fix an order of the simplices inside \( \V k \) (alas one fixes the order of vertices in the graph to form an adjacency matrix) as a matter of bookkeeping. Addiitionally, since \( C_k \) is a space over \( \ds R \), chains \( \sigma \) and \( - \sigma \) naturally introduce the notion of \emph{orientation} of the simplex.
+
+\todo{Simplex orientation and order}
+
+\todo{definition of the operators}
+
+\todo{lemma  \( B_k  B_{k+1} = 0 \) in general case}
+
+\todo{ Examples }
+
+
+
+\subsection{ Homology group and Hodge Laplacians \( L_k \) }
+
+\subsubsection{Homology group as Quontinent space}
+
+\subsubsection{ Elements of the Hodge decomposition as harmonic/vorticity/potential flow}
+      \todo{ Maybe we will need here a quick discussion with connection to the continuous case }
+
+\subsubsection{ Laplacian operators \( L_k \) }
+
+\subsubsection{ Classical Laplacian and its kernel elements }
+
+\subsubsection{ Kernel elements of \( L_k \) }
+
+\todo{Some relation to the continuous case}
+
+\paragraph{ Spreading and balancing as a mechanism of the non-local circulation}
+
+
+
 
 
 
@@ -184,6 +237,7 @@ Since \( C_k \) is a linear space, versor vectors corresponding to the elements 
 
 \section{ Weigthed and Normalised Boundary Operators}
 
+\todo{definition and motivation of the weighting scheme}
 
 Note that, from the definition \( \bar B_k= W_{k-1}^{-1} B_k W_k \) and \eqref{eq:Bk_Bk+1_0}, we immediately have that  \( \bar B_k\bar B_{k+1}=0 \). Thus, the group \( \bar {\mc H}_k = \ker \bar B_k / \im \bar B_{k+1} \) is well defined for any choice of positive weights  \( w_k \) and is isomorphic to \( \ker \bar L_k \). While the homology group may depend on the weights,  we observe below that its dimension does not. Precisely, we have 
 \begin{proposition}
@@ -211,3 +265,8 @@ Moreover, since \( \bar B_k \bar B_{k+1} =0 \), then \( \im \bar B_{k+1} \subset
       \end{aligned}
 \end{equation*}
 \end{proof}
+
+
+\todo{normalisation theorem}
+
+
