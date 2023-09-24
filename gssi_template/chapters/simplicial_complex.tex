@@ -197,7 +197,42 @@ Since \( C_k \) is a linear space, versor vectors corresponding to the elements 
 
 \todo{definition of the operators}
 
+\begin{definition}
+      \begin{equation}
+            B_k [ u_1, u_2, \dots u_{k+1} ] = \sum_{i=1}^{k+1} \left( -1 \right)^i [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{k+1}]
+      \end{equation}
+\end{definition}
+
+
+
 \todo{lemma  \( B_k  B_{k+1} = 0 \) in general case}
+
+\begin{lemma}[ Fundamental Lemma of Homology ]
+      \begin{equation}
+            B_k B_{k+1} = 0
+      \end{equation}
+\end{lemma}
+
+\begin{proof}
+      \begin{equation}
+            \begin{aligned}
+                  B_k B_{k+1} & [ u_1, u_2, \dots u_{k+2} ]  = B_k \left( \sum_{i=1}^{k+2} \left( -1 \right)^i [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{k+2} ] \right) = \\
+                  & =  \sum_{i=1}^{k+2} \left( -1 \right)^i B_k [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] = \\
+                  & = \sum_{i=1}^{k+2} \left( -1 \right)^i \left( 
+                  \sum_{j=1}^{i-1} (-1)^j [u_1, u_2, \dots u_{j-1}, u_{j+1}, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] + \right. \\
+                  & \left. + \sum_{j=i+1}^{k+2} (-1)^{j-1} [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{j-1}, u_{j+1}, \dots u_{k+2}] 
+                  \right) =  \\
+                  & = \sum_{i=1}^{k+2}
+                  \sum_{j=1}^{i-1} (-1)^{i+j} [u_1, u_2, \dots u_{j-1}, u_{j+1}, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] + \\
+                  &  - \sum_{i=1}^{k+2}\sum_{j=i+1}^{k+2} (-1)^{i+j} [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{j-1}, u_{j+1}, \dots u_{k+2}] 
+                   = \\
+                   & = \sum_{\substack{i, j = 1\\ j<i}}^{k+2}
+                  (-1)^{i+j} [u_1, u_2, \dots u_{j-1}, u_{j+1}, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] + \\
+                  &  - \sum_{\substack{i, j =1 \\ j>i}}^{k+2} (-1)^{i+j} [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{j-1}, u_{j+1}, \dots u_{k+2}] 
+                   = 0
+            \end{aligned}
+      \end{equation}
+\end{proof}
 
 \todo{ Examples }
 

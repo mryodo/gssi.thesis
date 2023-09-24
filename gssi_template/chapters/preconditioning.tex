@@ -1,4 +1,4 @@
-\chapter{Preconditioning}
+\chapter{ Preconditioning }
 
 \todo{
       Here we need to say general words about how we need an efficient preconditioning scheme.
@@ -193,6 +193,224 @@ The complexity of \Cref{algo:greedy} rests upon the precomputed \( \sigma \mapst
 
 
 \section{ HeCS preconditioning }
+Given \Cref{prop:schurcollapse}, a weakly collapsible simplicial complex \(\mc K \) immediately yields an exact Cholesky decomposition for its up-Laplacian:
+\begin{lemma}\label{lem:exact}
+      Assume \( \mc K \), 2-skeleton simplicial complex, is weakly collapsible though the collapsing sequence \( \Sigma \) with the corresponding sequence of maximal faces \( \ds T \). Let \( B_2 W_2 \) be a weighted boundary operator for \( \mc K \). Then 
+      \begin{equation*}
+            C =  P_\Sigma B_2 W_2 P_{\ds T} \quad \text{ is an exact Cholesky mulitplier for } \quad  P_\Sigma \Lu 1(\mc K) P_\Sigma^\top,
+      \end{equation*}
+      i.e. \( P_\Sigma \Lu 1 (\mc K) P_\Sigma^\top = C C^\top \), where \( P_\Sigma \) and \( P_{\ds T} \) are permutation matrices for each sequence ( \( \left[ P_\Sigma \right]_{ij} = 1  \iff j = \sigma_i \) ).
+\end{lemma}
+\begin{proof}
+      Note that the sequences \( \Sigma \) and \( \ds T \) (and the multiplication by the corresponding permutation matrices) impose only the reordering of \( \V 1 \) and \( \V 2\) respectively; after such reordering the \(i\)-th edge collapses the \(i\)-triangle. Hence, the first \((i-1) \) entries of the \( i \)-th columns of the matrix \( B_2 W_2 \) ( \( \left[ B_2 W_2 \right]_{\cdot i} = \sqrt{w(t_i)} \b e_{t_i} \)) are zeros, otherwise one of the previous edges is not free. As a result, \( C \) is lower-triangular and by the direct computation \( C C^\top = P_\Sigma \Lu 1 (\mc K ) P_\Sigma^\top \).
+\end{proof}
+
+An arbitrary simplicial complex \( \mc K \) is generally not weakly collapsible (see \Cref{fig:2-core}). Specifically, weak collapsibility is a property of sparse simplicial complexes with the sparsity being measured by the number of triangles \(m_2 \) (in the weakly collapsible case \( m_2 < m_1 \) ); hence, the removal of triangles from \( \V 2 \) can potentially destroy the 2-Core structure inside \( \mc K \) and make the complex weakly collapsible. 
+
+As a result, the original \Cref{prob:original_up} may be reduced to the search for a collapsible subcomplex \( \mc L \) inside the original complex \( \mc K \), in order to use an exact Cholesky multiplier of \( \mc L \) as an approximate Cholesky preconditioner for \( \Lu 1 ( \mc K )\). Specifically:
+
+\begin{problem}
+      \label{prob:subcomplex}
+      Let \( \mc K \) be a 2-skeleton simplicial complex, \( \mc K = \V 0 \cup \V 1 \cup \V 2\) with the corresponding triangle weight matrix \( W_2(\mc K ) \). Find the subcomplex \( \mc L \) such that:
+      \begin{enumerate}[leftmargin = 45pt, label=(\arabic*) ]
+            \item it has the same set of 0- and 1-simplices, \( \mc V_0(\mc L) = \V 0 \) and \( \mc V_1(\mc L) = \V 1 \);  
+            \item triangles in \( \mc L \) are subsampled, \( \mc V_2(\mc L ) \subseteq \V 2 \);
+            \item \( \mc L \) has the same 1-homology as \( \mc K \);
+            \item \( \mc L \) is weakly collapsible through some  collapsing sequence \( \Sigma \) and corresponding sequence of maximal faces \( \ds T \);
+            \item the Cholesky multiplier \( C = P_\Sigma B_2 (\mc L ) W_2(\mc L) P_{\ds T }\) improves the conditionality of \( \Lu 1 (\mc K )\): 
+            \begin{equation*}
+                  \kappa_+ ( \Lu 1 (\mc K) ) \gg \kappa_+ ( C^\dagger P_\Sigma \Lu 1 (\mc K ) P_\Sigma^\top C^{\dagger \top}  )
+            \end{equation*}
+      \end{enumerate}
+\end{problem}
+
+Conditions \emph{(1)} and \emph{(2)} imply that a subcomplex \( \mc L \) is obtained from \( \mc K \) through the elimination of triangles.
+\begin{remark}[On the conservation of the 1-homology]
+      Since one transitions between the systems \( \Lu 1 ( \mc K ) \b x = \b f \) and \( \left( C^\dagger P_\Sigma \Lu 1 (\mc K ) P_\Sigma^\top C^{\dagger \top} \right) C^\top P_\Sigma \b x = C^\dagger P_\Sigma \b f  \), it is necessary to have \( \ker C^\top = \ker \Lu 1(\mc K)  = \ker W_2 B_2^\top \) so the transition is bijective (assuming \( \b x \perp \ker \Lu 1 (\mc K )\)). 
+
+      Due to \Cref{lem:hodge_decomp} and the spectral inheritance principle, {\cite[Thm.~2.7]{guglielmi2023quantifying}}, 
+      \( \ker \Lu k (\mc X ) = \ker L_k (\mc X ) \oplus B_{k}^\top  \cdot \im \Lu {k-1} \).  The second part, \( B_{k}^\top  \cdot \im \Lu {k-1} \), consists of the action of \( B_{k}^\top \) on non-zero related eigenvectors of \( \Lu {k-1}\) and is not dependent on \( \V {k+1} \) (triangles, in case \( k =1 \)), hence remains conserved in the subcomplex from \Cref{prob:subcomplex}. As a result, the conservation of 1-homology is sufficient to converse the kernels \( \ker \Lu 1 ( \mc K ) = \ker \Lu 1 ( \mc L ) \).
+      Moreover, one can show that the subcomplex \( \mc L \) can only extend the kernel: \( \ker L_1 (\mc K) \subseteq \ker L_1 ( \mc L )\). Indeed, the elimination of the triangle \(t \in \V 2 \) lifts the restriction \( \b e_t^\top \b x = 0\) for \( \b x \in \ker L_1 (\mc K)\); hence, if \( \b x \in \ker L_1( \mc K )\), then \( \b x \in \ker L_1(\mc L)\).
+\end{remark}
+
+\begin{definition}[Subsampling matrix]
+      Assume \( \mc K \) be a 2-skeleton simplicial complex;  let \( \ds T \) be a subset of triangles, \( \ds T \subset \V 2 \) (so forming the subcomplex \(\mc L = \V 0 \cup \V 1 \cup \ds T \)). Then \( \Pi \) is a subsampling matrix if 
+      \begin{itemize}[leftmargin = 45pt]
+            \item \( \Pi \) is diagonal;
+            \item \( ( \Pi )_{ii} = 1  \iff i \in \ds T \); otherwise, \( ( \Pi )_{ii} = 0 \).
+      \end{itemize}
+\end{definition}
+
+\begin{lemma}[Optimal weight choice for the subcomplex]\label{lemma:subsample_weight}
+      Let \( \mc K \) be a simplicial complex and \( \mc L \) be its subcomplex, satisfying \Cref{prob:subcomplex}, with fixed corresponding subsampling matrix \( \Pi \). Then in order to obtain the closest up-Laplacian \( \Lu 1(\mc L)\) to the original \( \Lu 1(\mc K)\), one should choose the weight matrix \( W_2(\mc L )\) as follows:
+      \begin{equation*}
+            W_2 ( \mc L ) = W_2( \mc K)  \Pi
+      \end{equation*}
+\end{lemma}
+
+\begin{proof}
+      Let \( W_2^2(\mc K )= W \); then \( \Lu 1 (\mc K) = B_2 W B_2^\top \). Then \( \wh W \Pi \) is the diagonal matrix of weights of subsampled triangles (in case \( t \notin \ds T \), the entry \( (\wh W \Pi)_{tt} = 0 \) ). 
+      Note that \( \Pi \wh W = \wh W \Pi = \Pi \wh W \Pi\); then, ignoring the reordering of the edges, \( \Lu 1 (\mc L ) = B_2 \Pi \wh W \Pi B_2^\top \) barring several zero columns and rows corresponding to some of the eliminated triangles.
+      
+Generally speaking, weights \( \wh W \) of sampled triangles \( \ds T \) differ from the original weights \( W \). Let \( \wh W = W + \Delta W\), where \( \Delta W \) is still diagonal, but entries are not necessarily positive. Then one can formulate the question of the optimal weight redistribution as the optimization problem:
+\begin{equation*}
+      \min_{ \Delta W } \left\| \Lu 1(\mc L) - \Lu 1 (\mc K) \right\| = \min_{ \Delta W } \left\| B_2 \left[ \Pi( W + \Delta W ) \Pi - W \right] B_2^\top \right\|
+\end{equation*}
+Let \( \Delta W = \Delta W (t )\) where \(t \) is a virtual time parametrization; then one can compute the gradient \( \nabla_{\Delta W} \sigma_1 \left( \Lu 1(\mc L) - \Lu 1 (\mc K) \right) \) through the time derivative \( \frac{d}{dt} \sigma_1 \left(  \Lu 1(\mc L) - \Lu 1 (\mc K) \right)  \):
+\begin{equation*}
+      \begin{aligned}
+            \dot{\sigma}_1 & = \b x^\top B_2 \Pi \dot{ \Delta W } \Pi B_2^\top \b x = \left\langle B_2 \Pi \dot{ \Delta W } \Pi B_2^\top , \, \b x \b x^\top \right\rangle = \mathrm{Tr} \left( B_2 \Pi \dot{ \Delta W } \Pi B_2^\top \b x \b x^\top \right) = \\ 
+            & = \left\langle \Pi B_2^\top \b x \b x^\top B_2 \Pi , \, \dot{ \Delta W } \right\rangle = \left\langle \nabla_{\Delta W} \sigma_1, \dot{\Delta W } \right\rangle 
+      \end{aligned}
+\end{equation*}
+By projecting onto the diagonal structure of the weight perturbation, 
+\begin{equation*}
+      \nabla_{\diag \Delta W } \sigma_1 = \diag \left( \Pi B_2^\top \b x \b x^\top B_2 \Pi  \right).      
+\end{equation*}
+Note that \( \diag \left( \Pi B_2^\top \b x \b x^\top B_2 \Pi  \right)_{ii} = |  \Pi B_2^\top \b x |^2_i \); then the stationary point is characterized by \(  \Pi B_2^\top \b x = 0 \iff \b x \in \ker \Lu 1\). The latter is impossible since \( \b x \) is the eigenvector corresponding to the largest eigenvalue; hence, since \( \Pi (W + \Delta W ) \Pi \ne  W \), the optimal perturbation is \( \Delta W \equiv 0 \). 
+\end{proof}
+
+\begin{remark}
+      \label{rem:ker_im}
+     Given \Cref{prob:subcomplex} and the optimal conserved triangle wait from \Cref{lemma:subsample_weight}, one aims to preserve the kernel of subsampled Laplacian
+\[
+      \ker \left( B_2 W_2 \Pi W_2 B_2^\top \right) = \ker \left(  B_2  W_2^2 B_2^\top \right) 
+\]
+Since \( \Pi = \Pi^2 \), \( \ker \Lu 1 = \ker W_2 B_2^\top \) and \( \ker \left(   B_2 W_2 \Pi W_2 B_2^\top \right) = \ker \left( \Pi W_2 B_2^\top \right) \). Additionally, \( \ker W_2 B_2^\top \subseteq \ker \left( \Pi W_2 B_2^\top \right)  \), so \(  \ker \left(  B_2 W_2 \Pi W_2 B_2^\top \right) \ne \ker \left(  B_2 W_2^2 B_2^\top \right) \iff \) there exists \( \b y \in \im W_2 B_2^\top\) such that \( W_2 B_2^\top \b y \ne 0 \) and \( W_2 B_2^\top \b y \in \ker \Pi\). Then in order to preserve the kernel, one needs 
+\( \im W_2 B_2^\top \cap \ker \Pi = \{ 0 \} \). 
+\end{remark}
+
+\begin{theorem}[Conditionality of the Subcomplex]
+      \label{thm:cond_weight}
+      Let \( \mc L \) be a weakly collapsible subcomplex of \( \mc K \) defined by the subsampling matrix \( \Pi \) and let \( C \) be a Cholesky multiplier of \( \Lu 1 (\mc L) \) defined as in \Cref{lem:exact}. Then
+      %\begin{enumerate}[leftmargin = 45pt, label = (\arabic*)]
+            %\item
+             the conditioning of the symmetrically preconditioned \( \Lu 1 \) is given by:
+            \begin{equation*}
+                  \kappa_+ \left( C^\dagger P_\Sigma \Lu 1 P_\Sigma^\top C^{\dagger \top} \right) = \left( \kappa_+ \left( \left( S_1 V_1^\top \Pi \right)^\dagger S_1 \right) \right)^2 = \left( \kappa_+ ( \Pi V_1 ) \right)^2, 
+            \end{equation*}
+            where \( V_1 \) forms the orthonormal basis of \( \im W_2 B_2^\top \).
+            %\item the relative weight of the subsampling \( \| \diag (W_2 \Pi) \| / \| \diag W_2 \| \) is a natural indicator of the preconditioning quality.
+      %\end{enumerate}
+\end{theorem}
+\begin{proof}
+By \Cref{lemma:subsample_weight}, \(W_2( \mc L ) = \Pi W_2\); then let us consider the lower-triangular preconditioner  \( C =  P_\Sigma B_2 W_2 \Pi P_{\ds T}  \) for \( P_\Sigma \Lu 1 P_\Sigma^\top  \); then the preconditioned matrix is given by:
+\begin{equation*}
+      \begin{aligned}
+            C^\dagger \left( P_\Sigma \Lu 1 P_\Sigma^\top \right) C^{\top \dagger} & = \left( P_\Sigma B_2 W_2 \Pi P_{\ds T} \right)^\dagger \left( P_\Sigma \Lu 1 P_\Sigma^\top \right) \left( P_\Sigma B_2 W_2 \Pi P_{\ds T} \right)^{\top \dagger} = \\
+            & = P_{\ds T}^\top \left( B_2 W_2 \Pi \right)^\dagger 
+              \Lu 1 \left( B_2 W_2 \Pi  \right)^{\top \dagger} P_{\ds T}
+      \end{aligned}
+\end{equation*}
+Note that \( P_{ \ds T } \) is unitary, so \( \kappa_+ ( P_{ \ds T } X P_{ \ds T }^\top ) = \kappa_+ ( X ) \), hence the principle matrix is \( \left( B_2 W_2 \Pi \right)^\dagger \Lu 1 \left( B_2 W_2 \Pi \right)^{\top \dagger} = \left( B_2 W_2 \Pi \right)^\dagger ( B_2 W_2 ) ( B_2 W_2 )^\top \left( B_2 W_2 \Pi  \right)^{\top \dagger}  \).
+Since \( \kappa_+ ( X^\top X ) = \kappa_+^2( X ) \), then in fact one needs to consider
+\[
+       \kappa_+ \left( \left( B_2 W_2 \Pi \right)^\dagger ( B_2 W_2 ) \right)
+\]
+Let us consider the SVD-decomposition for \(  B_2 W_2 = U S V^\top \); more precisely,
+\begin{equation*}
+      B_2 W_2 = U S V^\top = \begin{mt} U_1 & U_2 \end{mt} \begin{mt} S_1 & 0 \\ 0 & 0 \end{mt} \begin{mt} V_1^\top \\ V_2^\top \end{mt} = U_1 S_1 V_1^\top
+\end{equation*}
+where \( S_1 \) is a diagonal invertible matrix. Note that \( U \) and \( U_1 \) have orthonormal columns and \( S_1 \) is diagonal and invertible, so
+\begin{equation*}
+      (  B_2 W_2 \Pi )^\dagger  B_2 W_2 = \left( S V^\top \Pi \right)^\dagger S V^\top = \left( S_1 V_1^\top \Pi \right)^\dagger S_1 V_1^\top %= \left( V_1^\top \Pi \right)^\dagger V_1^\top 
+\end{equation*}
+%Note that \( W_2 B_2^\top = V_1 S_1 U_1^\top\), hence \( \im (W_2 B_2^\top) = \mathrm{span}\, V_1 \).
+By the definition of the condition number \( \kappa_+ \), one needs to compute \( \sigma^+_{\min}\) and \( \sigma^+_{\max}\) where:
+\begin{equation*}
+      \sigma^+_{\min \backslash \max} = \underset{ \b x \perp \ker \left( \left( S_1 V_1^\top \Pi \right)^\dagger S_1 V_1^\top \right) }{\min \backslash \max} \frac{ \left\| \left( S_1 V_1^\top \Pi \right)^\dagger S_1 V_1^\top \b x \right\| }{ \| \b x \| }
+\end{equation*}
+
+Note that \( \im W_2 B_2^\top = \im V_1 = \im V_1 S_1  \), so by \Cref{rem:ker_im}, \( \ker \Pi \cap \im V_1 S_1 = \{ 0 \} \), hence \( \ker \Pi V_1 S_1 = \ker V_1 S_1 \). Since \(\ker V_1 S_1 \cap \im S_1 V_1^\top = \{0\} \), one gets \(\ker \Pi V_1 S_1 \cap \im S_1 V_1^\top = \{0\} \). By the properties of the pseudo-inverse \( \ker \Pi V_1 S_1 = \ker \left( S_1 V_1^\top \Pi \right)^\top = \ker \left( S_1 V_1^\top \Pi \right)^\dagger \); as a result, \( \ker \left( \left( S_1 V_1^\top \Pi \right)^\dagger S_1 V_1^\top \right) = \ker S_1 V_1^\top \). Since \( S_1 \) is invertible, \( \ker \left( \left( S_1 V_1^\top \Pi \right)^\dagger S_1 V_1^\top \right) = \ker V_1^\top \).
+ 
+For \( \b x \in \ker V_1^\top \Rightarrow \b x \in \im V_1 \), so \( \b x = V_1 \b y \). Since \( V_1^\top V_1 = I \), \( \| \b x \| = \| V_1 \b y \| \) and:
+\begin{equation*}
+      \sigma^+_{\min \backslash \max} =  \underset{ \b y }{\min \backslash \max} \frac{ \left\| \left( S_1 V_1^\top \Pi \right)^\dagger S_1 \b y  \right\|  }{ \| \b y \| } \underset{ \b z = S_1 \b y }{ = } \underset{ \b z }{\min \backslash \max} \frac{ \left\| \left( S_1 V_1^\top \Pi \right)^\dagger \b z \right\|  }{ \left\| S_1^{-1} \b z \right\| }
+\end{equation*}
+Note that \( \b v = \left( S_1 V_1^\top \Pi \right)^\dagger \b z \iff \begin{cases} S_1 V_1^\top \Pi \b v = \b z \\ \b v \perp \ker S_1 V_1^\top \Pi  \end{cases} \) and \( \ker S_1 V_1^\top \Pi = \ker V_1^\top \Pi \), so:
+\begin{equation*}
+      \sigma^+_{\min \backslash \max} = \underset{ \b v \perp \ker V_1^\top \Pi }{\min \backslash \max} \frac{ \| \b v \| }{ \| V_1^\top \Pi \b v \|  }
+\end{equation*}
+Hence \( \kappa_+ \left( C^\dagger P_\Sigma \Lu 1 P_\Sigma^\top C^{\dagger \top} \right) = \kappa_+^2 ( V_1^\top \Pi ) = \kappa_+^2 ( \Pi V_1 )\).
+
+
+
+%Since \( \mathrm{span} V_1 = \im W_2 B_2^\top = W_2 \im B_2^\top \), \( V_1 \) is naturally scaled by the weight matrix \( W_2 \). As a result, \( V_1^\top \Pi \) is closer to \( V_1^\top \) with \( \kappa_+ (V_1^\top ) = 1\) when the projection matrix \( \Pi \) nullifies  columns of \( V_1^\top \) corresponding to the smallest and vanishing weights. Thus, in order to optimize the conditionality \(\kappa_+^2(V_1^\top \Pi)\) one should aim to subsample \( \mc L \) with the highest possible weight.
+\end{proof}
+
+\begin{proposition}\label{prop:heavy}
+      The structure of the matrix \( \Pi V_1 \) from \Cref{thm:cond_weight} provides a strategy for optimizing subsampling quality. Note that by the definition, the subsampling matrix \( \Pi \) is diagonal and binary, hence the best conditioning is achieved at \( \Pi = I \) with \( \kappa_+^2 (V_1) = 1 \) %(at the same time, the subcomplex \( \mc L \) should be weakly collapsible so \(\Pi\) cannot have more than \( m_1 \) ones on the diagonal)
+, so one should minimize the distance between \( \Pi V_1 \) and \( V_1 \). Since \( \mathrm{span} V_1 = \im W_2 B_2^\top = W_2 \im B_2^\top \), \( V_1 \) is naturally scaled by the weight matrix \( W_2 \), i.e. \(i\)-th row of \( V_1 \) is scaled by \( w(t_i) \). Similarly, the subsampling matrix \( \Pi \) multiplies each row of \( V_1 \) either by \( 1 \) or \( 0 \); as a result, in order to close the distance between \( V_1 \) and \( \Pi V_1 \), one may aim to align \( 0 \)s in the diagonal of \( \Pi \) with smallest weights in \( W_2 \). In other words, one should search for heavier collapsible subcomplexes \( \mc L \) to achieve better preconditioning quality.
+\end{proposition}
+
+%\begin{remark}
+%      Empirically, \( \sigma_{\min} \left( V_1^\top \Pi  \right) = 1 \), so \( \kappa_+ ( V_1^\top \Pi ) = \sigma_{\max} \left( V_1^\top \Pi  \right) \). \blav MAYBE WRONG. Something may be done with this further, I think
+%\end{remark}
+
+
+\subsection{Constructing Heavy Subcomplex out of 2-Core}
+
+Given \Cref{thm:cond_weight} and \Cref{prop:heavy}, we search for a weakly collapsible subcomplex with a high total weight:
+\begin{equation*}
+      \max_{ \mc L \in \Omega_{\mc K} } \| W \Pi(\mc L) \|_F \quad \text{ where } \quad \Omega_{\mc K} = \left\{ \mc L \mid \mc L \subseteq \mc K \text{ and  } \mc L \text{ is weakly collapsible} \right\}.
+\end{equation*}
+
+The \Cref{algo:heavy_subsampling} works as follows: start with an empty subcomplex \( \mc L \); then, at each step try to extend \( \mc L \) with the heaviest unconsidered triangle \( t\): \( \mc L \to \mc L \cup \{ t \} \)\footnote{here the extension implies the addition of the triangle \(t\) with all its vertices and edges to the complex \(\mc L\)}. If the extension \( \mc L \cup \{ t \} \) is weakly collapsible, it is accepted as the new \( \mc L \), otherwise \( t \) is rejected; in either case triangle \(t\) is not considered for the second time.
+
+\begin{algorithm}[h]
+      \caption{ \texttt{HEAVY\_SUBCOMPLEX}\( (\mc K, W_2) \): construction a heavy collapsible subcomplex
+      \label{algo:heavy_subsampling}}
+      \begin{algorithmic}[1]
+            \Require the original complex \( \mc K \), weight matrix \( W_2 \)
+            \State \( \mc L  \gets \vn, \, \ds T \gets \vn  \) \Comment{initial empty subcomplex}
+            \While{ there is unprocessed triangle in \( \V 2 \) }
+                  \State \( t \gets \texttt{nextHeaviestTriangle}(\mc K, W_2) \) \Comment{e.g. iterate through \( \V 2 \) sorted by weight}
+                  \If{ \(\mc L \cup \{ t \} \) is weakly collapsible } \Comment{\small run \texttt{GREEDY\_COLLAPSE}\( (\mc L \cup \{ t\} ) \) (\Cref{algo:greedy})}
+                        \State \( \mc L \gets \mc L \cup \{ t \},\, \ds T \gets [ \ds T \; t ]  \) \Comment{ extend \( \mc L \) by \( t \)}
+                  \EndIf
+            \EndWhile
+             \State \Return \( \mc L, \, \ds T, \, \Sigma \) \Comment{here \( \Sigma \) is the collapsing sequence of \( \mc L \) }
+      \end{algorithmic}
+\end{algorithm}
+
+\begin{remark}[Validity of \Cref{algo:heavy_subsampling}]
+      The subcomplex \( \mc L \) sampled with \Cref{algo:heavy_subsampling} satisfies \Cref{prob:subcomplex}: indeed, \( \V 0 = \mc V_0(\mc L)\), \( \V 1 = \mc V_1(\mc L) \) and \( \mc L \) is weakly collapsible by construction. It is less trivial to show that the subsampling \( \mc L \) does not increase the dimensionality of \(1\)-homology.
+
+      Assuming the opposite, the subcomplex \( \mc L \) cannot have any additional \(1\)-dimensional holes in the form smallest-by-inclusion cycles of more than \( 3 \) edges: since this cycle is not present in \( \mc K \), it is ``covered'' by at least one triangle \( t \) which necessarily has a free edge, so \( \mc L \) can be extended by \(t\) and remain weakly collapsible. Alternatively, if the only additional hole correspond to the triangle \( t \) not present in \( \mc L \); then, reminiscent of the proof for \Cref{thm:poly}, let us consider the minimal by inclusion simplicial complex \( \mc K \) for which it happens. Then the only free edges in \( \mc L \)  are the edges of \( t \), otherwise \( \mc K \) is not minimal. At the same time, in such setups \( t\) is not registered as a hole since it is an outer  boundary of the complex \( \mc L \), e.g. consider the exclusion of exactly one triangle in the tetrahedron case, \Cref{fig:2-core} \footnote{algebraically, this fact is extremely dubious: due to the lack of free edges, there is a ``path'' between any two triangles in \( \mc L \) adjacent to \( t \) through adjacent triangles in \( \mc L \), which reduces degrees of freedom in the circulation of the flow around \( t \) and brings it to \( \ker B_2^\top \).}, which proves that \( \mc L \) cannot extend the 1-homology of \( \mc K \). 
+\end{remark}
+
+
+The complexity of \Cref{algo:heavy_subsampling} is \( \mc O( m_1 m_2 ) \) at worst which could be considered comparatively slow: the algorithm passes through every triangle in \( \V 2 \) and performs collapsibility check via \Cref{algo:greedy} on \( \mc L \) which never has more than \( m_1 \) triangles since it is weakly collapsible. Note that 
+ \Cref{algo:heavy_subsampling} and \Cref{thm:cond_weight} do not depend on \( \mc K \) being a 2-Core; moreover, the collapsible part of a generic \( \mc K \) is necessarily included in the subcomplex \( \mc L \) produced by \Cref{algo:heavy_subsampling}. Hence a prior pass of \texttt{GREEDY\_COLLAPSE}\((\mc K)\) reduces the complex to a smaller 2-Core \(\mc K'\) with faster \texttt{HEAVY\_SUBCOMPLEX}\((\mc K', W_2) \) since \( \mc V_1(\mc K') \subset \V 1 \) and \( \mc V_2(\mc K') \subset \V 2 \).
+
+We summarise the whole procedure in \Cref{fig:scheme}: in order to construct the preconditioner \( C \), one reduces a generic simplicial complex \( \mc K \) to a 2-Core \( \mc K'\) through the collapsing sequence \( \Sigma_1 \) and the corresponding sequence of maximal faces \( \ds T_1 \); then, a heavy weakly connected subcomplex \( \mc L \) is sampled from \( \mc K'\) with the collapsing sequence \( \Sigma_2 \) and the corresponding sequence of maximal faces \( \ds T_2 \). The preconditioner \( C \) is formed by the subset of triangles \( \ds T_1 \cup \ds T_2 \) (that produces the projection matrix \( \Pi \)) with collapsing sequence \( ( \Sigma_1, \Sigma_2 ) \).
+\begin{figure}[htbp]
+\centering
+\scalebox{0.8}{
+	\begin{tikzpicture}
+		%\node[align=center] at (0, 1.0){generic \\ 2-skeleton \( \mc K \)};
+		\node[align=center] at (0, -0.75){sparsified \( \mc K \)\\   \( m_2 = q(m_1) \) \\ \Cref{thm:sparsify}};
+		\node[align=center] at (4, -0.75){2-Core \( \mc K' \) \\ \( \mc K' \subset \mc K  \) };
+		\node[align=center, draw=red, inner sep = 1pt] at (12, -0.75){weakly collapsible \\ heavy subcomplex \( \mc L \)};
+		\draw[-latex, line width=1.5] (5, -0.75)  -- node[midway, below, align=center]{\small \texttt{HEAVY\_SUBCOMPLEX}\((\mc K', W_2) \) \\ \Cref{algo:heavy_subsampling} } (10, -0.75);
+		%\draw[-latex, line width = 1, gray, dashed] (0, 0.5) -- node[midway, above, rotate = 90]{\tiny \Cref{thm:sparsify}} (0, -0.75);
+		%\draw[-latex, line width=1.5] (1.05, 0.55) -- (3, -0.5);
+		\draw[-latex, line width=1.5] (1.15, -0.75) -- (3, -0.75);
+		\node[align=center, draw=red, inner sep=1pt] at (4.0, 0.75) {\small \texttt{GREEDY\_COLLAPSE}(\( \mc K \)) \\ \small \Cref{algo:greedy} };
+            %\draw[-](2.3, 0.755) -- (1.5, 0.275);
+            %\draw[-](2.5, 0.275) -- (1.75, -0.9);
+            \node[red, align = center,] at (10, 1.25) {projection matrix \( \Pi \) \\ preconditioner \( C \)};
+            \draw[-latex, red, dashed, thick] (5.675, 0.45)  -| (10, 0.75);
+            \draw[-, red, dashed, thick] (12, -0.25) |- (10, 0.45 );
+            \draw[-, red, dashed, thick] (1.75, -0.6) |- (2.5, 0.45 );
+	\end{tikzpicture}}
+	\caption{ The scheme of the simplicial complex transformation: from the original \( \mc K \) to the heavy weakly collapsible subcomplex \( \mc L \). \label{fig:scheme}}
+\end{figure}
+
+We refer to the preconditioner built according to \Cref{fig:scheme} via \Cref{algo:greedy} and \Cref{algo:heavy_subsampling} as a \emph{heavy collapsbile subcomplex} (\algname) preconditioner.
+
+
+
 
 \subsection{ Cholesky decomposition for weakly collapsible subcomplex }
 
