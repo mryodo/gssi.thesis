@@ -1,31 +1,45 @@
 \begin{tikzpicture}
-      \fill [opacity=0.3,liberty]    (-2, -3.5) -- (-1.25, -2.75) --  (-0.75, -3.3) -- cycle;
-      \fill [opacity=0.15,liberty]    (-2, -3.5) -- (-1.0, -4.0) --  (-0.75, -3.3) -- cycle;
-      \fill [opacity=0.25,liberty]    (-2, -3.5) -- (-1.25, -2.75) --  (-1.0, -4.0) -- cycle;
-      \fill [opacity=0.3,liberty]    (-0.75, -3.3) -- (-1.25, -2.75) --  (0, -3.0) -- cycle;
-      \fill [opacity=0.3,liberty]    (0, -3) -- (0.1, -3.8) --  (1.5, -4.5) -- cycle;
-      \fill [opacity=0.3,liberty]    (-1, -4) -- (0.1, -3.8) --  (1.5, -4.5) -- cycle;
 
-      \Vertex[x=-2, y=-3.5, style={color=persimmon}, fontcolor=white, size=0.2, label = 1]{v1}
-      \Vertex[x=-1.25, y=-2.75, style={color=persimmon}, fontcolor=white, size=0.2, label = 2]{v2}
-      \Vertex[x=-0.75, y=-3.3, style={color=persimmon}, fontcolor=white, size=0.2, label = 3]{v3}
-      \Vertex[x=-1.0, y=-4.0, style={color=persimmon}, fontcolor=white, size=0.2, label = 4]{v4}
-      \Vertex[x=-0, y=-3., style={color=persimmon}, fontcolor=white, size=0.2, label = 5]{v5}
-      \Vertex[x=0.1, y=-3.8, style={color=persimmon}, fontcolor=white, size=0.2, label = 6]{v6}
-      \Vertex[x=1.5, y=-4.5, style={color=persimmon}, fontcolor=white, size=0.2, label = 7]{v7}
+      \fill [opacity=0.3,liberty]    (0, 0) -- (3, 0) --  (1.5, 2.6) -- cycle;
+      %\node at (1.5, 0.9) {\AxisRotator[rotate=-90]};
+      %\node at (1.5, 1.2) {\small \color{liberty!50!jet} +1};
+      \fill [opacity=0.2,liberty]    (5.0, 1.0) -- (6.5, 2.6) --  (6.4, 1.4) -- cycle;
+      %\node at (17.9/3, 5/3) {\AxisRotatorMirror[rotate=0]};
+      \fill [opacity=0.6,liberty]    (5.0, 1.0) -- (9.0, -0.4) --  (6.4, 1.4) -- cycle;
+      %\node at (6.8, 2/3) {\AxisRotator[rotate=-90]};
+      \fill [opacity=0.4,liberty]    (6.5, 2.6) -- (9.0, -0.4) --  (6.4, 1.4) -- cycle;
+      %\node at (7.3, 1.2) {\AxisRotatorMirror[rotate=-90]};
+      
+      
+
+
+      \Vertex[x=0, y=0,style={color=persimmon}, fontcolor=white, size=0.25, label = 1]{v1}
+      %\node[below left=-1pt of v1] {\small \color{persimmon}+1};
+      \Vertex[x=3, y=0,style={color=persimmon}, fontcolor=white, size=0.25, label = 2]{v2}
+      %\node[below=-1pt of v2] {\small \color{persimmon}-2};
+      \Vertex[x=1.5, y=2.6, style={color=persimmon}, fontcolor=white, size=0.25, label = 3]{v3}
+     % \node[above=-1pt of v3] {\small \color{persimmon}+0};
+      \Vertex[x=5, y=1.0, style={color=persimmon}, fontcolor=white, size=0.25, label = 4]{v4}
+    %  \node[above=-1pt of v4] {\small \color{persimmon}-3};
+      \Vertex[x=6.5, y=2.6, style={color=persimmon}, fontcolor=white, size=0.25, label = 5]{v5}
+   %   \node[above right=-1pt of v5] {\small \color{persimmon}-1};
+      \Vertex[x=9, y=-.4, style={color=persimmon}, fontcolor=white, size=0.25, label = 6]{v6}
+  %    \node[below=-1pt of v6] {\small \color{persimmon}+0};
+      \Vertex[x=6.4, y=1.4, style={color=persimmon}, fontcolor=white, size=0.25, label = 7]{v7}
+ %     \node[right=-1pt of v7] {\small \color{persimmon}+2};
+      \Vertex[x=11.0, y=2.0, style={color=persimmon}, fontcolor=white, size=0.25, label = 8]{v8}
+%      \node[above=-1pt of v8] {\small \color{persimmon}+3};
 
       \Edge[](v1)(v2)
       \Edge[](v1)(v3)
-      \Edge[](v1)(v4)
       \Edge[](v2)(v3)
       \Edge[](v2)(v4)
-      \Edge[](v2)(v5)
       \Edge[](v3)(v4)
-      \Edge[](v3)(v5)
+      \Edge[](v4)(v5)
       \Edge[](v4)(v6)
       \Edge[](v4)(v7)
       \Edge[](v5)(v6)
       \Edge[](v5)(v7)
       \Edge[](v6)(v7)
-
+      \Edge[](v6)(v8)
 \end{tikzpicture}

@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+
+      \fill [opacity=0.3,liberty]    (0, 0) -- (3, 0) --  (1.5, 2.6) -- cycle;
+      \node at (1.5, 0.9) {\AxisRotator[rotate=-90]};
+      \node at (1.5, 1.2) {\tiny \color{liberty!50!jet} +1};
+
+      \Vertex[x=0, y=0,style={color=persimmon}, fontcolor=white, size=0.2, label = 1]{v1}
+      %\node[below left=-1pt of v1] {\small \color{persimmon}+1};
+      \Vertex[x=3, y=0,style={color=persimmon}, fontcolor=white, size=0.2, label = 2]{v2}
+      %\node[below=-1pt of v2] {\small \color{persimmon}-2};
+      \Vertex[x=1.5, y=2.6, style={color=persimmon}, fontcolor=white, size=0.2, label = 3]{v3}
+      %\node[above=-1pt of v3] {\small \color{persimmon}+0};
+
+      \Edge[](v1)(v2)
+      \Edge[](v1)(v3)
+      \Edge[](v2)(v3)
+
+      %\Edge[Direct,]( 3.5,  1.5)(5, 1.5)
+
+      \draw[-latex] ( 3.5,  1.0) --node[midway, above, align=center]{ boundary \\ map } (5, 1.0);
+
+      \node at (7.5, 0.9) {\AxisRotator[rotate=-90]};
+
+      \Vertex[x=6.2, y=-0.2,style={color=persimmon}, fontcolor=white, size=0.2, label = 1]{v1}
+      \Vertex[x=5.8, y=0.2,style={color=persimmon}, fontcolor=white, size=0.2, label = 1]{v11}
+      %\node[below left=-1pt of v1] {\small \color{persimmon}+1};
+      \Vertex[x=8.8, y=-0.2,style={color=persimmon}, fontcolor=white, size=0.2, label = 2]{v2}
+      \Vertex[x=9.2, y=0.2,style={color=persimmon}, fontcolor=white, size=0.2, label = 2]{v22}
+      %\node[below=-1pt of v2] {\small \color{persimmon}-2};
+      \Vertex[x=7.3, y=2.6, style={color=persimmon}, fontcolor=white, size=0.2, label = 3]{v3}
+      \Vertex[x=7.7, y=2.6, style={color=persimmon}, fontcolor=white, size=0.2, label = 3]{v33}
+
+      \Edge[Direct, label = +1, Math ](v1)(v2)
+      \Edge[Direct, label = -1, Math](v11)(v3)
+      \Edge[Direct, label = +1, Math](v22)(v33)
+
+
+\end{tikzpicture}

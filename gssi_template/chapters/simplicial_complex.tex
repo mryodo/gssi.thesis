@@ -4,7 +4,7 @@
 
 
 
-\section{ From graph to higher-order models } \label{sec:higher-order-models}
+\section{ From graph to higher-order models } \label[section]{sec:higher-order-models}
 
 \todo{graph definition}
 
@@ -30,21 +30,31 @@ simplicial complexes}
 
 
 
-\section{ Simplicial Complexes } \label{sec:SCs}
+\section{ Simplicial Complexes } \label[section]{sec:SCs}
 
 
 Let \( V = \{ v_1, v_2, \ldots, v_n \} \) be a set of nodes; as discussed above, such set may refer to various interacting entities and agents in the system, e.g.\ neurons, genes, traffic stops, online actors, publication authors, etc. Then: 
 
-\begin{definition}[Simplicial Complex]\label{def:simplicial_complex}
+\begin{definition}[Simplicial Complex]\label[definition]{def:simplicial_complex}
       The collection of subsets \( \mathcal K \) of the nodal set \( V \) is  a (abstract) {SC}\footnote{addition of the word ``abstract'' to the term is more common in the topological setting} if for each subset \( \sigma \in \mc K \), referred as a {simplex}, all its subsets \( \sigma'\), \( \sigma' \subseteq \sigma \), referred as {faces}, enter \( \mc K \) as well, \( \sigma' \in \mc K\).
 \end{definition}
 
-A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the order \( k \), \( \ord \sigma = k \). Let \( \V k \) be a set of all \(k\)-order simplices in \( \mc K \) and \( m_k \) is the cardinality of \( \V k\), \( m_k = | \V k | \); then \( \V 0 \) is the set of nodes in the simplicial complex \( \mc K \), \( \V 1 \) --- the set of edges, \( \V 2 \) --- the set of triangles, or \(3\)-cliques, and so on, with \( \mc K = \{ \V 0, \V 1, \V 2 \ldots \} \). Note that due to the inclusion rule in \Cref{def:simplicial_complex}, the number of non-empty \( \V k \) is finite and, moreover, uninterupted in a sense of the order: if \( \V k = \vn \), then \( \V {k+1} \) is also necessarily empty.
+We denote simplex \( \sigma \) on the set of vertices \( \{ u_1, u_2, \dots u_{k+1} \} \in V  \) as \( \sigma = [u_1, u_2, \dots u_{k+1} ]\). Then, a simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the order \( k \), \( \ord \sigma = k \); alternatively, we refer to it as a \(k\)-order simplex or \(k\)-simplex. Let \( \V k \) be a set of all \(k\)-order simplices in \( \mc K \) and \( m_k \) is the cardinality of \( \V k\), \( m_k = | \V k | \); then \( \V 0 \) is the set of nodes in the simplicial complex \( \mc K \), \( \V 1 \) --- the set of edges, \( \V 2 \) --- the set of triangles, or \(3\)-cliques, and so on, with \( \mc K = \{ \V 0, \V 1, \V 2 \ldots \} \). Note that due to the inclusion rule in \Cref{def:simplicial_complex}, the number of non-empty \( \V k \) is finite and, moreover, uninterupted in a sense of the order: if \( \V k = \vn \), then \( \V {k+1} \) is also necessarily empty.
+\begin{definition}[\(k\)-skeleton]\label[definition]{def:skeleton}
+      For a given simplicial complex \( \mc K \), a \(k\)-skeleton is defined as a simplicial complex \( \mc K^{(k)} \) containing all simplices of \( \mc K \) of order at most \( k \), 
+      \begin{equation}
+            \mc K^{(k)} = \cup_{i=0}^k \V i
+      \end{equation}
+      For instance, \( 2 \)-skeleton of \( \mc K \) consists of all nodes, edges and triangles of \( K \).
+\end{definition}
+
+It is easy to note that \( k\)-skeleton remains a simplicial complex: if \( \sigma \in K^{(k)}\), then all simplices \( \tau \) from the original complex \( \mc K \), \( \ord \tau \le \ord \sigma \), belong to \( \mc K^{(k)} \) by definition; then, by inclusion principle, all faces \( \sigma' \) of \( \sigma \) belong to \( \mc K \) and \( \ord \sigma' < \ord \sigma \le k \), so all faces of \( \sigma \) are necessarily included in the \( k\)-skeleton.
+
 \begin{figure}[hbtp]
       \centering
-      \scalebox{1.5}{\input{figures/tikz/simplicial_complex_example.tex}}
+      \input{figures/tikz/simplicial_complex_example.tex}
       \caption{
-            Example of a simplicial complex\label{fig:example_SC}}
+            Example of a simplicial complex on \(8\) nodes; nodes included in the compelx are shown in orange, edges --- in black, and triangles  --- in blue.\label{fig:example_SC}}
 \end{figure}
 
 
@@ -53,23 +63,27 @@ A simplex \( \sigma \in \mc K \) on \( k + 1 \) vertices is said to be of the or
       Here we provide the following example of the simplicial complex \( \mc K \), \Cref{fig:example_SC}: we denote \(0\)-order simplices (vertices) by orange color, \( 1\)-order simplicies (edges) by black and \( 2\)-order simplices (triangles) by blue, where: 
       \begin{equation}
             \begin{aligned}
-                  \V 0 & = \{ 1, 2, 3, 4, 5, 6, 7 \} \\
-                  \V 1 & = \{ [1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [2, 5], [3, 4], [3, 5], [4, 6], [4, 7], [5, 6], [6, 7] \} \\
-                  \V 2 & = \{ [ 1, 2, 3 ], [1, 2, 4], [1, 3, 4], [2, 3, 5], [4, 6, 7], [5, 6, 7] \}
+                  \V 0 & = \{ [1], [2], [3], [4], [5], [6], [7], [8] \} \\
+                  \V 1 & = \{ [1, 2], [1, 3], [2, 3], [2, 4], [3, 4], [4, 5], [4, 6], [4, 7], [5, 6], [5, 7], [6, 7], [6, 8] \} \\
+                  \V 2 & = \{ [ 1, 2, 3 ], [4, 5, 7], [4, 6, 7], [5, 6, 7] \}
             \end{aligned}
       \end{equation}
-      Note that \( \V 3 = \vn \), so the highest order of simplices in \( \mc K \) is \( 2 \). Additionally, edge \( [2, 3] \), \( [2, 4]\) and \( [3, 4]\) are included in \( \mc K \), but the triangle \( [2, 3, 4]\) is not; this does not violate the inclusion rule. Instead, every edge and every vertices of every triangle in \( \V 2 \) as well as every vertex of every edge in \( \V 1 \) are contained in \( \mc K \) fullfilling the inclusion principle.
+      Note that \( \V 3 = \vn \), so the highest order of simplices in \( \mc K \) is \( 2 \). Additionally, edge \( [4, 5] \), \( [4, 6]\) and \( [5, 6]\) are included in \( \mc K \), but the triangle \( [4, 5, 6]\) is not; this does not violate the inclusion rule. Instead, every edge and every vertices of every triangle in \( \V 2 \) as well as every vertex of every edge in \( \V 1 \) are contained in \( \mc K \) fullfilling the inclusion principle.
 \end{example}
 
 \begin{example}[Real Life Simplicial Complex]
+
+      coauthorship graph? cannot find a nice picture
 
       \todo{find a natural example of the simplicial complex with an illustration}
       
 \end{example}
 
 
-Comparing to the general case of the hypergraph described above, it is easy to see that simplicial complex is a special case of a hypergraph where every edge is enclosed with respect to the inclusion. In other words, simplicial complex contains additional structural rigidness which allows to formally describe the topology of \( \mc K \); as a result, one is specifically interested in the formal desctiption of the nested inclusion principle achieved through \emph{boundary operators} defined in the subsections below.
+Comparing to the definition of the hypergraph above, it is easy to see that simplicial complex is a special case of a hypergraph where every edge is enclosed with respect to the inclusion (every subset of every hyperedge is a hyperedge). In other words, simplicial complex contains additional structural rigidness which allows to formally describe the topology of \( \mc K \); as a result, one is specifically interested in the formal desctiption of the nested inclusion principle achieved through \emph{boundary operators} defined in the subsections below.
 
+
+Prior to discussing boundary mappings, we briefly cover the algebraic structure of such operators known as \emph{Hodge's theory}.
 
 \section{ Hodge's Theory }
 
@@ -79,7 +93,7 @@ Two linear operators \( A \) and \( B \) are said to satisfy Hodge's theory if a
 \end{equation}
 which is equivalent to \( \im B \subseteq \ker A \).
 
-\begin{definition}\label{def:quotient}
+\begin{definition}\label[definition]{def:quotient}
       For a pair of operators \( A \) and \( B \) satisfying Hodge's theory, the \emph{quotient space} \( \mc H \) is defined as follows:
       \begin{equation}
             \mc H = \faktor{ \ker A }{\im B}
@@ -95,7 +109,7 @@ By \Cref{def:quotient}, the quotient space \( \mc H \) is a collection\todo{in a
             \caption{Illustration of a harmonic representative for an equivalence class}
 \end{figure}
 
-\begin{theorem}[{\cite[Thm 5.3]{limHodgeLaplaciansGraphs2020}}]\label{thm:two_kernels}
+\begin{theorem}[{\cite[Thm 5.3]{limHodgeLaplaciansGraphs2020}}]\label[theorem]{thm:two_kernels}
       Let \( A \) and \( B \) be linear operators, \( A B = 0 \). Then the homology group \( \mc H \) satisfies:
       \begin{equation}
             \mc H = \faktor{\ker A }{\im B } \cong \ker A \cap \ker B^\top,
@@ -107,7 +121,7 @@ By \Cref{def:quotient}, the quotient space \( \mc H \) is a collection\todo{in a
       One builds the isomorphism through the harmonic representative, as discussed above. It sufficient to note that \( \b x_H \perp \im B \Leftrightarrow \b x_H \in \ker B^\top \) in order to complete the proof.
 \end{proof}
 
-\begin{lemma}[{\cite[Thm 5.2]{limHodgeLaplaciansGraphs2020}}]\label{lemma:hodge_kernels}
+\begin{lemma}[{\cite[Thm 5.2]{limHodgeLaplaciansGraphs2020}}]\label[lemma]{lemma:hodge_kernels}
       Let \( A \) and \( B \) be linear operators, \( A B = 0 \). Then:
       \begin{equation}
             \ker A \cap \ker B^\top = \ker \left( A^\top A + B B^\top \right)
@@ -149,7 +163,7 @@ Since \( A B = 0\), \( B^\top A^\top = 0 \) or \( \im A^\top \subset \ker B^\top
       \end{aligned}
 \end{equation}
 Given \Cref{lemma:hodge_kernels}, \( \ker A \cap \ker B^\top = \ker \left(  A^\top A + B B^\top \right) \) and, since \( \im A^\top \subset \ker B^\top \), \( \im A^\top \cap \ker B^\top = \im A^\top \), yeilding the decomposition of  the whole space:
-\begin{theorem}[Hodge Decomposition]\label{thm:hodge_decomposition}
+\begin{theorem}[Hodge Decomposition]\label[theorem]{thm:hodge_decomposition}
       Let \( A \) and \( B \) be linear operators, \( A B = 0 \). Then:
       \begin{equation}
             \ds R^n = \lefteqn{\overbrace{\phantom{\im A^\top \oplus  \ker \left( A^\top A + B B^\top \right)}}^{\ker B^\top}} \im A^\top \oplus
@@ -174,46 +188,81 @@ Each simplicial complex \( \mc K \) has a nested structure of simplicies: indeed
 This nested property implies that one can build a formal map from a simplex to its boundary enclosed inside the simplicial complex. 
 
 \begin{definition}[Chain spaces]
-      Let \( \mc K \) be a simplicial complex; then the space \( C_k \) of formal sums of simplices from \( \V k \) over real numbers is called \emph{a \( k\)-th chain space}.
+      Let \( \mc K \) be a simplicial complex; then the space \( \mc C_k \) of formal sums of simplices from \( \V k \) over real numbers is called \emph{a \( k\)-th chain space}.
 
-      \todo{switch to \( \mc C_k\)}
 \end{definition}
 
-\begin{example}    
+
+Chain spaces on its own are naturally present in the majority of the network models: \( \mc C_0 \) is a space of states of vertices (e.g. in the dynamical system \( \dot{ \b x } = A \b x \) the evoloving vector \( \b x \in \mc C_0 \)), \( \mc C_1 \) --- is a space of (unrestricted) flows on graphs edges, and so on\todo{refs?}.
+
+
+
+\begin{example}\label[example]{ex:chains}
       \begin{figure}[hbtp]
             \centering
             \input{figures/tikz/chains.tex}
-            \caption{Example of chains on the simplicial complex \label{fig:weak_example}}
+            \caption{Example of chains on the simplicial complex \label{fig:chain_example}}
       \end{figure}
 
-      \todo{add description of the example }
+      We provide an example of chains from \( \mc C_0 \), \( \mc C_1 \) and \( \mc C_2 \) in \Cref{fig:chain_example}:
+      \begin{equation}
+            \begin{aligned}
+                  \b c_0 & =  [1] - 2 [2] - 3[4] - [5] + 2[7] + 3[8] \\
+                  \b c_1 & = [1, 2] - [1, 3] + 2[2, 4] + 2 [3, 4]+[4, 5] - 3[4, 6] - [5, 7] + 2[6, 7] \\
+                  \b c_2 & = [1, 2, 3] - [4, 5, 7] + 2[5, 6, 7]
+            \end{aligned}
+      \end{equation}
 \end{example}
 
-Chain spaces on its own are naturally present in the majority of the network models: \( C_0 \) is a space of states of vertices (e.g. in the dynamical system \( \dot{ \b x } = A \b x \) the evoloving vector \( \b x \in C_0 \)), \( C_1 \) --- is a space of (unrestricted) flows on graphs edges, and so on\todo{refs?}.
+Since \( \mc C_k \) is a linear space, the elements of \( \V k\) is a natural basis of \( C_k \) and \( \mc C_k \cong \ds R^{m_k } \) with versor vectors forming the basis and corresponding to simplices in \( \V k \). For instance, in \Cref{ex:chains}:
+\begin{equation}
+      \begin{aligned}
+            \b c_0 & =  \begin{mt}
+                  1 & -2 & 0 -3 & -1 & 0 & 2 & 3
+            \end{mt}^\top \\
+            \b c_1 & =  \begin{mt}
+            1 & -1 & 0 & 2 & 2 & 1 & -3 & 0 & -1 & 0 & 2 & 0
+            \end{mt}^\top \\
+            \b c_2 & = \begin{mt}
+                  1 & -1 & 0 & 2
+            \end{mt}^\top 
+      \end{aligned}
+\end{equation} 
 
-Since \( C_k \) is a linear space, versor vectors corresponding to the elements of \( \V k\) is a natural basis of \( C_k \); in order to proceed with the boundary maps, one needs to fix an order of the simplices inside \( \V k \) (alas one fixes the order of vertices in the graph to form an adjacency matrix) as a matter of bookkeeping. Addiitionally, since \( C_k \) is a space over \( \ds R \), chains \( \sigma \) and \( - \sigma \) naturally introduce the notion of \emph{orientation} of the simplex.
+For the matrix notation of any operator acting on chain spaces \( \mc C_k \), it is natural to order simplices in \( \V k \) in some fashion. Additionally, for a matter of bookkeping one introduces the notion of \emph{orientation} of each simplex in \( \mc C_k \), e.g.~for simplex \( \sigma = [ u_1, u_2, \dots u_{k+1} ]\) the orientation maybe be assigned as the permutation sign, \( \mathrm{sgn}(u_1, u_2, \dots u_{k+1})\). We provide examples of oriented simplices in \Cref{fig:chain_example} in case of the lexicographical orientation described above. Note that neither ordering of simplices or their orientation should not be able to substantially alter topological properties of the simplicial complex if defined correctly.
 
-\todo{Simplex orientation and order}
-
-\todo{definition of the operators}
+\begin{figure}[hbtp]
+      \centering
+      \input{figures/tikz/boundary_sample.tex}
+      \caption{ Sample action of the boundary operators \label{fig:boundary_sample} }
+\end{figure}
+To form a boundary map, one aims to replicate the action of the operator on \Cref{fig:boundary_sample}: to map a simplex (f.i. \( [1, 2, 3] \)) to some combination of faces on its border (in case of \Cref{fig:boundary_sample}, \( [1, 2]\), \( [1, 3]\), \( [2, 3]\)). This implies that a boundary operator \( B_k \) should map \( \mc C_k \) onto \( \mc C_{k-1} \). Formally,
 
 \begin{definition}
+      Let \( \mc K \) be a simplicial complex with corresponding family of chain spaces \( \mc C_k \). Then the action of a boundary map \( B_k\), \( B_k : \mc C_k \mapsto \mc C_{k-1 }\), is defined as an alternating sum:
       \begin{equation}
             B_k [ u_1, u_2, \dots u_{k+1} ] = \sum_{i=1}^{k+1} \left( -1 \right)^i [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{k+1}]
       \end{equation}
-\end{definition}
-
-
-
-\todo{lemma  \( B_k  B_{k+1} = 0 \) in general case}
-
-\begin{lemma}[ Fundamental Lemma of Homology ]
+      In the case of \Cref{fig:chain_example},  
       \begin{equation}
+            B_2 [ 1, 2, 3] = [1, 2] - [1, 3] + [2, 3]
+      \end{equation}
+\end{definition}
+The alternating nature of the definition upholds so called \emph{fundamental lemma of homology} stating ``the boundary of the boundary is zero''. Indeed, 
+\begin{equation}
+      B_1 B_2 [1, 2, 3] = B_1 \left( [1, 2] - [1, 3] + [2, 3] \right) = [1] - [2] - [1] + [3] + [2] - [3] = 0
+\end{equation}  
+
+\begin{lemma}[ Fundamental Lemma of Homology ]\label[lemma]{lem:FLH}
+      Let \( \mc K \) be a simplicial complex with corresponding boundary operators \( B_k \). Then:
+      \begin{equation}
+            \label{eq:BkBk1}
             B_k B_{k+1} = 0
       \end{equation}
 \end{lemma}
 
 \begin{proof}
+      It is sufficient to directly calculate the action of the composition of \(B_k\) and \( B_{k+1}\) on \(\sigma = [u_1, u_2, \dots u_{k+2}]\):
       \begin{equation}
             \begin{aligned}
                   B_k B_{k+1} & [ u_1, u_2, \dots u_{k+2} ]  = B_k \left( \sum_{i=1}^{k+2} \left( -1 \right)^i [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{k+2} ] \right) = \\
@@ -228,13 +277,25 @@ Since \( C_k \) is a linear space, versor vectors corresponding to the elements 
                    = \\
                    & = \sum_{\substack{i, j = 1\\ j<i}}^{k+2}
                   (-1)^{i+j} [u_1, u_2, \dots u_{j-1}, u_{j+1}, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] + \\
+            \end{aligned}
+      \end{equation}
+      \begin{equation}
+            \begin{aligned}
+                  \phantom{B_k B_{k+1}}
                   &  - \sum_{\substack{i, j =1 \\ j>i}}^{k+2} (-1)^{i+j} [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{j-1}, u_{j+1}, \dots u_{k+2}] 
                    = 0
             \end{aligned}
       \end{equation}
 \end{proof}
 
-\todo{ Examples }
+Since we already established basis in \( \mc C_k \) and \( \mc C_{k-1}\) via elements of \( \V k \) and \( \V {k-1} \) respectively, for the rest of the work we assume boundary operators \( B_k \) in the matrix form, \( B_k \in \ds R^{ m_{k-1} \times m_k }\), see an example in \Cref{fig:bound_mat}.
+\begin{figure}[hbtp]
+      \centering
+      \input{figures/tikz/example_Bk.tex}
+      \caption{
+            Left-hand side panel: example of simplicial complex $\mc K$ on $7$ nodes, and of the action of $B_2$ on the 2-simplex $[1,2,3]$; $2$-simplices included in the complex are shown in red, arrows correspond to the orientation. Panels on the right: matrix forms $B_1$ and $B_2$ of boundary operators respectively. \label{fig:bound_mat}
+      }
+\end{figure}
 
 
 
@@ -274,9 +335,14 @@ Since \( C_k \) is a linear space, versor vectors corresponding to the elements 
 
 \todo{definition and motivation of the weighting scheme}
 
+
+
+
+
+
 Note that, from the definition \( \bar B_k= W_{k-1}^{-1} B_k W_k \) and \eqref{eq:Bk_Bk+1_0}, we immediately have that  \( \bar B_k\bar B_{k+1}=0 \). Thus, the group \( \bar {\mc H}_k = \ker \bar B_k / \im \bar B_{k+1} \) is well defined for any choice of positive weights  \( w_k \) and is isomorphic to \( \ker \bar L_k \). While the homology group may depend on the weights,  we observe below that its dimension does not. Precisely, we have 
 \begin{proposition}
- \label{thm:wHomGroup}
+ \label[proposition]{thm:wHomGroup}
      The dimension of the homology groups of \( \mc K \) is not affected by the weights of its \( k \)-simplicies. Precisely, if \( W_k \) are positive diagonal matrices, we have
      \begin{equation}
          \dim \ker \bar B_k = \dim \ker B_k, \quad \dim \ker \bar B_k^\top = \dim \ker B_k^\top, \quad \dim \bar{\mc H}_k = \dim \mc H_k\, .
