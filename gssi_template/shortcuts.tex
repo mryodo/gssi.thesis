@@ -159,3 +159,18 @@
 
 \newenvironment{mt}{\begin{pmatrix}}{\end{pmatrix}}
 
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usepackage{nicematrix}
+
+\NiceMatrixOptions
+  {
+    custom-line = 
+     {
+       letter = : ,
+       command = dashedline , 
+       ccommand = cdashedline ,
+       tikz = dotted
+     }
+  }

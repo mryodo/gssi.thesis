@@ -143,7 +143,35 @@ In particular, we notice that for $k = 0$, since $B_0=0$ and $\bar L_0=\bar L_0^
 \subsection{ Cities }
 
 
+\begin{table}[hbtp]
+  \centering
+  \begin{NiceTabular}{@{}c!{\qquad}cccc!{\qquad}ccc@{}}
+    \toprule
+    \Block{2-1}{\bfseries Cities} & \Block{1-3}{\bfseries network} & & & \Block{2-1}{ \( \beta_1 \) } & \Block{1-3}{\bfseries logarithmic weights} \\
+    & \( m_0 \) & \( m_1 \) & \( m_2 \) & & time & \( \eps \) & \( p \) \\
+    \midrule
+    \Block{2-1}{Bologna} & \Block{2-1}{60} & \Block{2-1}{175} & \Block{2-1}{171} & \Block{2-1}{2} &  \( 2.43 \)s & \( 0.65 \) & \( 0.003 \)\\
+     &  &  &  & & \Block{1-3}{\small  \textbf{{[}11, 47{]}} ($4^{th}$ smallest) } \\[0.1cm]
+     \dashedline
+     \noalign{\vskip 0.1cm}
+     \Block{2-1}{Anaheim} & \Block{2-1}{38} & \Block{2-1}{159} & \Block{2-1}{221} & \Block{2-1}{1} &  \( 5.39 \)s & \( 0.57 \) & \(0.003\)\\
+     &  &  &  &  & \Block{1-3}{\small \textbf{{[}10, 29{]}} ($11^{th}$ smallest)} \\[0.1cm]
+     \dashedline
+     \noalign{\vskip 0.1cm}
+     \Block{2-1}{Berlin-Tiergarten} & \Block{2-1}{26} & \Block{2-1}{63} & \Block{2-1}{55} & \Block{2-1}{0} & \(2.46\)s & \(1.18\) & \(0.015\) \\
+     & &  & & & \Block{1-3}{\small \textbf{{[}6, 16{]}} ($20^{th}$ smallest)} \\[0.1cm]
+     \dashedline
+     \noalign{\vskip 0.1cm}
+     \Block{2-1}{Berlin-Mitte} & \Block{2-1}{98} & \Block{2-1}{456} & \Block{2-1}{900} & \Block{2-1}{1} &  \( 127 \)s & \(0.887\) & \(0.0016\)\\
+     & & & & & \Block{1-3}{\small \textbf{{[}57, 87{]}} ($6^{th}$), \textbf{{[}58, 87{]}}, ($17^{th}$) } \\
+    \bottomrule
+    \end{NiceTabular}
 
+    \caption{
+      Topological instability of the transportation networks: filtered zone networks with the corresponding perturbation norm \( \eps \) and its percentile among \( w_1(\cdot) \) profile. For each simplicial complex the number of nodes, edges and triangles in \( \mc V_2(\mc K) \) are provided alongside the initial number of holes \( \beta_1 \). The results of the algorithm consist of the perturbation norm, \( \eps \), computation time, and approximate percentile \( p \).\label{tab:bologna}
+    }
+  
+\end{table}
 
 
 
