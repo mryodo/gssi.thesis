@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+      \Vertex[x=0, y=0, label=1, style={color=liberty}, fontcolor=white,]{v1}
+      \Vertex[x=5, y=0, label=2, style={color=liberty}, fontcolor=white,]{v2}
+      \Vertex[x=5, y=5, label=3, style={color=liberty}, fontcolor=white,]{v3}
+      \Vertex[x=0, y=5, label=4, style={color=liberty}, fontcolor=white,]{v4}
+      \Vertex[x=2, y=1.5, label=5, style={color=liberty}, fontcolor=white,]{v5}
+      \Vertex[x=1, y=4, label=6, style={color=liberty}, fontcolor=white,]{v6}
+      \Vertex[x=4, y=2.5, label=7, style={color=liberty}, fontcolor=white,]{v7}
+      \Vertex[x=3, y=3.5, label=8, style={color=liberty}, fontcolor=white,]{v8}
+      \Edge(v1)(v2)
+      \Edge(v2)(v3)
+      \Edge(v3)(v4)
+      \Edge(v1)(v4)
+      \Edge(v1)(v5)
+      \Edge(v2)(v5)
+      %\Edge(v2)(v7)
+      \Edge(v3)(v7)
+      \Edge(v5)(v7)
+      \Edge(v7)(v8)
+      \Edge(v5)(v8)
+      \Edge(v5)(v6)
+      %\Edge(v6)(v8)
+      \Edge(v3)(v8)
+      \Edge(v4)(v6)
+      \Edge(v1)(v6)
+      \Edge(v3)(v6)
+
+      \fill [opacity=0.3,liberty]   (v1.center) -- (v2.center) -- (v5.center) -- cycle;
+      \fill [opacity=0.3,liberty]   (v1.center) -- (v4.center) -- (v6.center) -- cycle;
+      \fill [opacity=0.3,liberty]   (v1.center) -- (v5.center) -- (v6.center) -- cycle;
+      \fill [opacity=0.3,liberty]   (v3.center) -- (v4.center) -- (v6.center) -- cycle;
+      \fill [opacity=0.3,liberty]   (v5.center) -- (v7.center) -- (v8.center) -- cycle;
+      \fill [opacity=0.3,liberty]   (v3.center) -- (v7.center) -- (v8.center) -- cycle;
+      
+      \Vertex[x=0, y=-3.5, style={color=white}]{fake}
+  \end{tikzpicture}

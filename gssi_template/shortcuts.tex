@@ -184,3 +184,21 @@
   \setcounter{MaxMatrixCols}{20}
   \usepackage{amsmath}
   \allowdisplaybreaks
+  
+\usepackage{wasysym}
+\usepackage{stackengine}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+  \newcommand\obullet[1]{\ensurestackMath{\stackon[0pt]{#1}{\mkern1mu\bigcdot}}}
+%\renewcommand{\dot}{\obullet}
+
+\DeclareMathOperator*{\vect}{\mathrm{diagvec}}
+\newcommand\mr{\min^+_{\mathrm{row}}}
+\renewcommand*{\deg}{\mathrm{deg}}
+\newcommand\scal[1]{\left\langle {#1} \right\rangle}
+
+\usepackage[caption=false]{subfig}
