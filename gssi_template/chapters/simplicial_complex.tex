@@ -253,7 +253,7 @@ The alternating nature of the definition upholds so called \emph{fundamental lem
       B_1 B_2 [1, 2, 3] = B_1 \left( [1, 2] - [1, 3] + [2, 3] \right) = [1] - [2] - [1] + [3] + [2] - [3] = 0
 \end{equation}  
 
-\begin{lemma}[ Fundamental Lemma of Homology ]\label[lemma]{lem:FLH}
+\begin{lemma}[ Fundamental Lemma of Homology, FLH ]\label[lemma]{lem:FLH}
       Let \( \mc K \) be a simplicial complex with corresponding boundary operators \( B_k \). Then:
       \begin{equation}
             \label{eq:BkBk1}
@@ -286,9 +286,10 @@ The alternating nature of the definition upholds so called \emph{fundamental lem
                    = 0
             \end{aligned}
       \end{equation}
+      For the final nullification it is sufficient to notice that two terms coincide upon the interchange \( i \leftrightarrow j\).
 \end{proof}
 
-Since we already established basis in \( \mc C_k \) and \( \mc C_{k-1}\) via elements of \( \V k \) and \( \V {k-1} \) respectively, for the rest of the work we assume boundary operators \( B_k \) in the matrix form, \( B_k \in \ds R^{ m_{k-1} \times m_k }\), see an example in \Cref{fig:bound_mat}.
+Since we already established basis in \( \mc C_k \) and \( \mc C_{k-1}\) via elements of \( \V k \) and \( \V {k-1} \) respectively, for the rest of the work we assume boundary operators \( B_k \) in the matrix form, \( B_k \in \ds R^{ m_{k-1} \times m_k }\), see an example in \Cref{fig:bound_mat}. Matrices \( B_k \) are naturally sparse and are de facto oriented incidence matrices for higher-order structures; specifically, as seen on \Cref{fig:bound_mat}, \( B_1 \) is known in the classical graph models as \emph{incidence matrix}.
 \begin{figure}[hbtp]
       \centering
       \input{figures/tikz/example_Bk.tex}
@@ -303,12 +304,67 @@ Since we already established basis in \( \mc C_k \) and \( \mc C_{k-1}\) via ele
 
 \subsubsection{Homology group as Quontinent space}
 
+For a given simplicial complex \( \mc K \), each pair of boundary maps \( B_k \) and \( B_{k+1 } \) satisfy Hodge's theory due to the Fundamental Lemma of Homology, \Cref{lem:FLH}, which means that this special case of quontient space \( \faktor{ \ker B_k }{ \im B_{k+1} } \) is correctly defined:
+
+\begin{definition}[Homology group]
+      Let \( \mc K \) be a simplicial complex with corresponding boundary maps \( B_k \). Then the quontient space:
+      \begin{equation}
+            \mc H_k = \faktor{ \ker B_k }{ \im B_{k+1} } 
+      \end{equation}
+      is referred as  \(k\)-th \emph{homology group} of the simplicial complex \( \mc K \).
+\end{definition}
+
+\begin{definition}[Hodge Laplacian Operator]
+      Let \( \mc K \) be a simplicial complex with corresponding boundary maps \( B_k \). Then due to \Cref{thm:two_kernels} and \Cref{lemma:hodge_kernels},
+      \begin{equation}
+            \mc H_k \cong \ker \left( B_k^\top B_k + B_{k+1} B_{k+1}^\top \right)
+      \end{equation}
+      Operator \( L_k =  B_k^\top B_k + B_{k+1} B_{k+1}^\top \) is known as \(k\)-th \emph{Hodge Laplacian} (or \emph{higher-order Laplacian}) operator. Two terms \( \Ld k =B_k^\top B_k  \) and \( \Lu k = B_{k+1} B_{k+1}^\top \) are known as \(k\)-th \emph{down}- and \emph{up}-Laplacians respectively.
+\end{definition}
+
+
 \subsubsection{ Elements of the Hodge decomposition as harmonic/vorticity/potential flow}
       \todo{ Maybe we will need here a quick discussion with connection to the continuous case }
 
+Similarly, simplicial complex-specific case of the Hodge's decomposition, \Cref{thm:hodge_decomposition}, holds:
+\begin{equation}
+      \ds R^{m_k} = \lefteqn{\overbrace{\phantom{\im B_k^\top \oplus  \ker \left( B_k^\top B_k + B_{k+1} B_{k+1}^\top \right)}}^{\ker B_{k+1}^\top}} \im B_k^\top \oplus
+      \underbrace{\ker \left( B_k^\top B_k + B_{k+1} B_{k+1}^\top \right) \oplus  \im B_{k+1}}_{\ker B_k}            
+\end{equation}
+As established above, the homology group \( \mc H_k \cong \ker L_k \) consists of \emph{harmonic representative} or \emph{harmonic chains} (which name is explained by the fact of falling into the kernel of the corresponding Laplacian operator \( L_k \)). ELements of the remaining components of the decomposition can be described through the analogy with differential operator on simplicial complexes. For instance, 
+\begin{enumerate}
+      \item the conjugate boundary map \( B_1^\top \) is a discrete derivative on the graph: \( B_1^\top  [u_1, u_2 ] = [ u_2 ] - [u_1]\), hence \( B_1^\top  = \grad \) and \( B_1 =  -\diver \);
+      \item the conjugate boundary map \( B_2^\top \) is a discrete \( \curl \) operator: \( B_2^\top [u_1, u_2, u_3 ] = [u_1, u_2] - [u_1, u_3]+[u_2, u_3] = [u_1, u_2] +[u_2, u_3] + [u_3, u_1]\); note that the fundamental lemma of homology de facto restates a widely known fact \( \curl \grad = 0 \);
+      \item \(1\)-st order Hodge Laplacian operator then can be rewritten as a composition of the differential operators:
+      \begin{equation}
+            L_1 = - \grad \diver + \curl^* \curl = \Delta_1
+      \end{equation}
+      Operator \( \Delta_1 \) is known as a \emph{Helmholzian operator on graphs}, an analogue of the vector Laplacian, \cite{hanlonLaplacianMethod2002}.
+\end{enumerate}
+
+Following this, the elements of \( \im B_1^\top = \im ( \grad )\) are refered as \emph{potential flows} (since each element \( y_i\) of a vector \( \b y = B_1^\top \b x \) is a difference of potentials between some pair nodes \( \alpha \) and \( \beta \) forming the \(i\)-th edge); similarly, elements of \( \im B_2 = \im( \curl^*)\) are \emph{vector potentials} or \emph{vorticities}, and \( \ker B_1 \) and \( \ker B_2^\top \) are divergence- and curl-free flows respectively (a more low level discussion of these two subspaces is provided further).
+
+\begin{remark}
+      Consideration above provides a solid intuition but lacks clearly formality: indeed, in order to properly define graph's gradient, divergence and curl operators, one would need to discuss alternating functions on a graph (co-chains) and corresponding coboundary operator and cohomology,~\cite{limHodgeLaplaciansGraphs2020}, and show a direct connection with dicrete differential forms on manifolds. We choose to abstain from the introduction of another quite abstract entity since it should not affect the clarity of the numerical analysis of the Laplacian operators conducted further.
+\end{remark}
+
+
+
+
+
+
+
 \subsubsection{ Laplacian operators \( L_k \) }
 
+The \(k\)-th order Hodge Laplacian operator \( L_k = B_k^\top B_k + B_{k+1} B_{k+1}^\top \) naturally joins the boundary relational information about simplices of differents orders in \( \mc K \) and describes the topological structure of the complex.
+
 \subsubsection{ Classical Laplacian and its kernel elements }
+
+Letting \( B_0 = 0 \) (the absence of the boundary of a node is reasonable), the \(0\)-order Hodge Laplacian \( L_0 \) is simply:
+\begin{equation}
+      L_0 = B_1 B_1^\top
+\end{equation}
+
 
 \subsubsection{ Kernel elements of \( L_k \) }
 

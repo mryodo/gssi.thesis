@@ -259,57 +259,7 @@ consisting of eight 0-simplices (vertices), twelve 1-simplices (edges),  four 2-
 
 \begin{figure}[t]
     \centering
-    \scalebox{0.7}{\begin{tikzpicture}
-            \fill [opacity=0.25,liberty]    (0, 0) -- (2, 0) --  (1, 2) -- cycle;
-             \fill [opacity=0.3,liberty]    (0, 0) -- (2, 0) --  (1, -2) -- cycle;
-            \fill [opacity=0.5,liberty]    (4, 1) -- (3, 2.5) --  (5, 2.5) -- cycle;
-            \fill [opacity=0.65,liberty]    (3, 2.5) -- (5, 2.5) --  (4, 4) -- cycle;
-            \Vertex[x=0, y=0, style={color=liberty}, fontcolor=white, size=0.4, label = 6 ]{v1}
-            \Vertex[x=2,y=0, style={color=liberty}, fontcolor=white, size=0.4, label = 5 ]{v2}
-            \Vertex[x=1, y=2, style={color=liberty}, fontcolor=white, size=0.4, label=4]{v3}
-            \Vertex[x=4, y=1, style={color=liberty}, fontcolor=white, size=0.4, label=3]{v4}
-            \Vertex[x=3, y=2.5, style={color=liberty}, fontcolor=white, size=0.4, label=2]{v5}
-            \Vertex[x=5, y=2.5, style={color=liberty}, fontcolor=white, size=0.4, label=1]{v6}
-            \Vertex[x=4, y=4, style={color=liberty}, fontcolor=white, size=0.4, label=8]{v7}
-            \Vertex[x=1, y=-2, style={liberty}, fontcolor=white, size = 0.4, label = 7]{v8}
-            \Edge[Math, label=1](v1)(v2)
-            \Edge[Math, label=0.6, lw=0.6pt](v1)(v3)
-            \Edge[Math, label=2.2, lw=2.2pt](v2)(v3)
-            \Edge[Math, label=0.7, lw=0.7](v2)(v4)
-            \Edge[Math, label=2.5, lw=2.5](v3)(v5)
-            \Edge[Math, label=1.8, lw=1.8](v4)(v5)
-            \Edge[Math, label=1](v4)(v6)
-            \Edge[Math, label=1.5, lw=1.5](v5)(v6)
-            \Edge[Math, label=1.75, lw=1.75](v5)(v7)
-            \Edge[Math, label=2, lw=2](v6)(v7)
-            \Edge[Math, label=0.5,  lw =0.5pt](v1)(v8)
-             \Edge[Math, label=3.0,  lw=3.0pt](v2)(v8)
-        \end{tikzpicture}}
-        \scalebox{0.7}{\begin{tikzpicture}
-             \node at (-1, 0.5) {\large $\longrightarrow$};
-            \fill [opacity=0.5,liberty]    (4, 1) -- (3, 2.5) --  (5, 2.5) -- cycle;
-            \fill [opacity=0.65,liberty]    (3, 2.5) -- (5, 2.5) --  (4, 4) -- cycle;
-            \Vertex[x=0, y=0, style={color=liberty}, fontcolor=white, size=0.4, label = 6 ]{v1}
-            \Vertex[x=2,y=0, style={color=liberty}, fontcolor=white, size=0.4, label = 5 ]{v2}
-            \Vertex[x=1, y=2, style={color=liberty}, fontcolor=white, size=0.4, label=4]{v3}
-            \Vertex[x=4, y=1, style={color=liberty}, fontcolor=white, size=0.4, label=3]{v4}
-            \Vertex[x=3, y=2.5, style={color=liberty}, fontcolor=white, size=0.4, label=2]{v5}
-            \Vertex[x=5, y=2.5, style={color=liberty}, fontcolor=white, size=0.4, label=1]{v6}
-            \Vertex[x=4, y=4, style={color=liberty}, fontcolor=white, size=0.4, label=8]{v7}
-            \Vertex[x=1, y=-2, style={liberty}, fontcolor=white, size = 0.4, label = 7]{v8}
-            %\Edge[Math, label=1](v1)(v2)
-            \Edge[Math, label=0.6, lw=0.6pt](v1)(v3)
-            \Edge[Math, label=2.2, lw=2.2pt](v2)(v3)
-            \Edge[Math, label=0.7, lw=0.7](v2)(v4)
-            \Edge[Math, label=2.5, lw=2.5](v3)(v5)
-            \Edge[Math, label=1.8, lw=1.8](v4)(v5)
-            \Edge[Math, label=1](v4)(v6)
-            \Edge[Math, label=1.5, lw=1.5](v5)(v6)
-            \Edge[Math, label=1.75, lw=1.75](v5)(v7)
-            \Edge[Math, label=2, lw=2](v6)(v7)
-            \Edge[Math, label=0.5,  lw =0.5pt](v1)(v8)
-             \Edge[Math, label=3.0,  lw=3.0pt](v2)(v8)
-        \end{tikzpicture}}
+    \input{figures/tikz/toy.tex}
     \caption{
    % \brev
     Simplicial complex $\mc K$ on $8$ vertices for the illustrative run (on the left): all 2-simplices from $\mc V_2$ are shown in blue, the weight of each edge $w_1(e_i)$ is given on the figure. On the right: perturbed simplicial complex $\mc K$ through the elimination of the edge $[5,6]$ creating additional hole $[5, 6, 7, 8]$.
