@@ -114,7 +114,15 @@ By \Cref{def:quotient}, the quotient space \( \mc H \) is a collection\todo{in a
       \begin{equation}
             \mc H = \faktor{\ker A }{\im B } \cong \ker A \cap \ker B^\top,
       \end{equation}
-      where \( \cong \) denotes the isomorphism.
+      where \( \cong \) denotes the isomorphism\footnote{Two
+      vector spaces \( V \)  and \( W \) over the same field \( F \) are
+      isomorphic if there is a bijection \( T \colon  V \mapsto W \) which
+      preserves addition and scalar multiplication, that
+      is, for all vectors \( \b u, \b v \in V\) and all \( c \in F \)
+      \[
+            T( \b u + \b v) = T( \b u) + T(\b v), \qquad T(c \b v) = c T(\b v)
+      \]
+      }
 \end{theorem}
 
 \begin{proof}
@@ -270,18 +278,17 @@ The alternating nature of the definition upholds so called \emph{fundamental lem
                   & = \sum_{i=1}^{k+2} \left( -1 \right)^i \left( 
                   \sum_{j=1}^{i-1} (-1)^j [u_1, u_2, \dots u_{j-1}, u_{j+1}, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] + \right. \\
                   & \left. + \sum_{j=i+1}^{k+2} (-1)^{j-1} [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{j-1}, u_{j+1}, \dots u_{k+2}] 
-                  \right) =  \\
-                  & = \sum_{i=1}^{k+2}
+                  \right) = 
+            \end{aligned}
+      \end{equation}
+      \begin{equation}
+            \begin{aligned}
+                  \phantom{B_k B_{k+1}}& = \sum_{i=1}^{k+2}
                   \sum_{j=1}^{i-1} (-1)^{i+j} [u_1, u_2, \dots u_{j-1}, u_{j+1}, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] + \\
                   &  - \sum_{i=1}^{k+2}\sum_{j=i+1}^{k+2} (-1)^{i+j} [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{j-1}, u_{j+1}, \dots u_{k+2}] 
                    = \\
                    & = \sum_{\substack{i, j = 1\\ j<i}}^{k+2}
                   (-1)^{i+j} [u_1, u_2, \dots u_{j-1}, u_{j+1}, \dots u_{i-1}, u_{i+1}, \dots u_{k+2}] + \\
-            \end{aligned}
-      \end{equation}
-      \begin{equation}
-            \begin{aligned}
-                  \phantom{B_k B_{k+1}}
                   &  - \sum_{\substack{i, j =1 \\ j>i}}^{k+2} (-1)^{i+j} [u_1, u_2, \dots u_{i-1}, u_{i+1}, \dots u_{j-1}, u_{j+1}, \dots u_{k+2}] 
                    = 0
             \end{aligned}
@@ -314,7 +321,11 @@ For a given simplicial complex \( \mc K \), each pair of boundary maps \( B_k \)
       is referred as  \(k\)-th \emph{homology group} of the simplicial complex \( \mc K \).
 \end{definition}
 
-Homology group on its own is an object of a quite high level of abstraction which can be met in various areas of algebra. Instead, since \( \mc H_k \) connects simplices and their borders by definition, we exploit the very first definition of the homology group in the algebraic topology as way to define and categorize holes in the manifold.
+Homology group on its own is an object of a quite high level of abstraction which can be met in various areas of algebra. Instead, since \( \mc H_k \) connects simplices and their borders by definition, we exploit the very first definition of the homology group in the algebraic topology as way to define and categorize holes in the manifold. 
+
+\begin{remark}
+      \todo{ of holes and boudaries}
+\end{remark}
 
 \todo{refs}
 
@@ -392,13 +403,16 @@ where \( \deg(\sigma_i) \) is the number of simplices in \( \V {k+1}\) having \(
 
 \subsubsection{ Classical Laplacian and its kernel elements }
 
-Letting \( B_0 = 0 \) (the absence of the boundary of a node is reasonable), the \(0\)-order Hodge Laplacian \( L_0 \) is simply:
+Homology groups described above are not necessarily devoted to the case of higher-order interaction (or, equally, high order simplicial complexes \( \mc K \)). Indeed, the \( 0 \)-order homology group is properly defined for \( 0\)-skeleton of any simplicial complex, or, in other words, the classical graph.
+
+Assuming the absent boundary of a node, \( B_0 = 0 \), the \( 0 \)-order Hodge Laplacian or classical graph Laplacian \( L_0 \) is defined as
 \begin{equation}
-      L_0 = B_1 B_1^\top
+      L_0 = B_1 B_1^\top \qquad \text{and} \qquad \mc H_0 = \ker B_1^\top
 \end{equation}
 
 
-\subsubsection{ Kernel elements of \( L_k \) }
+
+ \subsubsection{ Kernel elements of \( L_k \) }
 
 \todo{Some relation to the continuous case}
 
